@@ -4,11 +4,10 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.registry.entry.RegistryEntry;
 
-public class PoseidonsWrathEffect extends StatusEffect {
+public class GaiasGraspEffect extends StatusEffect {
 
-    public PoseidonsWrathEffect() {
+    public GaiasGraspEffect() {
         super(StatusEffectCategory.HARMFUL, 0xe9b8b3);
 
 
@@ -22,12 +21,8 @@ public class PoseidonsWrathEffect extends StatusEffect {
 
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-        if (entity instanceof PlayerEntity) {
-            ((PlayerEntity) entity).setAir(-19);
-        }
-
+            entity.setOnGround(false);
+            entity.setSprinting(false);
         return super.applyUpdateEffect(entity, amplifier);
     }
 }
-
-

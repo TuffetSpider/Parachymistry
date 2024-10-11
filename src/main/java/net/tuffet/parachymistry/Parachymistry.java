@@ -3,6 +3,7 @@ package net.tuffet.parachymistry;
 import net.fabricmc.api.ModInitializer;
 
 import net.tuffet.parachymistry.block.ModBlocks;
+import net.tuffet.parachymistry.effect.ModEffects;
 import net.tuffet.parachymistry.item.ModItems;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ public class Parachymistry implements ModInitializer {
 
 		ModBlocks.registerModBlocks();
 		ModItems.registerModItems();
+		ModEffects.registerModEffects();
 
 
 

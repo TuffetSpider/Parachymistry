@@ -14,6 +14,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
+import net.tuffet.parachymistry.entity.AirVialProjectile;
 
 public class AirVialClass extends Item implements ProjectileItem {
     public AirVialClass(Item.Settings settings) {
@@ -24,10 +25,10 @@ public class AirVialClass extends Item implements ProjectileItem {
         ItemStack itemStack = user.getStackInHand(hand);
         world.playSound((PlayerEntity)null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!world.isClient) {
-            SnowballEntity snowballEntity = new SnowballEntity(world, user);
-            snowballEntity.setItem(itemStack);
-            snowballEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
-            world.spawnEntity(snowballEntity);
+            AirVialProjectile airVialProjectile = new AirVialProjectile(world, user);
+            airVialProjectile.setItem(itemStack);
+            airVialProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
+            world.spawnEntity(airVialProjectile);
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));
@@ -36,8 +37,8 @@ public class AirVialClass extends Item implements ProjectileItem {
     }
 
     public ProjectileEntity createEntity(World world, Position pos, ItemStack stack, Direction direction) {
-        SnowballEntity snowballEntity = new SnowballEntity(world, pos.getX(), pos.getY(), pos.getZ());
-        snowballEntity.setItem(stack);
-        return snowballEntity;
+        AirVialProjectile airVialProjectile = new AirVialProjectile(world, pos.getX(), pos.getY(), pos.getZ());
+        airVialProjectile.setItem(stack);
+        return airVialProjectile;
     }
 }

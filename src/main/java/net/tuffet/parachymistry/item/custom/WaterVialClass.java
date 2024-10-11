@@ -25,10 +25,10 @@ public class WaterVialClass extends Item implements ProjectileItem {
         ItemStack itemStack = user.getStackInHand(hand);
         world.playSound((PlayerEntity)null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!world.isClient) {
-            SnowballEntity snowballEntity = new SnowballEntity(world, user);
-            snowballEntity.setItem(itemStack);
-            snowballEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
-            world.spawnEntity(snowballEntity);
+            WaterVialProjectile waterVialProjectile = new WaterVialProjectile(world, user);
+            waterVialProjectile.setItem(itemStack);
+            waterVialProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
+            world.spawnEntity(waterVialProjectile);
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));
