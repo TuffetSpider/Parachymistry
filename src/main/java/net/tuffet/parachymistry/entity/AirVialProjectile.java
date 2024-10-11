@@ -57,7 +57,7 @@ public class AirVialProjectile extends ThrownItemEntity {
             List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
             this.getWorld().createExplosion(this, (DamageSource)null, EXPLOSION_BEHAVIOR, this.getX(), this.getY(), this.getZ(), 2.0F, false, World.ExplosionSourceType.TRIGGER, ParticleTypes.GUST_EMITTER_SMALL, ParticleTypes.GUST_EMITTER_LARGE, SoundEvents.ENTITY_WIND_CHARGE_WIND_BURST);
             for (LivingEntity livingEntity : list) {
-                livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.AEOLUS_EFFECT,500));
+                livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.AEOLUS_EFFECT,400));
             }
 
 

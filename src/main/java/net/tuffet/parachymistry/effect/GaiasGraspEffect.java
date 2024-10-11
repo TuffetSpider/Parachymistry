@@ -23,7 +23,6 @@ public class GaiasGraspEffect extends StatusEffect {
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
             entity.setOnGround(false);
             entity.setSprinting(false);
-            entity.setSwimming(true);
         return super.applyUpdateEffect(entity, amplifier);
     }
 }

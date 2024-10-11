@@ -51,7 +51,7 @@ public class EarthVialProjectile extends ThrownItemEntity {
             Box box = this.getBoundingBox().expand(4.0, 2.0, 4.0);
             List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
             for (LivingEntity livingEntity : list) {
-                livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.GAIA_EFFECT, 100, 0));
+                livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.GAIA_EFFECT, 400, 0));
             }
 
 

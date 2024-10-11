@@ -37,6 +37,7 @@ public class AetherialSacrificeEffect extends StatusEffect {
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         StatusEffectInstance Status = entity.getStatusEffect(ModEffects.AETHERIAL_SACRIFICE_EFFECT);
+        entity.setGlowing(true);
         int TimeRemaining = Status.getDuration();
         if(TimeRemaining==1){
             entity.damage(entity.getWorld().getDamageSources().outOfWorld(),10);
@@ -47,6 +48,7 @@ public class AetherialSacrificeEffect extends StatusEffect {
             for (LivingEntity livingEntity : list) {
                 entity.getWorld().spawnEntity(new ShulkerBulletEntity(entity.getWorld(), (LivingEntity) entity, livingEntity, Direction.Axis.Z));
                 entity.getWorld().spawnEntity(new ShulkerBulletEntity(entity.getWorld(), (LivingEntity) entity, livingEntity, Direction.Axis.Z));
+                entity.setGlowing(false);
             }
         }
         return super.applyUpdateEffect(entity, amplifier);
