@@ -8,7 +8,6 @@ package net.tuffet.parachymistry.gui;
 import java.util.List;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -35,7 +34,6 @@ public class AlchymyScreenHandler extends ForgingScreenHandler {
     private static final int OUTPUT_X = 98;
     public static final int SLOT_Y = 48;
     private final World world;
-    private RecipeEntry<AlchymyRecipe> currentRecipe;
     private final List<RecipeEntry<SmithingRecipe>> recipes;
 
     public AlchymyScreenHandler(int syncId, PlayerInventory playerInventory) {
@@ -51,26 +49,34 @@ public class AlchymyScreenHandler extends ForgingScreenHandler {
     protected ForgingSlotsManager getForgingSlotsManager() {
         return ForgingSlotsManager.create().input(0, 8, 48, (stack) -> {
             return this.recipes.stream().anyMatch((recipe) -> {
-                return ((SmithingRecipe)recipe.value()).testTemplate(stack);
+                return ((SmithingRecipe) recipe.value()).testTemplate(stack);
             });
         }).input(1, 26, 48, (stack) -> {
             return this.recipes.stream().anyMatch((recipe) -> {
-                return ((SmithingRecipe)recipe.value()).testBase(stack);
+                return ((SmithingRecipe) recipe.value()).testBase(stack);
             });
         }).input(2, 44, 48, (stack) -> {
             return this.recipes.stream().anyMatch((recipe) -> {
-                return ((SmithingRecipe)recipe.value()).testAddition(stack);
+                return ((SmithingRecipe) recipe.value()).testAddition(stack);
             });
         }).output(3, 98, 48).build();
     }
 
-    protected boolean canUse(BlockState state) { {
-        return state.isOf(ModBlocks.ALCHYMY_STATION);
-    }
+    protected boolean canUse(BlockState state) {
+        {
+            return state.isOf(ModBlocks.ALCHYMY_STATION);
+        }
     }
 
+    @Override
+    public void updateResult() {
+
+    }
+
+
+    @Override
     protected boolean canTakeOutput(PlayerEntity player, boolean present) {
-        return this.currentRecipe != null && ((AlchymyRecipe)this.currentRecipe.value()).matches(this.createRecipeInput(), this.world);
+        return false;
     }
 
     protected void onTakeOutput(PlayerEntity player, ItemStack stack) {
@@ -101,25 +107,13 @@ public class AlchymyScreenHandler extends ForgingScreenHandler {
 
     }
 
-    public void updateResult() {
-        SmithingRecipeInput smithingRecipeInput = this.createRecipeInput();
-        List<RecipeEntry<SmithingRecipe>> list = this.world.getRecipeManager().getAllMatches(RecipeType.SMITHING, smithingRecipeInput, this.world);
-        if (list.isEmpty()) {
-            this.output.setStack(0, ItemStack.EMPTY);
-        } else {
-            RecipeEntry<AlchymyRecipe> recipeEntry = (RecipeEntry)list.get(0);
-            ItemStack itemStack = ((AlchymyRecipe)recipeEntry.value()).craft(smithingRecipeInput, this.world.getRegistryManager());
-            if (itemStack.isItemEnabled(this.world.getEnabledFeatures())) {
-                this.currentRecipe = recipeEntry;
-                this.output.setLastRecipe(recipeEntry);
-                this.output.setStack(0, itemStack);
-            }
+
         }
 
-    }
 
 
-    }
+
+
 
 
 

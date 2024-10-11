@@ -3,16 +3,11 @@ package net.tuffet.parachymistry.effect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.entity.player.PlayerEntity;
 
-public class GaiasGraspEffect extends StatusEffect {
-
-    public GaiasGraspEffect() {
-        super(StatusEffectCategory.HARMFUL, 0xe9b8b3);
-
-
+public class HadesHellfireEffect extends StatusEffect {
+    protected HadesHellfireEffect(StatusEffectCategory category, int color) {
+        super(StatusEffectCategory.HARMFUL,0xe9b8b3);
     }
-
     @Override
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
 
@@ -21,9 +16,10 @@ public class GaiasGraspEffect extends StatusEffect {
 
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-            entity.setOnGround(false);
-            entity.setSprinting(false);
-            entity.setSwimming(true);
+        entity.setOnFireFor(10);
+        entity.setOnFire(true);
         return super.applyUpdateEffect(entity, amplifier);
     }
 }
+
+

@@ -22,8 +22,9 @@ public class PoseidonsWrathEffect extends StatusEffect {
 
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-        if (entity instanceof PlayerEntity) {
-            ((PlayerEntity) entity).setAir(-19);
+        entity.setAir(-19);
+        if (entity.isTouchingWater()){
+            entity.setSwimming(true);
         }
 
         return super.applyUpdateEffect(entity, amplifier);

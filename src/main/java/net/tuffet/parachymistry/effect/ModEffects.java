@@ -19,6 +19,8 @@ public class ModEffects implements ModInitializer {
     public static final RegistryEntry<StatusEffect> POSEIDON_EFFECT;
     public static final RegistryEntry<StatusEffect> GAIA_EFFECT;
     public static final RegistryEntry<StatusEffect> AEOLUS_EFFECT;
+    public static final RegistryEntry<StatusEffect> HADES_EFFECT;
+    public static final RegistryEntry<StatusEffect> AETHERIAL_SACRIFICE_EFFECT;
 
     private static RegistryEntry<StatusEffect> register(String id, StatusEffect statusEffect) {
         return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(Parachymistry.MOD_ID,id), statusEffect);
@@ -30,6 +32,8 @@ public class ModEffects implements ModInitializer {
         GAIA_EFFECT = register("gaiasgrasp", new GaiasGraspEffect());
         POSEIDON_EFFECT = register("poseidonswrath", new PoseidonsWrathEffect());
         AEOLUS_EFFECT= register("aeolusbreath", new AeolusBreathEffect().addAttributeModifier(EntityAttributes.GENERIC_GRAVITY, Identifier.of(Parachymistry.MOD_ID,"effect.aeolusbreath"), -0.95f, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+        HADES_EFFECT = register("hadeshellfire", new HadesHellfireEffect(StatusEffectCategory.HARMFUL, 0xe9b8b3));
+        AETHERIAL_SACRIFICE_EFFECT = register("aetherialsacrifice", new AetherialSacrificeEffect(StatusEffectCategory.HARMFUL, 0).addAttributeModifier(EntityAttributes.GENERIC_GRAVITY, Identifier.of(Parachymistry.MOD_ID,"effect.aetherialsacrifice"),-1.05f, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
     }
 
     public static void registerModEffects() {

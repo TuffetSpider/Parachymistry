@@ -1,26 +1,26 @@
 package net.tuffet.parachymistry.block.custom;
 
 import com.mojang.serialization.MapCodec;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.CrafterBlock;
+import net.minecraft.block.*;
 import net.minecraft.block.SmithingTableBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.screen.NamedScreenHandlerFactory;
 import net.minecraft.screen.ScreenHandlerContext;
 import net.minecraft.screen.SimpleNamedScreenHandlerFactory;
 import net.minecraft.screen.SmithingScreenHandler;
+import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.tuffet.parachymistry.gui.AlchymyScreenHandler;
 
-public class AlchymyBlockClass extends CrafterBlock {
-    public static final MapCodec<CrafterBlock> CODEC = createCodec(CrafterBlock::new);
-    private static final Text SCREEN_TITLE = Text.of("Create Alchymical Wonders!");
+public class AlchymyBlockClass extends CraftingTableBlock {
+    public static final MapCodec<net.minecraft.block.SmithingTableBlock> CODEC = createCodec(net.minecraft.block.SmithingTableBlock::new);
+    private static final Text SCREEN_TITLE = Text.translatable("Undergo Experiments!");
 
-    public MapCodec<CrafterBlock> getCodec() {
+    public MapCodec<net.minecraft.block.SmithingTableBlock> getCodec() {
         return CODEC;
     }
 
@@ -39,6 +39,7 @@ public class AlchymyBlockClass extends CrafterBlock {
             return ActionResult.SUCCESS;
         } else {
             player.openHandledScreen(state.createScreenHandlerFactory(world, pos));
+            player.incrementStat(Stats.INTERACT_WITH_SMITHING_TABLE);
             return ActionResult.CONSUME;
         }
     }

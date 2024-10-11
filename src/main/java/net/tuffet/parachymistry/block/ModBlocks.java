@@ -2,6 +2,7 @@ package net.tuffet.parachymistry.block;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.CrafterBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
@@ -25,5 +26,5 @@ public class ModBlocks {
         Registry.register(Registries.ITEM, Identifier.of(Parachymistry.MOD_ID, name),
                 new BlockItem(block, new Item.Settings()));
     }
-    public static final Block ALCHYMY_STATION = registerBlock("alchymy_station", new Block(AlchymyBlockClass.Settings.create().strength(2f).sounds(BlockSoundGroup.LODESTONE)));
+    public static final Block ALCHYMY_STATION = registerBlock("alchymy_station", new AlchymyBlockClass(Block.Settings.create().strength(2f).sounds(BlockSoundGroup.LODESTONE)));
 }

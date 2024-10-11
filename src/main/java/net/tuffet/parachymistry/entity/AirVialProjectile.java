@@ -45,7 +45,7 @@ public class AirVialProjectile extends ThrownItemEntity {
         super.onEntityHit(entityHitResult);
         if (!this.getWorld().isClient) {
             Entity entity = entityHitResult.getEntity();
-            entity.damage(this.getDamageSources().drown(), (float)5.0);
+            entity.damage(this.getDamageSources().windCharge((Entity) this, (LivingEntity) this.getOwner()), (float)5.0);
             this.discard();
         }}
 
