@@ -17,8 +17,9 @@ public class Parachymistry implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		ModItems.registerModItems();
+
 		ModBlocks.registerModBlocks();
+		ModItems.registerModItems();
 
 
 
