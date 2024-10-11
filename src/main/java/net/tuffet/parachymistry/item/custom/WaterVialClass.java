@@ -14,6 +14,7 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
+import net.tuffet.parachymistry.entity.WaterVialProjectile;
 
 public class WaterVialClass extends Item implements ProjectileItem {
     public WaterVialClass(Item.Settings settings) {
@@ -36,8 +37,8 @@ public class WaterVialClass extends Item implements ProjectileItem {
     }
 
     public ProjectileEntity createEntity(World world, Position pos, ItemStack stack, Direction direction) {
-        SnowballEntity snowballEntity = new SnowballEntity(world, pos.getX(), pos.getY(), pos.getZ());
-        snowballEntity.setItem(stack);
-        return snowballEntity;
+        WaterVialProjectile waterVialProjectile = new WaterVialProjectile(world, pos.getX(), pos.getY(), pos.getZ());
+        waterVialProjectile.setItem(stack);
+        return waterVialProjectile;
     }
 }
