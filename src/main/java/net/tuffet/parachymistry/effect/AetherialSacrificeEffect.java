@@ -40,7 +40,9 @@ public class AetherialSacrificeEffect extends StatusEffect {
         entity.setGlowing(true);
         int TimeRemaining = Status.getDuration();
         if(TimeRemaining==1){
-            entity.damage(entity.getWorld().getDamageSources().outOfWorld(),10);
+            if (entity instanceof PlayerEntity player) {
+                if (!player.isCreative() && !player.isSpectator()) entity.damage(entity.getWorld().getDamageSources().outOfWorld(),10);
+            } else entity.damage(entity.getWorld().getDamageSources().outOfWorld(),10);
             entity.getWorld().createExplosion(entity, (DamageSource)null, EXPLOSION_BEHAVIOR, entity.getX(), entity.getY(), entity.getZ(), 5.0F, false, World.ExplosionSourceType.TRIGGER, ParticleTypes.GUST_EMITTER_SMALL, ParticleTypes.GUST_EMITTER_LARGE, SoundEvents.ENTITY_WIND_CHARGE_WIND_BURST);
             entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 400, 0));
             Box box = entity.getBoundingBox().expand(5, -20, 5);
