@@ -3,6 +3,7 @@ package net.tuffet.parachymistry.effect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.entity.player.PlayerEntity;
 
 public class HadesHellfireEffect extends StatusEffect {
     protected HadesHellfireEffect(StatusEffectCategory category, int color) {
@@ -16,8 +17,15 @@ public class HadesHellfireEffect extends StatusEffect {
 
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-        entity.setOnFireFor(10);
-        entity.setOnFire(true);
+        if (entity instanceof PlayerEntity player) {
+            if (!player.isCreative() && !player.isSpectator()) {
+                player.setOnFireFor(10);
+                player.setOnFire(true);
+            }
+        } else {
+            entity.setOnFireFor(10);
+            entity.setOnFire(true);
+        }
         return super.applyUpdateEffect(entity, amplifier);
     }
 }
