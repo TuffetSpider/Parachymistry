@@ -29,6 +29,7 @@ public class AetherVialClass extends Item implements ProjectileItem {
             AetherVialProjectile aetherVialProjectile = new AetherVialProjectile(world, user);
             aetherVialProjectile.setItem(itemStack);
             aetherVialProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
+            aetherVialProjectile.setNoGravity(true);
             world.spawnEntity(aetherVialProjectile);
         }
 

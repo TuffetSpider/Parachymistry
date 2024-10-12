@@ -12,16 +12,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeEntry;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.recipe.SmithingRecipe;
-import net.minecraft.recipe.input.SmithingRecipeInput;
 import net.minecraft.screen.ForgingScreenHandler;
 import net.minecraft.screen.ScreenHandlerContext;
-import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.ForgingSlotsManager;
 import net.minecraft.world.World;
 import net.tuffet.parachymistry.block.ModBlocks;
 import net.tuffet.parachymistry.recipe.AlchymyRecipe;
+import net.tuffet.parachymistry.recipe.AlchymyRecipeInput;
+import net.tuffet.parachymistry.recipe.ModRecipes;
 
 public class AlchymyScreenHandler extends ForgingScreenHandler {
     public static final int TEMPLATE_ID = 0;
@@ -34,30 +32,30 @@ public class AlchymyScreenHandler extends ForgingScreenHandler {
     private static final int OUTPUT_X = 98;
     public static final int SLOT_Y = 48;
     private final World world;
-    private final List<RecipeEntry<SmithingRecipe>> recipes;
+    private final List<RecipeEntry<AlchymyRecipe>> recipes;
 
     public AlchymyScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
     }
 
     public AlchymyScreenHandler(int syncId, PlayerInventory playerInventory, ScreenHandlerContext context) {
-        super(ScreenHandlerType.SMITHING, syncId, playerInventory, context);
+        super(ModGuis.ALCHYMY, syncId, playerInventory, context);
         this.world = playerInventory.player.getWorld();
-        this.recipes = this.world.getRecipeManager().listAllOfType(RecipeType.SMITHING);
+        this.recipes = this.world.getRecipeManager().listAllOfType(ModRecipes.ALCHYMY);
     }
 
     protected ForgingSlotsManager getForgingSlotsManager() {
         return ForgingSlotsManager.create().input(0, 8, 48, (stack) -> {
             return this.recipes.stream().anyMatch((recipe) -> {
-                return ((SmithingRecipe) recipe.value()).testTemplate(stack);
+                return ((AlchymyRecipe) recipe.value()).testBase(stack);
             });
         }).input(1, 26, 48, (stack) -> {
             return this.recipes.stream().anyMatch((recipe) -> {
-                return ((SmithingRecipe) recipe.value()).testBase(stack);
+                return ((AlchymyRecipe) recipe.value()).testReagant(stack);
             });
         }).input(2, 44, 48, (stack) -> {
             return this.recipes.stream().anyMatch((recipe) -> {
-                return ((SmithingRecipe) recipe.value()).testAddition(stack);
+                return ((AlchymyRecipe) recipe.value()).testCatalyst(stack);
             });
         }).output(3, 98, 48).build();
     }
@@ -94,8 +92,8 @@ public class AlchymyScreenHandler extends ForgingScreenHandler {
         return List.of(this.input.getStack(0), this.input.getStack(1), this.input.getStack(2));
     }
 
-    private SmithingRecipeInput createRecipeInput() {
-        return new SmithingRecipeInput(this.input.getStack(0), this.input.getStack(1), this.input.getStack(2));
+    private AlchymyRecipeInput createRecipeInput() {
+        return new AlchymyRecipeInput(this.input.getStack(0), this.input.getStack(1), this.input.getStack(2));
     }
 
     private void decrementStack(int slot) {

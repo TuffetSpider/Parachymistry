@@ -29,7 +29,7 @@ public class ModEffects implements ModInitializer {
 
 
     static {
-        GAIA_EFFECT = register("gaiasgrasp", new GaiasGraspEffect());
+        GAIA_EFFECT = register("gaiasgrasp", new GaiasGraspEffect().addAttributeModifier(EntityAttributes.GENERIC_GRAVITY, Identifier.of(Parachymistry.MOD_ID,"effect.gaiasgrasp"),10,EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         POSEIDON_EFFECT = register("poseidonswrath", new PoseidonsWrathEffect());
         AEOLUS_EFFECT= register("aeolusbreath", new AeolusBreathEffect().addAttributeModifier(EntityAttributes.GENERIC_GRAVITY, Identifier.of(Parachymistry.MOD_ID,"effect.aeolusbreath"), -0.95f, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         HADES_EFFECT = register("hadeshellfire", new HadesHellfireEffect(StatusEffectCategory.HARMFUL, 0xe9b8b3));

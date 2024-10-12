@@ -6,6 +6,9 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.entry.RegistryEntry;
 
+import java.util.Map;
+import java.util.jar.Attributes;
+
 public class PoseidonsWrathEffect extends StatusEffect {
 
     public PoseidonsWrathEffect() {
@@ -25,6 +28,7 @@ public class PoseidonsWrathEffect extends StatusEffect {
         entity.setAir(-19);
         if (entity.isTouchingWater()){
             entity.setSwimming(true);
+
         }
 
         return super.applyUpdateEffect(entity, amplifier);

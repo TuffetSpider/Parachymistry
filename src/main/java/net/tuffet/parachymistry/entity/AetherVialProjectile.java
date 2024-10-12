@@ -29,6 +29,7 @@ public class AetherVialProjectile extends ThrownItemEntity {
         super(entityType, world);
     }
 
+
     public AetherVialProjectile(World world, LivingEntity owner) {
         super(EntityType.SNOWBALL, owner, world);
     }

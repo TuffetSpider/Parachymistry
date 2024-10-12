@@ -43,7 +43,7 @@ public class AetherialSacrificeEffect extends StatusEffect {
             entity.damage(entity.getWorld().getDamageSources().outOfWorld(),10);
             entity.getWorld().createExplosion(entity, (DamageSource)null, EXPLOSION_BEHAVIOR, entity.getX(), entity.getY(), entity.getZ(), 5.0F, false, World.ExplosionSourceType.TRIGGER, ParticleTypes.GUST_EMITTER_SMALL, ParticleTypes.GUST_EMITTER_LARGE, SoundEvents.ENTITY_WIND_CHARGE_WIND_BURST);
             entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 400, 0));
-            Box box = entity.getBoundingBox().expand(10, -200, 10);
+            Box box = entity.getBoundingBox().expand(5, -20, 5);
             List<LivingEntity> list = entity.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
             for (LivingEntity livingEntity : list) {
                 entity.getWorld().spawnEntity(new ShulkerBulletEntity(entity.getWorld(), (LivingEntity) entity, livingEntity, Direction.Axis.Z));

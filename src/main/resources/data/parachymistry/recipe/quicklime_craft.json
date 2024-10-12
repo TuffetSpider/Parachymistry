@@ -1,0 +1,15 @@
+{
+  "type": "parachymistry:alchymy_craft",
+  "base": {
+    "item": "minecraft:calcite"
+  },
+  "reagent": {
+    "item": "parachymistry:vial_of_fire"
+  },
+  "catalyst": {
+    "item": "minecraft:nautilus_shell"
+  },
+  "result": {
+    "item": "parachymistry:quicklime"
+  }
+}

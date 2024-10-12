@@ -35,15 +35,15 @@ public record AlchymyRecipeInput(ItemStack base, ItemStack reagant, ItemStack ca
         return this.base.isEmpty() && this.reagant.isEmpty() && this.catalyst.isEmpty();
     }
 
-    public ItemStack template() {
+    public ItemStack base() {
         return this.base;
     }
 
-    public ItemStack base() {
+    public ItemStack reagant() {
         return this.reagant;
     }
 
-    public ItemStack addition() {
+    public ItemStack catalyst() {
         return this.catalyst;
     }
 }
