@@ -31,14 +31,12 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
     }
 
     public boolean matches(AlchymyRecipeInput alchymyRecipeInput, World world) {
-        return this.base.test(alchymyRecipeInput.base()) && this.reagent.test(alchymyRecipeInput.base()) && this.catalyst.test(alchymyRecipeInput.catalyst());
+        return this.base.test(alchymyRecipeInput.base()) && this.reagent.test(alchymyRecipeInput.reagent()) && this.catalyst.test(alchymyRecipeInput.catalyst());
     }
 
 
     public ItemStack craft(AlchymyRecipeInput alchymyRecipeInput, RegistryWrapper.WrapperLookup wrapperLookup) {
-        ItemStack itemStack = alchymyRecipeInput.base().copyComponentsToNewStack(this.result.getItem(), this.result.getCount());
-        itemStack.applyUnvalidatedChanges(this.result.getComponentChanges());
-        return itemStack;
+        return this.result.copy();
     }
 
     @Override
@@ -54,7 +52,7 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
         return this.base.test(stack);
     }
 
-    public boolean testReagant(ItemStack stack) {
+    public boolean testReagent(ItemStack stack) {
         return this.reagent.test(stack);
     }
 
@@ -77,11 +75,11 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
 
     public static class Serializer implements RecipeSerializer<net.tuffet.parachymistry.recipe.AlchymyRecipe> {
         private static final MapCodec<net.tuffet.parachymistry.recipe.AlchymyRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
-            return instance.group(Ingredient.ALLOW_EMPTY_CODEC.fieldOf("template").forGetter((recipe) -> {
+            return instance.group(Ingredient.ALLOW_EMPTY_CODEC.fieldOf("base").forGetter((recipe) -> {
                 return recipe.base;
-            }), Ingredient.ALLOW_EMPTY_CODEC.fieldOf("base").forGetter((recipe) -> {
+            }), Ingredient.ALLOW_EMPTY_CODEC.fieldOf("reagent").forGetter((recipe) -> {
                 return recipe.reagent;
-            }), Ingredient.ALLOW_EMPTY_CODEC.fieldOf("addition").forGetter((recipe) -> {
+            }), Ingredient.ALLOW_EMPTY_CODEC.fieldOf("catalyst").forGetter((recipe) -> {
                 return recipe.catalyst;
             }), ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter((recipe) -> {
                 return recipe.result;

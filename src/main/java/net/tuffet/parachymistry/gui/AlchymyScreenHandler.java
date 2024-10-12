@@ -51,7 +51,7 @@ public class AlchymyScreenHandler extends ForgingScreenHandler {
             });
         }).input(1, 26, 48, (stack) -> {
             return this.recipes.stream().anyMatch((recipe) -> {
-                return ((AlchymyRecipe) recipe.value()).testReagant(stack);
+                return ((AlchymyRecipe) recipe.value()).testReagent(stack);
             });
         }).input(2, 44, 48, (stack) -> {
             return this.recipes.stream().anyMatch((recipe) -> {

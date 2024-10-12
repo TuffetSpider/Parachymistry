@@ -67,7 +67,7 @@ public class AlchymyScreen extends ForgingScreen<AlchymyScreenHandler> {
 
 
     private boolean hasInvalidRecipe() {
-        return ((AlchymyScreenHandler)this.handler).getSlot(0).hasStack() && ((AlchymyScreenHandler)this.handler).getSlot(1).hasStack() && ((AlchymyScreenHandler)this.handler).getSlot(2).hasStack() && !((AlchymyScreenHandler)this.handler).getSlot(((AlchymyScreenHandler)this.handler).getResultSlotIndex()).hasStack();
+        return ((AlchymyScreenHandler)this.handler).getSlot(0).hasStack() && ((AlchymyScreenHandler)this.handler).getSlot(1).hasStack() && this.handler.getSlot(2).hasStack() && !this.handler.getSlot(this.handler.getResultSlotIndex()).hasStack();
     }
 
     static {

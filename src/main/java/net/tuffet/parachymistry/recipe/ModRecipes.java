@@ -21,8 +21,6 @@ public class ModRecipes implements ModInitializer{
 
     @Override
     public void onInitialize() {
-        ALCHYMY = Registry.register(Registries.RECIPE_TYPE, Identifier.of(Parachymistry.MOD_ID, "alchymy"), new RecipeType<AlchymyRecipe>(){});
-        AlCHYMYSERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, Identifier.of(Parachymistry.MOD_ID, "alchymy_craft"), new AlchymyRecipe.Serializer());
 
     }
 }
