@@ -1,26 +1,25 @@
-
-
 package net.tuffet.parachymistry.recipe;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.component.ComponentMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
-import net.minecraft.recipe.*;
-import net.minecraft.recipe.book.CraftingRecipeCategory;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
+import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.text.Text;
 import net.minecraft.world.World;
 import net.tuffet.parachymistry.component.ModComponents;
 import net.tuffet.parachymistry.component.TinctureIngredientComponent;
-import net.tuffet.parachymistry.item.ModItems;
-
 
 import java.util.stream.Stream;
 
-
-
-public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
+public class MysteriousTinctureRecipe implements Recipe<AlchymyRecipeInput> {
 
     final Ingredient base;
     final Ingredient reagent;
@@ -28,7 +27,7 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
     final ItemStack result;
 
 
-    public AlchymyRecipe(Ingredient base, Ingredient reagent, Ingredient catalyst, ItemStack result) {
+    public MysteriousTinctureRecipe(Ingredient base, Ingredient reagent, Ingredient catalyst, ItemStack result) {
 
 
 
@@ -46,12 +45,7 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
 
 
     public ItemStack craft(AlchymyRecipeInput alchymyRecipeInput, RegistryWrapper.WrapperLookup wrapperLookup) {
-        if(result.getItem() == ModItems.MYSTERIOUS_TINCTURE){
-            ItemStack tincture = this.result.copy();
-            tincture.set(ModComponents.TINCTUREITEM,new TinctureIngredientComponent(alchymyRecipeInput.catalyst().getItem().toString()));
-            return tincture.copy();
-        }
-        return this.result.copy();
+        return this.result;
     }
 
 
@@ -60,7 +54,7 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
     }
 
     public ItemStack getResult(RegistryWrapper.WrapperLookup registriesLookup) {
-        return this.result.copy();
+        return this.result;
     }
 
     public boolean testBase(ItemStack stack) {
@@ -76,11 +70,11 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
     }
 
     public RecipeSerializer<?> getSerializer() {
-        return ModRecipes.AlCHYMYSERIALIZER;
+        return ModRecipes.TINCTURESERIALIZER;
     }
 
     public RecipeType<?> getType() {
-        return ModRecipes.ALCHYMY;
+        return ModRecipes.TINCTURE;
     }
 
 
@@ -88,30 +82,31 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
         return Stream.of(this.base, this.reagent, this.catalyst).anyMatch(Ingredient::isEmpty);
     }
 
-    public static class Serializer implements RecipeSerializer<net.tuffet.parachymistry.recipe.AlchymyRecipe> {
-        private static final MapCodec<net.tuffet.parachymistry.recipe.AlchymyRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(Ingredient.ALLOW_EMPTY_CODEC.fieldOf("base").forGetter((recipe) -> recipe.base), Ingredient.ALLOW_EMPTY_CODEC.fieldOf("reagent").forGetter((recipe) -> recipe.reagent), Ingredient.ALLOW_EMPTY_CODEC.fieldOf("catalyst").forGetter((recipe) -> recipe.catalyst), ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter((recipe) -> recipe.result)).apply(instance, AlchymyRecipe::new));
-        public static final PacketCodec<RegistryByteBuf, net.tuffet.parachymistry.recipe.AlchymyRecipe> PACKET_CODEC = PacketCodec.ofStatic(net.tuffet.parachymistry.recipe.AlchymyRecipe.Serializer::write, net.tuffet.parachymistry.recipe.AlchymyRecipe.Serializer::read);
+    public static class Serializer implements RecipeSerializer<net.tuffet.parachymistry.recipe.MysteriousTinctureRecipe> {
+        private static final MapCodec<MysteriousTinctureRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(Ingredient.ALLOW_EMPTY_CODEC.fieldOf("base").forGetter((recipe) -> recipe.base), Ingredient.ALLOW_EMPTY_CODEC.fieldOf("reagent").forGetter((recipe) -> recipe.reagent), Ingredient.ALLOW_EMPTY_CODEC.fieldOf("catalyst").forGetter((recipe) -> recipe.catalyst), ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter((recipe) -> recipe.result)).apply(instance, MysteriousTinctureRecipe::new));
+        public static final PacketCodec<RegistryByteBuf, MysteriousTinctureRecipe> PACKET_CODEC = PacketCodec.ofStatic(net.tuffet.parachymistry.recipe.MysteriousTinctureRecipe.Serializer::write, net.tuffet.parachymistry.recipe.MysteriousTinctureRecipe.Serializer::read);
 
         public Serializer() {
+
         }
 
-        public MapCodec<net.tuffet.parachymistry.recipe.AlchymyRecipe> codec() {
+        public MapCodec<net.tuffet.parachymistry.recipe.MysteriousTinctureRecipe> codec() {
             return CODEC;
         }
 
-        public PacketCodec<RegistryByteBuf, net.tuffet.parachymistry.recipe.AlchymyRecipe> packetCodec() {
+        public PacketCodec<RegistryByteBuf, net.tuffet.parachymistry.recipe.MysteriousTinctureRecipe> packetCodec() {
             return PACKET_CODEC;
         }
 
-        private static net.tuffet.parachymistry.recipe.AlchymyRecipe read(RegistryByteBuf buf) {
+        private static net.tuffet.parachymistry.recipe.MysteriousTinctureRecipe read(RegistryByteBuf buf) {
             Ingredient ingredient = Ingredient.PACKET_CODEC.decode(buf);
             Ingredient ingredient2 = Ingredient.PACKET_CODEC.decode(buf);
             Ingredient ingredient3 = Ingredient.PACKET_CODEC.decode(buf);
             ItemStack itemStack = ItemStack.PACKET_CODEC.decode(buf);
-            return new net.tuffet.parachymistry.recipe.AlchymyRecipe(ingredient, ingredient2, ingredient3, itemStack);
+            return new net.tuffet.parachymistry.recipe.MysteriousTinctureRecipe(ingredient, ingredient2, ingredient3, itemStack);
         }
 
-        private static void write(RegistryByteBuf buf, net.tuffet.parachymistry.recipe.AlchymyRecipe recipe) {
+        private static void write(RegistryByteBuf buf, net.tuffet.parachymistry.recipe.MysteriousTinctureRecipe recipe) {
             Ingredient.PACKET_CODEC.encode(buf, recipe.base);
             Ingredient.PACKET_CODEC.encode(buf, recipe.reagent);
             Ingredient.PACKET_CODEC.encode(buf, recipe.catalyst);

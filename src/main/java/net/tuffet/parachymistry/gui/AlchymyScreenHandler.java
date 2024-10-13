@@ -6,6 +6,7 @@
 package net.tuffet.parachymistry.gui;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -20,11 +21,13 @@ import net.tuffet.parachymistry.block.ModBlocks;
 import net.tuffet.parachymistry.recipe.AlchymyRecipe;
 import net.tuffet.parachymistry.recipe.AlchymyRecipeInput;
 import net.tuffet.parachymistry.recipe.ModRecipes;
+import net.tuffet.parachymistry.recipe.MysteriousTinctureRecipe;
 
 public class AlchymyScreenHandler extends ForgingScreenHandler {
     private final World world;
     private RecipeEntry<AlchymyRecipe> currentRecipe;
-    private final List<RecipeEntry<AlchymyRecipe>> recipes;
+    private List<RecipeEntry<AlchymyRecipe>> recipes;
+    private List<RecipeEntry<MysteriousTinctureRecipe>> recipes2;
 
 
     public AlchymyScreenHandler(int syncId, PlayerInventory playerInventory) {
