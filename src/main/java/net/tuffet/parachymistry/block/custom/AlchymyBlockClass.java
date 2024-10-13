@@ -15,7 +15,7 @@ import net.tuffet.parachymistry.gui.AlchymyScreenHandler;
 
 public class AlchymyBlockClass extends CraftingTableBlock {
     public static final MapCodec<net.tuffet.parachymistry.block.custom.AlchymyBlockClass> CODEC = createCodec(net.tuffet.parachymistry.block.custom.AlchymyBlockClass::new);
-    private static final Text SCREEN_TITLE = Text.translatable("container.upgrade");
+    private static final Text SCREEN_TITLE = Text.translatable("Undergo Alchymy");
 
     public MapCodec<net.tuffet.parachymistry.block.custom.AlchymyBlockClass> getCodec() {
         return CODEC;
