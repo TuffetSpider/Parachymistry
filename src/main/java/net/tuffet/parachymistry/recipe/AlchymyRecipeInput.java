@@ -9,12 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.input.RecipeInput;
 
 public record AlchymyRecipeInput(ItemStack base, ItemStack reagent, ItemStack catalyst) implements RecipeInput {
-    public AlchymyRecipeInput(ItemStack base, ItemStack reagent, ItemStack catalyst) {
-        this.base = base;
-        this.catalyst = catalyst;
-        this.reagent = reagent;
-    }
-
     public ItemStack getStackInSlot(int slot) {
         ItemStack var10000;
         switch (slot) {

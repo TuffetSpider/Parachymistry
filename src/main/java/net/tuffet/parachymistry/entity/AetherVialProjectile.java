@@ -1,15 +1,11 @@
 package net.tuffet.parachymistry.entity;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.mob.ShulkerEntity;
 import net.minecraft.entity.projectile.ShulkerBulletEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -22,7 +18,6 @@ import net.tuffet.parachymistry.item.ModItems;
 
 import java.util.List;
 
-import static net.minecraft.entity.projectile.AbstractWindChargeEntity.EXPLOSION_BEHAVIOR;
 
 public class AetherVialProjectile extends ThrownItemEntity {
     public AetherVialProjectile(EntityType<? extends FireVialProjectile> entityType, World world) {

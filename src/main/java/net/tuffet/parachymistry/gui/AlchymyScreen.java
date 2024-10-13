@@ -31,7 +31,7 @@ public class AlchymyScreen extends ForgingScreen<AlchymyScreenHandler> {
     private final CyclingSlotIcon additionsSlotIcon = new CyclingSlotIcon(2);
 
     public AlchymyScreen(AlchymyScreenHandler handler, PlayerInventory playerInventory, Text title) {
-        super(handler, playerInventory, Text.of("Create Alchymical Wonders!"), Identifier.of(Parachymistry.MOD_ID,"textures/gui/sprites/alchemical_table.png"));
+        super(handler, playerInventory, title, Identifier.of(Parachymistry.MOD_ID,"textures/gui/sprites/alchemical_table.png"));
         this.titleX = 33;
         this.titleY = 15;
     }
@@ -67,7 +67,7 @@ public class AlchymyScreen extends ForgingScreen<AlchymyScreenHandler> {
 
 
     private boolean hasInvalidRecipe() {
-        return ((AlchymyScreenHandler)this.handler).getSlot(0).hasStack() && ((AlchymyScreenHandler)this.handler).getSlot(1).hasStack() && this.handler.getSlot(2).hasStack() && !this.handler.getSlot(this.handler.getResultSlotIndex()).hasStack();
+        return this.handler.getSlot(0).hasStack() && this.handler.getSlot(1).hasStack() && this.handler.getSlot(2).hasStack() && !this.handler.getSlot(this.handler.getResultSlotIndex()).hasStack();
     }
 
     static {

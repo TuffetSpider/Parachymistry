@@ -20,7 +20,6 @@ import net.tuffet.parachymistry.item.ModItems;
 
 import java.util.List;
 
-import static java.lang.Math.random;
 
 public class FireVialProjectile extends ThrownItemEntity {
     public FireVialProjectile(EntityType<? extends FireVialProjectile> entityType, World world) {

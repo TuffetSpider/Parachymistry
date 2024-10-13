@@ -4,14 +4,13 @@ package net.tuffet.parachymistry.recipe;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.world.World;
-import net.tuffet.parachymistry.block.ModBlocks;
+
 
 import java.util.stream.Stream;
 
@@ -29,7 +28,6 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
         this.catalyst = catalyst;
         this.result = result;
     }
-
     public boolean matches(AlchymyRecipeInput alchymyRecipeInput, World world) {
         return this.base.test(alchymyRecipeInput.base()) && this.reagent.test(alchymyRecipeInput.reagent()) && this.catalyst.test(alchymyRecipeInput.catalyst());
     }
@@ -39,7 +37,7 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
         return this.result.copy();
     }
 
-    @Override
+
     public boolean fits(int width, int height) {
         return false;
     }
@@ -64,7 +62,6 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
         return ModRecipes.AlCHYMYSERIALIZER;
     }
 
-    @Override
     public RecipeType<?> getType() {
         return ModRecipes.ALCHYMY;
     }
@@ -74,17 +71,7 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
     }
 
     public static class Serializer implements RecipeSerializer<net.tuffet.parachymistry.recipe.AlchymyRecipe> {
-        private static final MapCodec<net.tuffet.parachymistry.recipe.AlchymyRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> {
-            return instance.group(Ingredient.ALLOW_EMPTY_CODEC.fieldOf("base").forGetter((recipe) -> {
-                return recipe.base;
-            }), Ingredient.ALLOW_EMPTY_CODEC.fieldOf("reagent").forGetter((recipe) -> {
-                return recipe.reagent;
-            }), Ingredient.ALLOW_EMPTY_CODEC.fieldOf("catalyst").forGetter((recipe) -> {
-                return recipe.catalyst;
-            }), ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter((recipe) -> {
-                return recipe.result;
-            })).apply(instance, net.tuffet.parachymistry.recipe.AlchymyRecipe::new);
-        });
+        private static final MapCodec<net.tuffet.parachymistry.recipe.AlchymyRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(Ingredient.ALLOW_EMPTY_CODEC.fieldOf("base").forGetter((recipe) -> recipe.base), Ingredient.ALLOW_EMPTY_CODEC.fieldOf("reagent").forGetter((recipe) -> recipe.reagent), Ingredient.ALLOW_EMPTY_CODEC.fieldOf("catalyst").forGetter((recipe) -> recipe.catalyst), ItemStack.VALIDATED_CODEC.fieldOf("result").forGetter((recipe) -> recipe.result)).apply(instance, AlchymyRecipe::new));
         public static final PacketCodec<RegistryByteBuf, net.tuffet.parachymistry.recipe.AlchymyRecipe> PACKET_CODEC = PacketCodec.ofStatic(net.tuffet.parachymistry.recipe.AlchymyRecipe.Serializer::write, net.tuffet.parachymistry.recipe.AlchymyRecipe.Serializer::read);
 
         public Serializer() {
@@ -99,10 +86,10 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
         }
 
         private static net.tuffet.parachymistry.recipe.AlchymyRecipe read(RegistryByteBuf buf) {
-            Ingredient ingredient = (Ingredient)Ingredient.PACKET_CODEC.decode(buf);
-            Ingredient ingredient2 = (Ingredient)Ingredient.PACKET_CODEC.decode(buf);
-            Ingredient ingredient3 = (Ingredient)Ingredient.PACKET_CODEC.decode(buf);
-            ItemStack itemStack = (ItemStack)ItemStack.PACKET_CODEC.decode(buf);
+            Ingredient ingredient = Ingredient.PACKET_CODEC.decode(buf);
+            Ingredient ingredient2 = Ingredient.PACKET_CODEC.decode(buf);
+            Ingredient ingredient3 = Ingredient.PACKET_CODEC.decode(buf);
+            ItemStack itemStack = ItemStack.PACKET_CODEC.decode(buf);
             return new net.tuffet.parachymistry.recipe.AlchymyRecipe(ingredient, ingredient2, ingredient3, itemStack);
         }
 

@@ -1,20 +1,10 @@
 package net.tuffet.parachymistry.entity;
-
-import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleFactory;
-import net.minecraft.client.render.entity.model.ParrotEntityModel;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -22,10 +12,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.tuffet.parachymistry.effect.ModEffects;
-import net.tuffet.parachymistry.effect.PoseidonsWrathEffect;
 import net.tuffet.parachymistry.item.ModItems;
-
-import java.util.Iterator;
 import java.util.List;
 
 public class WaterVialProjectile extends ThrownItemEntity {
