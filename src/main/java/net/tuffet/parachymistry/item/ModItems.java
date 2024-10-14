@@ -1,5 +1,6 @@
 package net.tuffet.parachymistry.item;
 
+import net.minecraft.component.type.FoodComponents;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -17,7 +18,7 @@ public class ModItems {
     public static final Item AIR_VIAL = registerItem("vial_of_air", new AirVialClass(new Item.Settings()));
     public static final Item AETHER_VIAL = registerItem("vial_of_aether", new AetherVialClass(new Item.Settings()));
     public static final Item QUICKLIME = registerItem("quicklime", new Item(new Item.Settings()));
-    public static final Item MYSTERIOUS_TINCTURE = registerItem("mysterious_tincture", new MysteriousTinctureClass(new Item.Settings()));
+    public static final Item MYSTERIOUS_TINCTURE = registerItem("mysterious_tincture", new MysteriousTinctureClass(new Item.Settings().food(ModFoodComponents.TINCTURE)));
 
          private static Item registerItem(String name, Item item) {
             return Registry.register(Registries.ITEM, Identifier.of(Parachymistry.MOD_ID, name), item);

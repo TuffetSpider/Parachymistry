@@ -2,38 +2,46 @@ package net.tuffet.parachymistry.item.custom;
 
 
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.Items;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.text.Text;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.Hand;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import net.tuffet.parachymistry.component.ModComponents;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class MysteriousTinctureClass extends Item{
     public MysteriousTinctureClass(Settings settings) {
         super(settings);
 
+    }
 
+
+    @Override
+    public UseAction getUseAction(ItemStack stack) {
+        return UseAction.DRINK;
     }
 
     @Override
-    public ActionResult useOnBlock(ItemUsageContext context) {
-        Objects.requireNonNull(context.getPlayer()).sendMessage(Text.of(Objects.requireNonNull(context.getStack().get(ModComponents.TINCTUREITEM)).toString()));
-        return super.useOnBlock(context);
+    public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
+        System.out.println("TinctureIngredientComponent[ingredient=minecraft:ender_pearl]");
+        System.out.println((Objects.requireNonNull(stack.get(ModComponents.TINCTUREITEM)).toString()));
+        if(testComponent(stack,"minecraft:ender_pearl"))
+        {if(user.getLastAttacker()!=null){
+            user.teleport(Objects.requireNonNull(user.getLastAttacker()).getX(),user.getLastAttacker().getY(),user.getLastAttacker().getZ(),true);
+        }}
+
+
+        return super.finishUsing(stack, world, user);
+    }
+    public boolean testComponent(ItemStack stack, String item){
+        return Objects.equals(Objects.requireNonNull(stack.get(ModComponents.TINCTUREITEM)).toString(), "TinctureIngredientComponent[ingredient=" + item + "]");
 
     }
-
 }
+
+
+
 
 
 
