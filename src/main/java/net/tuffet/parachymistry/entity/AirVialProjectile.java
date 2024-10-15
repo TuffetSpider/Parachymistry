@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleTypes;
@@ -22,7 +23,7 @@ import java.util.List;
 import static net.minecraft.entity.projectile.AbstractWindChargeEntity.EXPLOSION_BEHAVIOR;
 
 public class AirVialProjectile extends ThrownItemEntity {
-    public AirVialProjectile(EntityType<? extends FireVialProjectile> entityType, World world) {
+    public AirVialProjectile(EntityType<? extends SnowballEntity> entityType, World world) {
         super(entityType, world);
     }
 

@@ -3,6 +3,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.sound.SoundEvents;
@@ -16,7 +17,7 @@ import net.tuffet.parachymistry.item.ModItems;
 import java.util.List;
 
 public class WaterVialProjectile extends ThrownItemEntity {
-    public WaterVialProjectile(EntityType<? extends FireVialProjectile> entityType, World world) {
+    public WaterVialProjectile(EntityType<? extends SnowballEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -37,20 +38,11 @@ public class WaterVialProjectile extends ThrownItemEntity {
         super.onEntityHit(entityHitResult);
         if (!this.getWorld().isClient) {
             Entity entity = entityHitResult.getEntity();
-            entity.damage(this.getDamageSources().drown(), (float)5.0);
+            entity.damage(this.getDamageSources().thrown(this,this.getOwner()), (float)5.0);
             this.discard();
         }}
 
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
-        if (!this.getWorld().isClient && !this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
-            this.playSound(SoundEvents.BLOCK_GLASS_BREAK,1f,1f);
-            Box box = this.getBoundingBox().expand(4.0, 2.0, 4.0);
-            List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
-            for (LivingEntity livingEntity : list) {
-                livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.POSEIDON_EFFECT, 400, 0));
-            }
-
-
-    }this.discard();
+        this.discard();
 }}

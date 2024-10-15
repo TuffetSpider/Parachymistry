@@ -19,6 +19,7 @@ public class ModItems {
     public static final Item AETHER_VIAL = registerItem("vial_of_aether", new AetherVialClass(new Item.Settings()));
     public static final Item QUICKLIME = registerItem("quicklime", new Item(new Item.Settings()));
     public static final Item MYSTERIOUS_TINCTURE = registerItem("mysterious_tincture", new MysteriousTinctureClass(new Item.Settings().food(ModFoodComponents.TINCTURE)));
+    public static final Item MYSTERIOUS_CONCOCTION = registerItem("mysterious_concoction", new MysteriousConcoctionClass(new Item.Settings()));
 
          private static Item registerItem(String name, Item item) {
             return Registry.register(Registries.ITEM, Identifier.of(Parachymistry.MOD_ID, name), item);

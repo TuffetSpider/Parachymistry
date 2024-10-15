@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.sound.SoundEvents;
@@ -18,7 +19,7 @@ import net.tuffet.parachymistry.item.ModItems;
 import java.util.List;
 
 public class EarthVialProjectile extends ThrownItemEntity {
-    public EarthVialProjectile(EntityType<? extends FireVialProjectile> entityType, World world) {
+    public EarthVialProjectile(EntityType<? extends SnowballEntity> entityType, World world) {
         super(entityType, world);
     }
 

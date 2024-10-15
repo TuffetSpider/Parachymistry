@@ -4,6 +4,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.ShulkerBulletEntity;
+import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.sound.SoundEvents;
@@ -20,7 +21,7 @@ import java.util.List;
 
 
 public class AetherVialProjectile extends ThrownItemEntity {
-    public AetherVialProjectile(EntityType<? extends FireVialProjectile> entityType, World world) {
+    public AetherVialProjectile(EntityType<? extends SnowballEntity> entityType, World world) {
         super(entityType, world);
     }
 

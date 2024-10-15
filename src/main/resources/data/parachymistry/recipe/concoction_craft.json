@@ -1,0 +1,15 @@
+{
+  "type": "parachymistry:alchymy_serializer",
+  "base": {
+    "item": "parachymistry:alchymical_vial"
+  },
+  "reagent": {
+    "item": "minecraft:gunpowder"
+  },
+  "catalyst": {
+    "tag": "parachymistry:tincture_ingredients"
+  },
+  "result": {
+    "id": "parachymistry:mysterious_concoction"
+  }
+}
