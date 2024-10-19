@@ -7,9 +7,10 @@
     "minecraft:blaze_powder",
     "minecraft:pufferfish",
     "minecraft:sugar",
-    "minecraft:soul_sand",
+    "minecraft:soul_soil",
     "minecraft:glowstone_dust",
     "minecraft:ender_eye",
-    "minecraft:ender_pearl"
+    "minecraft:ender_pearl",
+    "parachymistry:vial_of_air"
   ]
 }
