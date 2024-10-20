@@ -24,6 +24,8 @@ public class ModEffects implements ModInitializer {
     public static final RegistryEntry<StatusEffect> HADES_EFFECT;
     public static final RegistryEntry<StatusEffect> AETHERIAL_SACRIFICE_EFFECT;
     public static final RegistryEntry<StatusEffect> SWIFTSTRIDE_EFFECT;
+    public static final RegistryEntry<StatusEffect> IRONWARD_EFFECT;
+    public static final RegistryEntry<StatusEffect> VENOMOUS_RECIPROCATION_EFFECT;
 
     private static RegistryEntry<StatusEffect> register(String id, StatusEffect statusEffect) {
         return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(Parachymistry.MOD_ID,id), statusEffect);
@@ -38,6 +40,8 @@ public class ModEffects implements ModInitializer {
         HADES_EFFECT = register("hadeshellfire", new HadesHellfireEffect(StatusEffectCategory.HARMFUL, 0xe9b8b3));
         AETHERIAL_SACRIFICE_EFFECT = register("aetherialsacrifice", new AetherialSacrificeEffect(StatusEffectCategory.HARMFUL, 0).addAttributeModifier(EntityAttributes.GENERIC_GRAVITY, Identifier.of(Parachymistry.MOD_ID,"effect.aetherialsacrifice"),-1.05f, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         SWIFTSTRIDE_EFFECT = register("swiftstride", new SwiftStrideEffect(StatusEffectCategory.BENEFICIAL,102156172).addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_EFFICIENCY,Identifier.of(Parachymistry.MOD_ID,"effect.swiftstride"),1f, EntityAttributeModifier.Operation.ADD_VALUE));
+        IRONWARD_EFFECT = register("ironward", new IronWardEffect(StatusEffectCategory.BENEFICIAL,543087).addAttributeModifier(EntityAttributes.GENERIC_ARMOR,Identifier.of(Parachymistry.MOD_ID,"effect.ironward"), 4f, EntityAttributeModifier.Operation.ADD_VALUE));
+        VENOMOUS_RECIPROCATION_EFFECT = register("venomous_reciprocation", new VenomousReciprocationEffect(StatusEffectCategory.BENEFICIAL,24232));
     }
 
     public static void registerModEffects() {

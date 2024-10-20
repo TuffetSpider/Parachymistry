@@ -44,6 +44,10 @@ public class MysteriousTinctureClass extends Item{
             }
         }else if (testComponent(stack,"minecraft:soul_soil")){
             user.addStatusEffect(new StatusEffectInstance(ModEffects.SWIFTSTRIDE_EFFECT,2400,0));
+        }else if (testComponent(stack,"minecraft:iron_block")){
+            user.addStatusEffect(new StatusEffectInstance(ModEffects.IRONWARD_EFFECT,1200,0));
+        }else if (testComponent(stack,"minecraft:pufferfish")){
+            user.addStatusEffect(new StatusEffectInstance(ModEffects.VENOMOUS_RECIPROCATION_EFFECT,1200,0));
         }
 
 
