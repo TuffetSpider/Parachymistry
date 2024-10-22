@@ -31,7 +31,6 @@ public class EarthVialClass extends Item implements ProjectileItem {
             earthVialProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
             world.spawnEntity(earthVialProjectile);
         }
-
         user.incrementStat(Stats.USED.getOrCreateStat(this));
         itemStack.decrementUnlessCreative(1, user);
         return TypedActionResult.success(itemStack, world.isClient());

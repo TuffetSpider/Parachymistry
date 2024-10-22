@@ -41,7 +41,7 @@ public class AlchymyScreenHandler extends ForgingScreenHandler {
     }
 
     protected ForgingSlotsManager getForgingSlotsManager() {
-        return ForgingSlotsManager.create().input(0, 8, 48, (stack) -> this.recipes.stream().anyMatch((recipe) -> (recipe.value()).testBase(stack))).input(1, 26, 48, (stack) -> this.recipes.stream().anyMatch((recipe) -> (recipe.value()).testReagent(stack))).input(2, 44, 48, (stack) -> this.recipes.stream().anyMatch((recipe) -> (recipe.value()).testCatalyst(stack))).output(3, 98, 48).build();
+        return ForgingSlotsManager.create().input(0, 79, 15, (stack) -> this.recipes.stream().anyMatch((recipe) -> (recipe.value()).testBase(stack))).input(1, 102, 52, (stack) -> this.recipes.stream().anyMatch((recipe) -> (recipe.value()).testReagent(stack))).input(2, 56, 52, (stack) -> this.recipes.stream().anyMatch((recipe) -> (recipe.value()).testCatalyst(stack))).output(3, 79, 47).build();
     }
 
     protected boolean canUse(BlockState state) {
@@ -82,7 +82,6 @@ public class AlchymyScreenHandler extends ForgingScreenHandler {
         this.decrementStack(0);
         this.decrementStack(1);
         this.decrementStack(2);
-        this.context.run((world, pos) -> world.syncWorldEvent(1044, pos, 0));
     }
 
     private List<ItemStack> getInputStacks() {
