@@ -9,7 +9,7 @@ import net.tuffet.parachymistry.Parachymistry;
 
 public class ModTags implements ModInitializer {
 public static class Items {
-    public static final TagKey<Item> TINCTURE_INGREDIENTS = createTag("tinctureingredients");
+    public static final TagKey<Item> TINCTURE_INGREDIENTS = TagKey.of(RegistryKeys.ITEM,Identifier.of(Parachymistry.MOD_ID,"tincture_ingredients"));
 }
 private static TagKey<Item> createTag(String name){
     return TagKey.of(RegistryKeys.ITEM, Identifier.of(Parachymistry.MOD_ID, name));

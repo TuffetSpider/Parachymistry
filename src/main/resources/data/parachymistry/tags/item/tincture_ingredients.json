@@ -1,16 +1,12 @@
 {
   "replace":false,
   "values": [
-    "minecraft:red_mushroom",
-    "minecraft:brown_mushroom",
-    "minecraft:nether_wart",
-    "minecraft:blaze_powder",
     "minecraft:pufferfish",
     "minecraft:iron_block",
     "minecraft:soul_soil",
-    "minecraft:glowstone_dust",
-    "minecraft:ender_eye",
     "minecraft:ender_pearl",
-    "parachymistry:vial_of_air"
+    "parachymistry:vial_of_air",
+    "minecraft:golden_apple",
+    "minecraft:armadillo_scute"
   ]
 }
