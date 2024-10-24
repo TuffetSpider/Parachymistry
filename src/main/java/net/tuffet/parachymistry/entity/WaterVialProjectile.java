@@ -6,10 +6,13 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.tuffet.parachymistry.effect.ModEffects;
@@ -38,11 +41,41 @@ public class WaterVialProjectile extends ThrownItemEntity {
         super.onEntityHit(entityHitResult);
         if (!this.getWorld().isClient) {
             Entity entity = entityHitResult.getEntity();
-            entity.damage(this.getDamageSources().thrown(this,this.getOwner()), (float)5.0);
+            entity.damage(this.getDamageSources().thrown(this, this.getOwner()), (float) 5.0);
             this.discard();
-        }}
+        }
+    }
 
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
-        this.discard();
-}}
+        if (!this.getWorld().isClient && !this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
+            this.playSound(SoundEvents.BLOCK_GLASS_BREAK, 1f, 1f);
+            int particleCount = 200;
+            double radius = 4.0;
+            Vec3d center = hitResult.getPos();
+            for (int i = 0; i < particleCount; i++) {
+                // Calculate the angle in radians
+                double angle = 2 * Math.PI * i / particleCount;
+
+                // Calculate x and z coordinates for the particle
+                double x = center.x + radius * Math.cos(angle);
+                double z = center.z + radius * Math.sin(angle);
+
+                // y can be the height above ground where you want the particles to appear
+                double y = center.y;
+
+                // Spawn the fire particle at the calculated position
+                ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.SPLASH, x, y, z, 0, 0, 0, 0, 1.0);
+            }
+
+            Box box = this.getBoundingBox().expand(3.5, 2.0, 3.5);
+            List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
+            for (LivingEntity livingEntity : list) {
+                livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.POSEIDON_EFFECT, 400, 0));
+                livingEntity.setOnFireForTicks(140);
+            }
+            this.discard();
+        }
+
+    }
+}
