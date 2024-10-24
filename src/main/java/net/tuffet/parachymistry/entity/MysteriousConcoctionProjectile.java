@@ -49,42 +49,37 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
 
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
-        if (!this.getWorld().isClient) {
-            if (testConcoctionComponent("minecraft:ender_pearl")) {
-                if (!this.getWorld().isClient&&entityHitResult.getEntity().isLiving()) {
-                LivingEntity user = (LivingEntity) entityHitResult.getEntity();
-                    for(int i = 0; i < 16; ++i) {
-                        double d = user.getX() + (user.getRandom().nextDouble() - 0.5) * 16.0;
-                        double e = MathHelper.clamp(user.getY() + (double)(user.getRandom().nextInt(16) - 8), (double)this.getWorld().getBottomY(), (double)(this.getWorld().getBottomY() + ((ServerWorld)this.getWorld()).getLogicalHeight() - 1));
-                        double f = user.getZ() + (user.getRandom().nextDouble() - 0.5) * 16.0;
-                        if (user.hasVehicle()) {
-                            user.stopRiding();
-                        }
+        switch(testConcoctionComponent(this.getStack())){
+            case"minecraft:ender_pearl":{
+                //example, put effect here
+            }
+            case"minecraft:brown_mushroom":{
+                //example, put effect here
+            }
+            default:{
+                this.discard();
+                break;
+            }
 
-                        Vec3d vec3d = user.getPos();
-                        if (user.teleport(d, e, f, true)) {
-                            this.getWorld().emitGameEvent(GameEvent.TELEPORT, vec3d, GameEvent.Emitter.of(user));
-                            SoundCategory soundCategory;
-                            SoundEvent soundEvent;
-                            if (user instanceof FoxEntity) {
-                                soundEvent = SoundEvents.ENTITY_FOX_TELEPORT;
-                                soundCategory = SoundCategory.NEUTRAL;
-                            } else {
-                                soundEvent = SoundEvents.ITEM_CHORUS_FRUIT_TELEPORT;
-                                soundCategory = SoundCategory.PLAYERS;
-                            }}}}
-            }}
-            this.discard();
-        }
+        }}
 
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
-        if (testConcoctionComponent("minecraft:ender_pearl")) {
-           // example, true effect is in onEntityHit
+        switch(testConcoctionComponent(this.getStack())){
+            case"minecraft:ender_pearl":{
+                //Example, put effect here
+            }
+            case"minecraft:brown_mushroom":{
+                //Example, put effect here
+            }
+            default:{
+                this.discard();
+                break;
+            }
         }
-        this.discard();
     }
-public boolean testConcoctionComponent(String item){
-    return Objects.equals(Objects.requireNonNull(this.getStack().get(ModComponents.TINCTUREITEM)).toString(), "TinctureIngredientComponent[ingredient="+item+"]");
+    public String testConcoctionComponent(ItemStack stack){
+        return Objects.requireNonNull(stack.get(ModComponents.TINCTUREITEM)).toString().replace("TinctureIngredientComponent[ingredient=","").replace("]","");
+    }
 
-}}
+}
