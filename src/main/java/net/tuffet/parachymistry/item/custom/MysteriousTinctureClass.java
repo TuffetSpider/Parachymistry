@@ -2,21 +2,25 @@ package net.tuffet.parachymistry.item.custom;
 
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.UseAction;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.tuffet.parachymistry.Parachymistry;
 import net.tuffet.parachymistry.component.ModComponents;
 import net.tuffet.parachymistry.effect.ModEffects;
 
+import java.util.List;
 import java.util.Objects;
 
 public class MysteriousTinctureClass extends Item{
@@ -84,6 +88,12 @@ public class MysteriousTinctureClass extends Item{
                 Objects.requireNonNull(user.getAttributeInstance(EntityAttributes.GENERIC_SCALE)).setBaseValue(user.getAttributeValue(EntityAttributes.GENERIC_SCALE)-0.1);
                 break;
             }
+            case"minecraft:glowstone":{
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING,2400,1),user);
+                break;
+            }
+
+
 
             default:{
                 break;
