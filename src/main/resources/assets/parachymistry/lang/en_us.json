@@ -1,0 +1,23 @@
+{
+  "item.parachymistry.vial_of_aether": "Aether Vial",
+  "item.parachymistry.vial_of_fire": "Fire Vial",
+  "item.parachymistry.vial_of_air": "Air Vial",
+  "item.parachymistry.vial_of_water": "Water Vial",
+  "item.parachymistry.vial_of_earth": "Earth Vial",
+  "item.parachymistry.mercury": "Mercury",
+  "item.parachymistry.salt": "Salt",
+  "item.parachymistry.quicklime": "Quicklime",
+  "item.parachymistry.mysterious_tincture": "Mysterious Tincture",
+  "block.parachymistry.alchymy_station": "Alchymy Station",
+  "item.parachymistry.alchymical_vial": "Alchymical Vial",
+  "effect.parachymistry.gaiasgrasp": "Gaias Grasp",
+  "effect.parachymistry.hadeshellfire": "Hades Hellfire",
+  "effect.parachymistry.poseidonswrath": " Poseidons Wrath",
+  "effect.parachymistry.aetherialsacrifice": "Aetherial Sacrifice",
+  "effect.parachymistry.swiftstride": "Swift Stride",
+  "effect.parachymistry.venomousreciprocation": "Venomous Reciprocation ",
+  "effect.parachymistry.karmicshielding": "Karmic Shielding",
+  "effect.parachymistry.ironward": "Iron Ward",
+  "effect.parachymistry.aeolusbreath": "Aeolus Breath",
+  "itemgroup.parachymistry.parachymistry": "Parachymistry"
+}

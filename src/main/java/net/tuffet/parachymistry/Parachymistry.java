@@ -13,6 +13,7 @@ import net.tuffet.parachymistry.block.ModBlocks;
 import net.tuffet.parachymistry.component.ModComponents;
 import net.tuffet.parachymistry.effect.ModEffects;
 import net.tuffet.parachymistry.gui.AlchymyScreen;
+import net.tuffet.parachymistry.item.ModItemGroups;
 import net.tuffet.parachymistry.item.ModItems;
 import net.tuffet.parachymistry.recipe.AlchymyRecipe;
 import net.tuffet.parachymistry.recipe.ModRecipes;
@@ -39,6 +40,7 @@ public class Parachymistry implements ModInitializer {
 		ModRecipes.TINCTURESERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, Identifier.of(Parachymistry.MOD_ID, "tincture_serializer"), new MysteriousTinctureRecipe.Serializer());
 		ModComponents.intialize();
 		ModTags.initialize();
+		ModItemGroups.registerItemGroups();
 
 
 
