@@ -27,7 +27,7 @@ public class KarmicShieldingEffect extends StatusEffect {
 
     @Override
     public void onEntityDamage(LivingEntity entity, int amplifier, DamageSource source, float amount) {
-        DamageStored = DamageStored + amount/3;
+        DamageStored = DamageStored + Math.max(amount/3,1);
             entity.setAbsorptionAmount(DamageStored);
             DamageStored=0f;
         super.onEntityDamage(entity, amplifier, source, amount);
