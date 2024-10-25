@@ -17,7 +17,6 @@ public class SwiftStrideEffect extends StatusEffect {
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         entity.setFrozenTicks(0);
-
         return super.applyUpdateEffect(entity, amplifier);
     }
 }

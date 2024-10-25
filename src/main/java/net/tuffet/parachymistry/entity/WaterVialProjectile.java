@@ -75,7 +75,7 @@ public class WaterVialProjectile extends ThrownItemEntity {
                 livingEntity.setOnFireForTicks(140);
             }
             this.discard();
-        }
+        }this.discard();
 
     }
 }

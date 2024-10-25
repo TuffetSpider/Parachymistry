@@ -52,9 +52,13 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
         switch(testConcoctionComponent(this.getStack())){
             case"minecraft:ender_pearl":{
                 //example, put effect here
+                this.discard();
+                break;
             }
             case"minecraft:brown_mushroom":{
                 //example, put effect here
+                this.discard();
+                break;
             }
             default:{
                 this.discard();
@@ -67,10 +71,15 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
         super.onCollision(hitResult);
         switch(testConcoctionComponent(this.getStack())){
             case"minecraft:ender_pearl":{
+
                 //Example, put effect here
+                this.discard();
+                break;
             }
             case"minecraft:brown_mushroom":{
+
                 //Example, put effect here
+                this.discard();break;
             }
             default:{
                 this.discard();

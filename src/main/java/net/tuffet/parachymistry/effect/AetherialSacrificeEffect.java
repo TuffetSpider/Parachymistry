@@ -38,6 +38,7 @@ public class AetherialSacrificeEffect extends StatusEffect {
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         StatusEffectInstance Status = entity.getStatusEffect(ModEffects.AETHERIAL_SACRIFICE_EFFECT);
         entity.setGlowing(true);
+        assert Status != null;
         int TimeRemaining = Status.getDuration();
         if(TimeRemaining==1){
             if (entity instanceof PlayerEntity player) {

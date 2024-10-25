@@ -74,6 +74,7 @@ public class AetherVialProjectile extends ThrownItemEntity {
                 this.getWorld().spawnEntity(new ShulkerBulletEntity(this.getWorld(), (LivingEntity) this.getOwner(), livingEntity, Direction.Axis.pickRandomAxis(random)));
                 this.getWorld().spawnEntity(new ShulkerBulletEntity(this.getWorld(), (LivingEntity) this.getOwner(), livingEntity, Direction.Axis.pickRandomAxis(random)));
                 }
+            this.discard();
 
 
 

@@ -76,7 +76,7 @@ public class AirVialProjectile extends ThrownItemEntity {
             ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.GUST_EMITTER_LARGE, this.getX(),this.getY(),this.getZ(), 0, 0, 0, 0, 1.0);
             for (LivingEntity livingEntity : list) {
                 livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.AEOLUS_EFFECT,400));
-            }
+            }this.discard();
 
 
         }this.discard();
