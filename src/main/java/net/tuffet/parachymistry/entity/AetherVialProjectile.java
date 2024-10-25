@@ -48,24 +48,24 @@ public class AetherVialProjectile extends ThrownItemEntity {
 
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
-        if (!this.getWorld().isClient && !this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
-            int particleCount = 200;
-            double radius = 4.0;
-            Vec3d center = hitResult.getPos();
-            for (int i = 0; i < particleCount; i++) {
-                // Calculate the angle in radians
-                double angle = 2 * Math.PI * i / particleCount;
+        int particleCount = 200;
+        double radius = 4.0;
+        Vec3d center = hitResult.getPos();
+        for (int i = 0; i < particleCount; i++) {
+            // Calculate the angle in radians
+            double angle = 2 * Math.PI * i / particleCount;
 
-                // Calculate x and z coordinates for the particle
-                double x = center.x + radius * Math.cos(angle);
-                double z = center.z + radius * Math.sin(angle);
+            // Calculate x and z coordinates for the particle
+            double x = center.x + radius * Math.cos(angle);
+            double z = center.z + radius * Math.sin(angle);
 
-                // y can be the height above ground where you want the particles to appear
-                double y = center.y;
+            // y can be the height above ground where you want the particles to appear
+            double y = center.y;
 
-                // Spawn the fire particle at the calculated position
-                ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.END_ROD, x, y, z, 0, 0, 0, 0, 1.0);
-            }
+            // Spawn the fire particle at the calculated position
+            ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.END_ROD, x, y, z, 0, 0, 0, 0, 1.0);
+        }
+        if (!this.getWorld().isClient && this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
             this.playSound(SoundEvents.BLOCK_GLASS_BREAK,1f,1f);
             Box box = this.getBoundingBox().expand(3.5, 4.0, 3.5);
             List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);

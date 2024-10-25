@@ -75,6 +75,10 @@ public class MysteriousTinctureClass extends Item{
                 Objects.requireNonNull(user.getAttributeInstance(EntityAttributes.GENERIC_SCALE)).setBaseValue(user.getAttributeValue(EntityAttributes.GENERIC_SCALE)-0.1);
                 break;
             }
+            case"minecraft:":{
+
+            }
+
 
             default:{
                 break;

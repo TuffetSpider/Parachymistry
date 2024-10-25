@@ -51,7 +51,6 @@ public class AirVialProjectile extends ThrownItemEntity {
         }}
 
     protected void onCollision(HitResult hitResult) {
-        super.onCollision(hitResult);
         int particleCount = 200;
         double radius = 4.0;
         Vec3d center = hitResult.getPos();
@@ -69,7 +68,9 @@ public class AirVialProjectile extends ThrownItemEntity {
             // Spawn the fire particle at the calculated position
             ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.POOF, x, y, z, 0, 0, 0, 0, 1.0);
         }
-        if (!this.getWorld().isClient && !this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
+        super.onCollision(hitResult);
+
+        if (!this.getWorld().isClient && this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
             this.playSound(SoundEvents.BLOCK_GLASS_BREAK,1f,1f);
             Box box = this.getBoundingBox().expand(3.5, 2.0, 3.5);
             List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
