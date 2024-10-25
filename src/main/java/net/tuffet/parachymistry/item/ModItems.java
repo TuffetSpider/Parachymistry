@@ -18,8 +18,8 @@ public class ModItems {
     public static final Item AIR_VIAL = registerItem("vial_of_air", new AirVialClass(new Item.Settings()));
     public static final Item AETHER_VIAL = registerItem("vial_of_aether", new AetherVialClass(new Item.Settings()));
     public static final Item QUICKLIME = registerItem("quicklime", new Item(new Item.Settings()));
-    public static final Item MERCURY = registerItem("mercury", new Item(new Item.Settings()));
-    public static final Item SALT = registerItem("salt", new Item(new Item.Settings()));
+    public static final Item MERCURY = registerItem("mercury", new Item(new Item.Settings().food(ModFoodComponents.MERCURY)));
+    public static final Item SALT = registerItem("salt", new Item(new Item.Settings().food(ModFoodComponents.SALT)));
     public static final Item MYSTERIOUS_TINCTURE = registerItem("mysterious_tincture", new MysteriousTinctureClass(new Item.Settings().food(ModFoodComponents.TINCTURE)));
     public static final Item MYSTERIOUS_CONCOCTION = registerItem("mysterious_concoction", new MysteriousConcoctionClass(new Item.Settings()));
          private static Item registerItem(String name, Item item) {
