@@ -12,6 +12,8 @@
     "minecraft:red_mushroom",
     "minecraft:glowstone",
     "minecraft:ender_eye",
-    "minecraft:gunpowder"
+    "minecraft:gunpowder",
+    "parachymistry:quicklime",
+    "parachymistry:mercury"
   ]
 }

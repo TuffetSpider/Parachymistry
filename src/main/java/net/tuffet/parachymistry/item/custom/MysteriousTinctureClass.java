@@ -5,9 +5,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stat.Stat;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
@@ -77,9 +79,14 @@ public class MysteriousTinctureClass extends Item{
                 Objects.requireNonNull(user.getAttributeInstance(EntityAttributes.GENERIC_SCALE)).setBaseValue(user.getAttributeValue(EntityAttributes.GENERIC_SCALE)-0.1);
                 break;
             }
+            case"minecraft:glowstone":{
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING,600,0));
+                break;
+            }
             case"minecraft:ender_eye":{
                 Vec3d Position = user.raycast(20,1f,true).getPos();
             user.teleport(Position.getX(),Position.getY(),Position.getZ(),true);
+            break;
             }
             case"minecraft:gunpowder":{
                 user.getWorld().createExplosion(user,user.getX(),user.getY()+1,user.getZ(),0,World.ExplosionSourceType.MOB);
@@ -91,7 +98,28 @@ public class MysteriousTinctureClass extends Item{
                     double magnitude = (Math.pow(entity.getY()-user.getY(),2))+((Math.pow(entity.getX()-user.getX(),2))+(Math.pow(entity.getZ()-user.getZ(),2)));
                     entity.setVelocity((new Vec3d((entity.getX()-user.getX()),(entity.getY()-user.getY())+0.4,(entity.getZ()-user.getZ())).multiply(Math.min((3/magnitude),3))));
 
-            }}
+            }break;}
+            case"parachymistry:mercury":{
+                user.removeStatusEffect(StatusEffects.BLINDNESS);
+                user.removeStatusEffect(StatusEffects.WITHER);
+                user.removeStatusEffect(StatusEffects.SLOWNESS);
+                user.removeStatusEffect(StatusEffects.HUNGER);
+                user.removeStatusEffect(StatusEffects.WEAKNESS);
+                user.removeStatusEffect(StatusEffects.DARKNESS);
+            user.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON,300,3));
+            break;
+
+
+            }
+            case"parachymistry:quicklime":{
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS,200,0));
+                user.setOnFireForTicks(200);
+                if(user.isTouchingWater()){
+                    user.setVelocity(0,5,0);
+                    user.getWorld().createExplosion(user,user.getX(),user.getY(),user.getZ(),0f, World.ExplosionSourceType.MOB);
+                    user.damage(user.getWorld().getDamageSources().explosion(user,user),5);
+                }
+            }break;
 
 
             default:{
