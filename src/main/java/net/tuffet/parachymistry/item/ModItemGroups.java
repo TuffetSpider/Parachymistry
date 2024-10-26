@@ -17,7 +17,6 @@ public class ModItemGroups {
             FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.MYSTERIOUS_TINCTURE))
                     .displayName(Text.translatable("itemgroup.parachymistry.parachymistry"))
                     .entries((displayContext, entries) -> {
-                        entries.add(ModItems.MYSTERIOUS_TINCTURE);
                         entries.add(ModItems.AETHER_VIAL);
                         entries.add(ModItems.AIR_VIAL );
                         entries.add(ModItems.ALCHYMICAL_VIAL);
