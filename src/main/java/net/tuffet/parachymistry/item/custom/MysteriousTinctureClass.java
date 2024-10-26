@@ -3,25 +3,20 @@ package net.tuffet.parachymistry.item.custom;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.tuffet.parachymistry.Parachymistry;
 import net.tuffet.parachymistry.component.ModComponents;
 import net.tuffet.parachymistry.effect.ModEffects;
 
 import java.util.List;
 import java.util.Objects;
-
-import static java.lang.Math.*;
 
 public class MysteriousTinctureClass extends Item{
     public MysteriousTinctureClass(Settings settings) {
@@ -39,7 +34,6 @@ public class MysteriousTinctureClass extends Item{
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
         if(user.isPlayer()){
             PlayerEntity user1 = (PlayerEntity) user;
-            user1.getItemCooldownManager().set(this, 40);
         }
 
         // This tests the components added during crafting, to add your own effects do  case "<ITEM>":{EFFECT}, added some examples that function here
@@ -89,14 +83,13 @@ public class MysteriousTinctureClass extends Item{
             }
             case"minecraft:gunpowder":{
                 user.getWorld().createExplosion(user,user.getX(),user.getY()+1,user.getZ(),0,World.ExplosionSourceType.MOB);
-                Box box = user.getBoundingBox().expand(5);
+                Box box = user.getBoundingBox().expand(7);
                 List<Entity> list = user.getWorld().getNonSpectatingEntities(Entity.class,box);
                 list.remove(user);
-                for (Entity livingEntity : list) {
-                    livingEntity.setOnFireForTicks(20);
-                    double magnitude = (Math.pow(livingEntity.getY()-user.getY(),2))+((Math.pow(livingEntity.getX()-user.getX(),2))+(Math.pow(livingEntity.getZ()-user.getZ(),2)));
-                    livingEntity.setVelocity((new Vec3d((livingEntity.getX()-user.getX()),(livingEntity.getY()-user.getY())+0.4,(livingEntity.getZ()-user.getZ())).multiply(Math.min((3/magnitude),3))));
-
+                for (Entity entity : list) {
+                    entity.setOnFireForTicks(20);
+                    double magnitude = (Math.pow(entity.getY()-user.getY(),2))+((Math.pow(entity.getX()-user.getX(),2))+(Math.pow(entity.getZ()-user.getZ(),2)));
+                    entity.setVelocity((new Vec3d((entity.getX()-user.getX()),(entity.getY()-user.getY())+0.4,(entity.getZ()-user.getZ())).multiply(Math.min((3/magnitude),3))));
 
             }}
 
