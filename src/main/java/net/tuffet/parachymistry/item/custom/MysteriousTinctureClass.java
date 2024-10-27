@@ -2,10 +2,12 @@ package net.tuffet.parachymistry.item.custom;
 
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.passive.PufferfishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -81,6 +83,7 @@ public class MysteriousTinctureClass extends Item{
             }
             case"minecraft:glowstone":{
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING,600,0));
+                PufferfishEntity pufferfish = new PufferfishEntity(EntityType.PUFFERFISH,user.getWorld());
                 break;
             }
             case"minecraft:ender_eye":{
