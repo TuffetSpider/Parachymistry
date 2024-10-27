@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.PufferfishEntity;
@@ -19,6 +20,8 @@ import net.minecraft.world.World;
 import net.tuffet.parachymistry.component.ModComponents;
 import net.tuffet.parachymistry.effect.ModEffects;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -123,6 +126,17 @@ public class MysteriousTinctureClass extends Item{
                     user.damage(user.getWorld().getDamageSources().explosion(user,user),5);
                 }
             }break;
+            case"parachymistry:salt":{
+                user.clearStatusEffects();
+                user.setHealth(user.getMaxHealth());
+                user.setAbsorptionAmount(0);
+                user.setVelocity(0,0,0);
+                user.extinguishWithSound();
+                if(user.isPlayer()){
+                    PlayerEntity userPlayer = (PlayerEntity) user;
+                    userPlayer.getHungerManager().setFoodLevel(0);
+                }
+            }
 
 
             default:{
@@ -135,6 +149,7 @@ public class MysteriousTinctureClass extends Item{
     public String testComponent(ItemStack stack){
         return Objects.requireNonNull(stack.get(ModComponents.TINCTUREITEM)).toString().replace("TinctureIngredientComponent[ingredient=","").replace("]","");
     }
+
 }
 
 

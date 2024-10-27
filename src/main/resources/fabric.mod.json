@@ -20,6 +20,9 @@
 		],
 		"fabric-datagen": [
 			"net.tuffet.parachymistry.ParachymistryDataGenerator"
+		],
+		"client": [
+			"net.tuffet.parachymistry.ParachymistryClient"
 		]
 	},
 	"mixins": [

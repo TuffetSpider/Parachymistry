@@ -48,38 +48,32 @@ public class VialItemClass extends Item {
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        user.getItemCooldownManager().set(this, 20);
         if(entity.getClass() == net.minecraft.entity.mob.BlazeEntity.class){
             user.getWorld().playSound((PlayerEntity) null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_OMINOUS_BOTTLE_DISPOSE, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-            user.getWorld().emitGameEvent(user, GameEvent.FLUID_PICKUP, user.getPos());
             entity.damage(user.getWorld().getDamageSources().indirectMagic(user,user),1);
             if (user instanceof ServerPlayerEntity) {
                 this.fill(user.getWeaponStack(), user, new ItemStack(ModItems.FIRE_VIAL));
             }
         } else if (entity.getClass()==net.minecraft.entity.mob.GuardianEntity.class) {
             user.getWorld().playSound((PlayerEntity) null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_OMINOUS_BOTTLE_DISPOSE, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-            user.getWorld().emitGameEvent(user, GameEvent.FLUID_PICKUP, user.getPos());
             entity.damage(user.getWorld().getDamageSources().indirectMagic(user,user),1);
             if (user instanceof ServerPlayerEntity) {
                 this.fill(user.getWeaponStack(), user, new ItemStack(ModItems.WATER_VIAL));
             }
         }else if(entity.getClass()==net.minecraft.entity.passive.SnifferEntity.class){
             user.getWorld().playSound((PlayerEntity) null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_OMINOUS_BOTTLE_DISPOSE, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-            user.getWorld().emitGameEvent(user, GameEvent.FLUID_PICKUP, user.getPos());
             entity.damage(user.getWorld().getDamageSources().indirectMagic(user,user),1);
             if (user instanceof ServerPlayerEntity) {
                 this.fill(user.getWeaponStack(), user, new ItemStack(ModItems.EARTH_VIAL));
             }
         } else if (entity.getClass()==net.minecraft.entity.mob.BreezeEntity.class) {
             user.getWorld().playSound((PlayerEntity) null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_OMINOUS_BOTTLE_DISPOSE, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-            user.getWorld().emitGameEvent(user, GameEvent.FLUID_PICKUP, user.getPos());
             entity.damage(user.getWorld().getDamageSources().indirectMagic(user,user),1);
             if (user instanceof ServerPlayerEntity) {
                 this.fill(user.getWeaponStack(), user, new ItemStack(ModItems.AIR_VIAL));
             }
         } else if (entity.getClass()==net.minecraft.entity.mob.ShulkerEntity.class) {
             user.getWorld().playSound((PlayerEntity) null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_OMINOUS_BOTTLE_DISPOSE, SoundCategory.NEUTRAL, 1.0F, 1.0F);
-            user.getWorld().emitGameEvent(user, GameEvent.FLUID_PICKUP, user.getPos());
             entity.damage(user.getWorld().getDamageSources().indirectMagic(user,user),1);
             if (user instanceof ServerPlayerEntity) {
                 this.fill(user.getWeaponStack(), user, new ItemStack(ModItems.AETHER_VIAL));

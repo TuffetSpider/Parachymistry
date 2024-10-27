@@ -1,8 +1,11 @@
 package net.tuffet.parachymistry;
 
 import com.mojang.serialization.Codec;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.component.ComponentType;
 import net.minecraft.recipe.RecipeType;
@@ -33,7 +36,6 @@ public class Parachymistry implements ModInitializer {
 		ModBlocks.registerModBlocks();
 		ModItems.registerModItems();
 		ModEffects.registerModEffects();
-		HandledScreens.register(ALCHYMY, AlchymyScreen::new);
 		ModRecipes.ALCHYMY = Registry.register(Registries.RECIPE_TYPE, Identifier.of(Parachymistry.MOD_ID, "alchymy"), new RecipeType<AlchymyRecipe>(){});
 		ModRecipes.AlCHYMYSERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, Identifier.of(Parachymistry.MOD_ID, "alchymy_serializer"), new AlchymyRecipe.Serializer());
 		ModRecipes.TINCTURE = Registry.register(Registries.RECIPE_TYPE, Identifier.of(Parachymistry.MOD_ID, "tincture"), new RecipeType<MysteriousTinctureRecipe>(){});

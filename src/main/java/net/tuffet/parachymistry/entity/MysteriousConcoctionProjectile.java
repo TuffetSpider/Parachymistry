@@ -6,33 +6,28 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.mob.EndermiteEntity;
-import net.minecraft.entity.passive.FoxEntity;
 import net.minecraft.entity.passive.PufferfishEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
+
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
+
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.Text;
+
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.MathHelper;
+
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
-import net.minecraft.world.event.GameEvent;
+
 import net.tuffet.parachymistry.component.ModComponents;
-import net.tuffet.parachymistry.effect.ModEffects;
+
 import net.tuffet.parachymistry.item.ModItems;
 
 import java.util.List;
@@ -59,7 +54,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
         super.onEntityHit(entityHitResult);
         switch(testConcoctionComponent(this.getStack())){
             case"minecraft:ender_pearl":{
-                //example, put effect here
+
                 this.discard();
                 break;
             }
@@ -75,7 +70,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                 if (entityHitResult.getEntity().isLiving()) {
                     LivingEntity livingEntity = (LivingEntity) entityHitResult.getEntity();
                 if (entityHitResult.getEntity().isLiving()) {
-                    livingEntity.removeStatusEffect(StatusEffects.ABSORPTION);
+                    livingEntity.setAbsorptionAmount(0);
                     this.discard();
                 }
                 }
@@ -105,8 +100,8 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
             case"minecraft:soul_soil":{
                 if (entityHitResult.getEntity().isLiving()) {
                     LivingEntity livingEntity = (LivingEntity) entityHitResult.getEntity();
-                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS,300,0));
-                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,400,0));
+                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS,200,0));
+                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,200,0));
                     this.discard();
                 }
                 break;
@@ -120,18 +115,18 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                     livingEntity.removeStatusEffect(StatusEffects.HUNGER);
                     livingEntity.removeStatusEffect(StatusEffects.WEAKNESS);
                     livingEntity.removeStatusEffect(StatusEffects.DARKNESS);
-                livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON,600,0));
+                livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON,200,0));
             }}
 
             case"parachymistry:quicklime":{
                 if (entityHitResult.getEntity().isLiving()) {
                     LivingEntity livingEntity = (LivingEntity) entityHitResult.getEntity();
-                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS,200,0));
-                    livingEntity.setOnFireForTicks(200);
+                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS,50,0));
+                    livingEntity.setOnFireForTicks(50);
                     if(livingEntity.isTouchingWater()){
                         livingEntity.setVelocity(0,5,0);
                         livingEntity.getWorld().createExplosion(livingEntity,livingEntity.getX(),livingEntity.getY(),livingEntity.getZ(),0f, World.ExplosionSourceType.MOB);
-                        livingEntity.damage(livingEntity.getWorld().getDamageSources().explosion(livingEntity,livingEntity),5);
+                        livingEntity.damage(livingEntity.getWorld().getDamageSources().explosion(livingEntity,livingEntity),2);
                 }}}
 
 

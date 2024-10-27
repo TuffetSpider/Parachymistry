@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CBC",
+    "A A",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:glass"
+    },
+    "B": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "C": {
+      "item": "minecraft:iron_nugget"
+    }
+  },
+  "result": {
+    "id": "parachymistry:alchymical_vial"
+  }
+}

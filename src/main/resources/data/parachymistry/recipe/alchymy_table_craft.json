@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ACA",
+    "FBD",
+    "AEA"
+  ],
+  "key": {
+    "A": {
+      "item": "parachymistry:alchymical_vial"
+    },
+    "B": {
+      "item": "minecraft:brewing_stand"
+    },
+    "C": {
+      "item": "parachymistry:vial_of_air"
+    },
+    "D": {
+      "item": "parachymistry:vial_of_water"
+    },
+    "E": {
+      "item": "parachymistry:vial_of_earth"
+    },
+    "F": {
+      "item": "parachymistry:vial_of_fire"
+    }
+  },
+  "result": {
+    "id": "parachymistry:alchymy_station"
+  }
+}
