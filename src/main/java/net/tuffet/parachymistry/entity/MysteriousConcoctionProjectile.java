@@ -1,10 +1,8 @@
 package net.tuffet.parachymistry.entity;
 
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MovementType;
+import net.minecraft.block.Blocks;
+import net.minecraft.entity.*;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -205,6 +203,18 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
 
 
                 this.discard();
+                break;
+            }
+            case"minecraft:iron_block":{
+                Box box = this.getBoundingBox().expand(3);
+                List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
+
+                for (LivingEntity livingEntity : list) {
+                    FallingBlockEntity anvil = FallingBlockEntity.spawnFromBlock(livingEntity.getWorld(),livingEntity.getBlockPos().add(0,2,0), Blocks.ANVIL.getDefaultState());
+                    anvil.setDestroyedOnLanding();
+                    anvil.setHurtEntities(5,5);
+                    livingEntity.getWorld().spawnEntity(anvil);
+            }this.discard();
                 break;
             }
 
