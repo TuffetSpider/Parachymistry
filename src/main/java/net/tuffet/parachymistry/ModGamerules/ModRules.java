@@ -11,7 +11,7 @@ public class ModRules implements ModInitializer {
     public static final GameRules.Key<GameRules.BooleanRule> SHOULD_HAVE_DAMAGING_VIALS =
             GameRuleRegistry.register("moreDamagingVials", GameRules.Category.MOBS, GameRuleFactory.createBooleanRule(true));
 
-    public void initialize(){
+    public static void initialize(){
 
     }
     @Override

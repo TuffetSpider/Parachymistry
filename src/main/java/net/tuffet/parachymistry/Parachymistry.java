@@ -12,6 +12,7 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.tuffet.parachymistry.ModGamerules.ModRules;
 import net.tuffet.parachymistry.block.ModBlocks;
 import net.tuffet.parachymistry.component.ModComponents;
 import net.tuffet.parachymistry.effect.ModEffects;
@@ -43,6 +44,7 @@ public class Parachymistry implements ModInitializer {
 		ModComponents.intialize();
 		ModTags.initialize();
 		ModItemGroups.registerItemGroups();
+		ModRules.initialize();
 
 
 

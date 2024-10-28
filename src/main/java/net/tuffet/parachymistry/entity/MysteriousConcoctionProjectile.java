@@ -208,8 +208,6 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                     double magnitude = (Math.pow(livingEntity.getY() - this.getY(), 2)) + ((Math.pow(livingEntity.getX() - this.getX(), 2)) + (Math.pow(livingEntity.getZ() - this.getZ(), 2)));
                     livingEntity.setVelocity((new Vec3d((livingEntity.getX() - this.getX()), (livingEntity.getY() - this.getY()) + 0.4, (livingEntity.getZ() - this.getZ())).multiply(Math.min((3 / magnitude), 3))));
                 }
-
-                    //Example, put effect here
                 this.discard();break;
             }
             case"minecraft:pufferfish":{
@@ -229,6 +227,15 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                     FallingBlockEntity anvil = FallingBlockEntity.spawnFromBlock(livingEntity.getWorld(),livingEntity.getBlockPos().add(0,2,0), Blocks.ANVIL.getDefaultState());anvil.setDestroyedOnLanding();
                     if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) anvil.setHurtEntities(5,5);
                 }this.discard();
+                break;
+            }
+            case"parachymistry:salt":{
+                Box box = this.getBoundingBox().expand(3);
+                List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
+
+                for (LivingEntity livingEntity : list) {
+                    livingEntity.clearStatusEffects();
+            }this.discard();
                 break;
             }
 
