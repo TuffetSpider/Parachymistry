@@ -14,6 +14,8 @@
     "minecraft:gunpowder",
     "parachymistry:quicklime",
     "parachymistry:mercury",
-    "parachymistry:salt"
+    "parachymistry:salt",
+    "minecraft:powder_snow_bucket"
+
   ]
 }

@@ -2,11 +2,14 @@ package net.tuffet.parachymistry.entity;
 
 
 import net.minecraft.block.Blocks;
+import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.*;
+import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.passive.PufferfishEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
@@ -152,14 +155,6 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                 }}}
 
 
-
-            case "minecraft:ender_eye":{
-                if (entityHitResult.getEntity().isLiving()) {
-                    LivingEntity livingEntity = (LivingEntity) entityHitResult.getEntity();
-                    Vec3d Position = livingEntity.raycast(20,1f,true).getPos();
-                    livingEntity.teleport(Position.getX(),Position.getY(),Position.getZ(),true);
-                    }}
-
             default:{
                 this.discard();
                 break;
@@ -179,6 +174,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                     ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.ELECTRIC_SPARK, this.getX(),this.getY(),this.getZ(), 0, 0, 0, 0, 1.0);
                     for (LivingEntity livingEntity : list) {
                         livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING,600,0));
+                        livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY,600,0));
                     }}
                 this.discard();
                 break;
@@ -237,6 +233,27 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                     livingEntity.clearStatusEffects();
             }this.discard();
                 break;
+            }
+            case"minecraft:ender_eye":{
+                Box box = this.getBoundingBox().expand(3);
+                List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
+
+                for (LivingEntity livingEntity : list) {
+                    if(!livingEntity.isPlayer()) {
+                        livingEntity.lookAt(EntityAnchorArgumentType.EntityAnchor.EYES, Objects.requireNonNull(this.getPos()));
+                        livingEntity.setAttacker(livingEntity.getEntityWorld().getClosestEntity(LivingEntity.class, TargetPredicate.createAttackable(),livingEntity,livingEntity.getX(),livingEntity.getY(),livingEntity.getZ(),livingEntity.getBoundingBox().expand(5)));
+                    }
+                }this.discard();
+                break;
+            }
+            case"minecraft:powder_snow_bucket":{
+                Box box = this.getBoundingBox().expand(3);
+                List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
+                for (LivingEntity livingEntity : list) {
+                    if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)){
+                        livingEntity.setFrozenTicks(600);
+                    }else livingEntity.setFrozenTicks(140);
+                }
             }
 
             default:{

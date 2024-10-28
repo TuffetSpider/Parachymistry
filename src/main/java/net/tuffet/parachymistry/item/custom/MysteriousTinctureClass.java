@@ -9,6 +9,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stat.Stat;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
@@ -126,6 +127,11 @@ public class MysteriousTinctureClass extends Item{
                     userPlayer.getHungerManager().setFoodLevel(0);
                 }
             }break;
+            case"minecraft:powder_snow_bucket":{
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION,300,1));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,300,1));
+                user.setFrozenTicks(140);
+            }
 
 
             default:{
