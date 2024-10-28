@@ -126,17 +126,17 @@ public class MysteriousTinctureClass extends Item{
                     user.damage(user.getWorld().getDamageSources().explosion(user,user),5);
                 }
             }break;
-            case"parachymistry:salt":{
+            case"parachymistry:salt": {
                 user.clearStatusEffects();
                 user.setHealth(user.getMaxHealth());
                 user.setAbsorptionAmount(0);
-                user.setVelocity(0,0,0);
+                user.setVelocity(0, 0, 0);
                 user.extinguishWithSound();
-                if(user.isPlayer()){
+                if (user.isPlayer()) {
                     PlayerEntity userPlayer = (PlayerEntity) user;
                     userPlayer.getHungerManager().setFoodLevel(0);
                 }
-            }
+            }break;
 
 
             default:{

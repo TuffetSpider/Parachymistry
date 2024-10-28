@@ -93,9 +93,9 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                     LivingEntity livingEntity = (LivingEntity) entityHitResult.getEntity();
                 if (entityHitResult.getEntity().isLiving()) {
                     livingEntity.setAbsorptionAmount(0);
-                    this.discard();
+
                 }
-                }
+                }this.discard();
                 break;
             }
 

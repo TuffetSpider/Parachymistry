@@ -32,6 +32,12 @@ public class KarmicShieldingEffect extends StatusEffect {
             DamageStored=0f;
         super.onEntityDamage(entity, amplifier, source, amount);
     }
+
+    @Override
+    public void onApplied(LivingEntity entity, int amplifier) {
+        DamageStored=0f;
+        super.onApplied(entity, amplifier);
+    }
 }
 
 
