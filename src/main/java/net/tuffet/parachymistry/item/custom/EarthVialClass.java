@@ -2,7 +2,6 @@ package net.tuffet.parachymistry.item.custom;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ProjectileItem;
@@ -24,7 +23,7 @@ public class EarthVialClass extends Item implements ProjectileItem {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         user.getItemCooldownManager().set(this, 20);
         ItemStack itemStack = user.getStackInHand(hand);
-        world.playSound((PlayerEntity)null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!world.isClient) {
             EarthVialProjectile earthVialProjectile = new EarthVialProjectile(world, user);
             earthVialProjectile.setItem(itemStack);

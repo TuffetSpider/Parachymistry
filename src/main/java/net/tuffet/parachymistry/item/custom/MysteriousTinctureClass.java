@@ -2,26 +2,19 @@ package net.tuffet.parachymistry.item.custom;
 
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.passive.PufferfishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.stat.Stat;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.tuffet.parachymistry.component.ModComponents;
 import net.tuffet.parachymistry.effect.ModEffects;
-
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,9 +32,6 @@ public class MysteriousTinctureClass extends Item{
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
-        if(user.isPlayer()){
-            PlayerEntity user1 = (PlayerEntity) user;
-        }
 
         // This tests the components added during crafting, to add your own effects do  case "<ITEM>":{EFFECT}, added some examples that function here
         if(stack.get(ModComponents.TINCTUREITEM)!=null){
@@ -86,7 +76,6 @@ public class MysteriousTinctureClass extends Item{
             }
             case"minecraft:glowstone":{
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING,600,0));
-                PufferfishEntity pufferfish = new PufferfishEntity(EntityType.PUFFERFISH,user.getWorld());
                 break;
             }
             case"minecraft:ender_eye":{

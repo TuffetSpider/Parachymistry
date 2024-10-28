@@ -3,7 +3,6 @@ package net.tuffet.parachymistry.ModGamerules;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleFactory;
 import net.fabricmc.fabric.api.gamerule.v1.GameRuleRegistry;
-import net.minecraft.registry.Registry;
 import net.minecraft.world.GameRules;
 
 public class ModRules implements ModInitializer {

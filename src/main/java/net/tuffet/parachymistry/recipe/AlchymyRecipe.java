@@ -8,7 +8,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.recipe.*;
-import net.minecraft.recipe.book.CraftingRecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.world.World;
 import net.tuffet.parachymistry.component.ModComponents;

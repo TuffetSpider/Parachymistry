@@ -3,7 +3,6 @@ package net.tuffet.parachymistry.entity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
@@ -22,8 +21,6 @@ import net.tuffet.parachymistry.effect.ModEffects;
 import net.tuffet.parachymistry.item.ModItems;
 
 import java.util.List;
-
-import static net.minecraft.entity.projectile.AbstractWindChargeEntity.EXPLOSION_BEHAVIOR;
 
 public class AirVialProjectile extends ThrownItemEntity {
     public AirVialProjectile(EntityType<? extends SnowballEntity> entityType, World world) {
@@ -47,7 +44,7 @@ public class AirVialProjectile extends ThrownItemEntity {
         super.onEntityHit(entityHitResult);
         if (!this.getWorld().isClient) {
             Entity entity = entityHitResult.getEntity();
-            if(entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) entity.damage(this.getDamageSources().windCharge((Entity) this, (LivingEntity) this.getOwner()), (float)5.0);
+            if(entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) entity.damage(this.getDamageSources().windCharge(this, (LivingEntity) this.getOwner()), (float)5.0);
             this.discard();
         }}
 

@@ -2,7 +2,6 @@ package net.tuffet.parachymistry.recipe;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.component.ComponentMap;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
@@ -10,12 +9,8 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryWrapper;
-import net.minecraft.text.Text;
 import net.minecraft.world.World;
-import net.tuffet.parachymistry.component.ModComponents;
-import net.tuffet.parachymistry.component.TinctureIngredientComponent;
 
 import java.util.stream.Stream;
 
@@ -55,18 +50,6 @@ public class MysteriousTinctureRecipe implements Recipe<AlchymyRecipeInput> {
 
     public ItemStack getResult(RegistryWrapper.WrapperLookup registriesLookup) {
         return this.result;
-    }
-
-    public boolean testBase(ItemStack stack) {
-        return this.base.test(stack);
-    }
-
-    public boolean testReagent(ItemStack stack) {
-        return this.reagent.test(stack);
-    }
-
-    public boolean testCatalyst(ItemStack stack) {
-        return this.catalyst.test(stack);
     }
 
     public RecipeSerializer<?> getSerializer() {

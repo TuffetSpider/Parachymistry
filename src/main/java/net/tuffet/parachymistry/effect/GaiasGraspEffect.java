@@ -3,7 +3,6 @@ package net.tuffet.parachymistry.effect;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.entity.player.PlayerEntity;
 
 public class GaiasGraspEffect extends StatusEffect {
 

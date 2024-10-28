@@ -14,7 +14,6 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.tuffet.parachymistry.ModGamerules.ModRules;
 import net.tuffet.parachymistry.effect.ModEffects;

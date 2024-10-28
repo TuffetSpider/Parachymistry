@@ -13,7 +13,6 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
-import net.tuffet.parachymistry.entity.FireVialProjectile;
 import net.tuffet.parachymistry.entity.MysteriousConcoctionProjectile;
 
 public class MysteriousConcoctionClass extends Item implements ProjectileItem {
@@ -24,7 +23,7 @@ public class MysteriousConcoctionClass extends Item implements ProjectileItem {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         user.getItemCooldownManager().set(this, 20);
         ItemStack itemStack = user.getStackInHand(hand);
-        world.playSound((PlayerEntity)null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!world.isClient) {
             MysteriousConcoctionProjectile mysteriousConcoctionProjectile = new MysteriousConcoctionProjectile(world, user);
             mysteriousConcoctionProjectile.setItem(itemStack);

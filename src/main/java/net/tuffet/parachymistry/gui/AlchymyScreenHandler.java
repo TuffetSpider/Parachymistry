@@ -1,12 +1,8 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
+
 
 package net.tuffet.parachymistry.gui;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -21,14 +17,11 @@ import net.tuffet.parachymistry.block.ModBlocks;
 import net.tuffet.parachymistry.recipe.AlchymyRecipe;
 import net.tuffet.parachymistry.recipe.AlchymyRecipeInput;
 import net.tuffet.parachymistry.recipe.ModRecipes;
-import net.tuffet.parachymistry.recipe.MysteriousTinctureRecipe;
 
 public class AlchymyScreenHandler extends ForgingScreenHandler {
     private final World world;
     private RecipeEntry<AlchymyRecipe> currentRecipe;
-    private List<RecipeEntry<AlchymyRecipe>> recipes;
-    private List<RecipeEntry<MysteriousTinctureRecipe>> recipes2;
-
+    private final List<RecipeEntry<AlchymyRecipe>> recipes;
 
     public AlchymyScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
