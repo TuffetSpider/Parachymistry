@@ -16,6 +16,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import net.tuffet.parachymistry.ModGamerules.ModRules;
 import net.tuffet.parachymistry.effect.ModEffects;
 import net.tuffet.parachymistry.item.ModItems;
 
@@ -44,7 +45,7 @@ public class FireVialProjectile extends ThrownItemEntity {
         super.onEntityHit(entityHitResult);
         if (!this.getWorld().isClient) {
          Entity entity = entityHitResult.getEntity();
-         entity.damage(this.getDamageSources().indirectMagic(this, this.getOwner()), (float)5.0);
+            if(entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) entity.damage(this.getDamageSources().indirectMagic(this, this.getOwner()), (float)5.0);
          this.discard();
     }}
 
@@ -76,7 +77,6 @@ public class FireVialProjectile extends ThrownItemEntity {
             List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
             for (LivingEntity livingEntity : list) {
                 livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.HADES_EFFECT, 400, 0));
-                livingEntity.setOnFireForTicks(140);
             }this.discard();
         }
 

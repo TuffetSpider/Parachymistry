@@ -4,6 +4,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
+import net.tuffet.parachymistry.ModGamerules.ModRules;
 
 public class HadesHellfireEffect extends StatusEffect {
     protected HadesHellfireEffect(StatusEffectCategory category, int color) {
@@ -19,11 +20,15 @@ public class HadesHellfireEffect extends StatusEffect {
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         if (entity instanceof PlayerEntity player) {
             if (!player.isCreative() && !player.isSpectator()) {
-                player.setOnFireFor(10);
+                if(entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)){
+                    entity.setOnFireFor(5);
+                }
                 player.setOnFire(true);
             }
         } else {
-            entity.setOnFireFor(10);
+            if(entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)){
+                entity.setOnFireFor(5);
+            }
             entity.setOnFire(true);
         }
         return super.applyUpdateEffect(entity, amplifier);

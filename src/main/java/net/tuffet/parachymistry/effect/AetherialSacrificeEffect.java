@@ -18,6 +18,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import net.tuffet.parachymistry.ModGamerules.ModRules;
 
 import java.util.List;
 import java.util.Random;
@@ -42,8 +43,9 @@ public class AetherialSacrificeEffect extends StatusEffect {
         int TimeRemaining = Status.getDuration();
         if(TimeRemaining==1){
             if (entity instanceof PlayerEntity player) {
-                if (!player.isCreative() && !player.isSpectator()) entity.damage(entity.getWorld().getDamageSources().outOfWorld(),10);
-            } else entity.damage(entity.getWorld().getDamageSources().outOfWorld(),10);
+                if (!player.isCreative() && !player.isSpectator()) if(entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) entity.damage(entity.getWorld().getDamageSources().outOfWorld(),10);
+            }
+            else if(entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) entity.damage(entity.getWorld().getDamageSources().outOfWorld(),10);
             entity.getWorld().createExplosion(entity, (DamageSource)null, EXPLOSION_BEHAVIOR, entity.getX(), entity.getY(), entity.getZ(), 5.0F, false, World.ExplosionSourceType.TRIGGER, ParticleTypes.GUST_EMITTER_SMALL, ParticleTypes.GUST_EMITTER_LARGE, SoundEvents.ENTITY_WIND_CHARGE_WIND_BURST);
             entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 400, 0));
             Box box = entity.getBoundingBox().expand(5, -20, 5);

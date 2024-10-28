@@ -22,10 +22,13 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 
+import net.minecraft.world.event.GameEvent;
+import net.tuffet.parachymistry.ModGamerules.ModRules;
 import net.tuffet.parachymistry.component.ModComponents;
 
 import net.tuffet.parachymistry.item.ModItems;
@@ -54,8 +57,27 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
         super.onEntityHit(entityHitResult);
         switch(testConcoctionComponent(this.getStack())){
             case"minecraft:ender_pearl":{
+                World world = this.getWorld();
 
-                this.discard();
+                if (!world.isClient&&entityHitResult.getEntity().isLiving()) {
+                    LivingEntity user = (LivingEntity) entityHitResult.getEntity();
+                    for(int i = 0; i < 16; ++i) {
+                        double d = user.getX() + (user.getRandom().nextDouble() - 0.5) * 16.0;
+                        double e = MathHelper.clamp(user.getY() + (double)(user.getRandom().nextInt(16) - 8), (double)world.getBottomY(), (double)(world.getBottomY() + ((ServerWorld)world).getLogicalHeight() - 1));
+                        double f = user.getZ() + (user.getRandom().nextDouble() - 0.5) * 16.0;
+                        if (user.hasVehicle()) {
+                            user.stopRiding();
+                        }
+
+                        Vec3d vec3d = user.getPos();
+                        if (user.teleport(d, e, f, true)) {
+                            world.emitGameEvent(GameEvent.TELEPORT, vec3d, GameEvent.Emitter.of(user));
+                            user.onLanding();
+                            this.discard();
+                            break;
+                        }
+                    }}
+
                 break;
             }
             case"minecraft:brown_mushroom":{
@@ -100,7 +122,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
             case"minecraft:soul_soil":{
                 if (entityHitResult.getEntity().isLiving()) {
                     LivingEntity livingEntity = (LivingEntity) entityHitResult.getEntity();
-                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS,200,0));
+                    if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS,200,0));
                     livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,200,0));
                     this.discard();
                 }
@@ -115,18 +137,18 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                     livingEntity.removeStatusEffect(StatusEffects.HUNGER);
                     livingEntity.removeStatusEffect(StatusEffects.WEAKNESS);
                     livingEntity.removeStatusEffect(StatusEffects.DARKNESS);
-                livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON,200,0));
+                    if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON,200,0));
             }}
 
             case"parachymistry:quicklime":{
                 if (entityHitResult.getEntity().isLiving()) {
                     LivingEntity livingEntity = (LivingEntity) entityHitResult.getEntity();
                     livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS,50,0));
-                    livingEntity.setOnFireForTicks(50);
+                    if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.setOnFireForTicks(50);
                     if(livingEntity.isTouchingWater()){
                         livingEntity.setVelocity(0,5,0);
                         livingEntity.getWorld().createExplosion(livingEntity,livingEntity.getX(),livingEntity.getY(),livingEntity.getZ(),0f, World.ExplosionSourceType.MOB);
-                        livingEntity.damage(livingEntity.getWorld().getDamageSources().explosion(livingEntity,livingEntity),2);
+                        if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.damage(livingEntity.getWorld().getDamageSources().explosion(livingEntity,livingEntity),2);
                 }}}
 
 
@@ -179,13 +201,12 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
             case"minecraft:gunpowder":{
 
                 Box box = this.getBoundingBox().expand(7);
-                List<Entity> list = this.getWorld().getNonSpectatingEntities(Entity.class,box);
-                list.remove(this);
-                for (Entity entity : list) {
-                    entity.setOnFireForTicks(20);
-                    entity.getWorld().createExplosion(entity, entity.getX(), entity.getY(), entity.getZ(), 0f , World.ExplosionSourceType.MOB);
-                    double magnitude = (Math.pow(entity.getY() - this.getY(), 2)) + ((Math.pow(entity.getX() - this.getX(), 2)) + (Math.pow(entity.getZ() - this.getZ(), 2)));
-                    entity.setVelocity((new Vec3d((entity.getX() - this.getX()), (entity.getY() - this.getY()) + 0.4, (entity.getZ() - this.getZ())).multiply(Math.min((3 / magnitude), 3))));
+                List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class,box);
+                for (LivingEntity livingEntity : list) {
+                    if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.setOnFireForTicks(20);
+                    livingEntity.getWorld().createExplosion(livingEntity, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0f , World.ExplosionSourceType.MOB);
+                    double magnitude = (Math.pow(livingEntity.getY() - this.getY(), 2)) + ((Math.pow(livingEntity.getX() - this.getX(), 2)) + (Math.pow(livingEntity.getZ() - this.getZ(), 2)));
+                    livingEntity.setVelocity((new Vec3d((livingEntity.getX() - this.getX()), (livingEntity.getY() - this.getY()) + 0.4, (livingEntity.getZ() - this.getZ())).multiply(Math.min((3 / magnitude), 3))));
                 }
 
                     //Example, put effect here
@@ -205,11 +226,9 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                 List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
 
                 for (LivingEntity livingEntity : list) {
-                    FallingBlockEntity anvil = FallingBlockEntity.spawnFromBlock(livingEntity.getWorld(),livingEntity.getBlockPos().add(0,2,0), Blocks.ANVIL.getDefaultState());
-                    anvil.setDestroyedOnLanding();
-                    anvil.setHurtEntities(5,5);
-                    livingEntity.getWorld().spawnEntity(anvil);
-            }this.discard();
+                    FallingBlockEntity anvil = FallingBlockEntity.spawnFromBlock(livingEntity.getWorld(),livingEntity.getBlockPos().add(0,2,0), Blocks.ANVIL.getDefaultState());anvil.setDestroyedOnLanding();
+                    if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) anvil.setHurtEntities(5,5);
+                }this.discard();
                 break;
             }
 

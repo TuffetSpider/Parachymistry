@@ -19,5 +19,6 @@
   "effect.parachymistry.karmicshielding": "Karmic Shielding",
   "effect.parachymistry.ironward": "Iron Ward",
   "effect.parachymistry.aeolusbreath": "Aeolus Breath",
-  "itemgroup.parachymistry.parachymistry": "Parachymistry"
+  "itemgroup.parachymistry.parachymistry": "Parachymistry",
+  "gamerule.moreDamagingVials": "Vials should have damaging effects"
 }

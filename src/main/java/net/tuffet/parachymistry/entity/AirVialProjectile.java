@@ -17,6 +17,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import net.tuffet.parachymistry.ModGamerules.ModRules;
 import net.tuffet.parachymistry.effect.ModEffects;
 import net.tuffet.parachymistry.item.ModItems;
 
@@ -46,7 +47,7 @@ public class AirVialProjectile extends ThrownItemEntity {
         super.onEntityHit(entityHitResult);
         if (!this.getWorld().isClient) {
             Entity entity = entityHitResult.getEntity();
-            entity.damage(this.getDamageSources().windCharge((Entity) this, (LivingEntity) this.getOwner()), (float)5.0);
+            if(entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) entity.damage(this.getDamageSources().windCharge((Entity) this, (LivingEntity) this.getOwner()), (float)5.0);
             this.discard();
         }}
 
