@@ -7,7 +7,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 public class GaiasGraspEffect extends StatusEffect {
 
     public GaiasGraspEffect() {
-        super(StatusEffectCategory.HARMFUL, 0xe9b8b3);
+        super(StatusEffectCategory.HARMFUL, 2889224);
 
 
     }

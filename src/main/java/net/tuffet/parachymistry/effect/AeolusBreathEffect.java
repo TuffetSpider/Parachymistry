@@ -8,7 +8,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 public class AeolusBreathEffect extends StatusEffect {
 
     public AeolusBreathEffect() {
-        super(StatusEffectCategory.HARMFUL, 0xe9b8b3);
+        super(StatusEffectCategory.HARMFUL, 16113331);
 
 
     }

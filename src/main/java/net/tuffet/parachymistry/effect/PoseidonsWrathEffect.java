@@ -8,7 +8,7 @@ import net.minecraft.entity.effect.StatusEffectCategory;
 public class PoseidonsWrathEffect extends StatusEffect {
 
     public PoseidonsWrathEffect() {
-        super(StatusEffectCategory.HARMFUL, 0xe9b8b3);
+        super(StatusEffectCategory.HARMFUL, 1182351);
 
 
     }

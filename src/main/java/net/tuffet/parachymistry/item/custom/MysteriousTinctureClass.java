@@ -33,6 +33,10 @@ public class MysteriousTinctureClass extends Item{
 
     @Override
     public ItemStack finishUsing(ItemStack stack, World world, LivingEntity user) {
+        if(user.isPlayer()){
+            PlayerEntity playeruser = (PlayerEntity) user;
+            playeruser.getItemCooldownManager().set(this, 40);
+        }
 
         // This tests the components added during crafting, to add your own effects do  case "<ITEM>":{EFFECT}, added some examples that function here
         if(stack.get(ModComponents.TINCTUREITEM)!=null){
