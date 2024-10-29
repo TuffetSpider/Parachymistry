@@ -1,15 +1,15 @@
 {
 	"schemaVersion": 1,
 	"id": "parachymistry",
-	"version": "${version}",
+	"version": "1.0.0",
 	"name": "Parachymistry",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Mod made for Modfest 1.21 Neoforge. Vaguely inspired by medieval alchemy, with a focus on interesting consumeables to help players in a variety of situations",
 	"authors": [
-		"Me!"
+		"TuffetSpider_, Auzdin, Sneakedy, DevMC and Bytime."
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/TuffetSpider/Paracyhmistry"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/parachymistry/icon.png",
@@ -25,9 +25,6 @@
 			"net.tuffet.parachymistry.ParachymistryClient"
 		]
 	},
-	"mixins": [
-		"parachymistry.mixins.json"
-	],
 	"depends": {
 		"fabricloader": ">=0.16.4",
 		"minecraft": "~1.21.1",

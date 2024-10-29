@@ -66,7 +66,7 @@ public class WaterVialProjectile extends ThrownItemEntity {
             // Spawn the fire particle at the calculated position
             ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.SPLASH, x, y, z, 0, 0, 0, 0, 1.0);
         }
-        if (!this.getWorld().isClient && this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
+        if (!this.getWorld().isClient) {
             this.playSound(SoundEvents.BLOCK_GLASS_BREAK, 1f, 1f);
 
             Box box = this.getBoundingBox().expand(3.5, 2.0, 3.5);

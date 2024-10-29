@@ -68,7 +68,7 @@ public class AirVialProjectile extends ThrownItemEntity {
         }
         super.onCollision(hitResult);
 
-        if (!this.getWorld().isClient && this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
+        if (!this.getWorld().isClient) {
             this.playSound(SoundEvents.BLOCK_GLASS_BREAK,1f,1f);
             Box box = this.getBoundingBox().expand(3.5, 2.0, 3.5);
             List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);

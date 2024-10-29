@@ -9,6 +9,10 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stat;
 import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Box;
@@ -36,6 +40,7 @@ public class MysteriousTinctureClass extends Item{
         if(user.isPlayer()){
             PlayerEntity playeruser = (PlayerEntity) user;
             playeruser.getItemCooldownManager().set(this, 40);
+
         }
 
         // This tests the components added during crafting, to add your own effects do  case "<ITEM>":{EFFECT}, added some examples that function here
@@ -135,6 +140,12 @@ public class MysteriousTinctureClass extends Item{
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION,300,1));
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,300,1));
                 user.setFrozenTicks(140);
+            }
+            case"minecraft:sculk_sensor":{
+                user.addVelocity(user.getRotationVecClient().negate().multiply(2));
+                user.getWorld().addParticle(ParticleTypes.SONIC_BOOM,true,user.getX(),user.getY(),user.getZ(),0,0,0);
+                user.getWorld().playSound(user,user.getBlockPos(), SoundEvents.ENTITY_WARDEN_SONIC_BOOM, SoundCategory.PLAYERS,1f,1f);
+
             }
 
 

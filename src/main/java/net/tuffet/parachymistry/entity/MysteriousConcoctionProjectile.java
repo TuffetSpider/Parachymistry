@@ -1,13 +1,16 @@
 package net.tuffet.parachymistry.entity;
 
 
+import jdk.jshell.Snippet;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.SculkCatalystBlock;
 import net.minecraft.command.argument.EntityAnchorArgumentType;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.TargetPredicate;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.PufferfishEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
@@ -32,6 +35,7 @@ import net.minecraft.world.World;
 
 import net.minecraft.world.event.GameEvent;
 import net.tuffet.parachymistry.ModGamerules.ModRules;
+import net.tuffet.parachymistry.Parachymistry;
 import net.tuffet.parachymistry.component.ModComponents;
 
 import net.tuffet.parachymistry.item.ModItems;
@@ -167,7 +171,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
         switch(testConcoctionComponent(this.getStack())){
             case"minecraft:glowstone":{
 
-                if (!this.getWorld().isClient && this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
+                if (!this.getWorld().isClient) {
                     this.playSound(SoundEvents.BLOCK_GLASS_BREAK,1f,1f);
                     Box box = this.getBoundingBox().expand(3.5, 2.0, 3.5);
                     List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
@@ -182,7 +186,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
 
             case"minecraft:armadillo_scute":{
 
-                if (!this.getWorld().isClient && this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
+                if (!this.getWorld().isClient) {
                     this.playSound(SoundEvents.BLOCK_GLASS_BREAK,1f,1f);
                     Box box = this.getBoundingBox().expand(10, 10, 10);
                     List<ProjectileEntity> list = this.getWorld().getNonSpectatingEntities(ProjectileEntity.class, box);
@@ -253,6 +257,27 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                     if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)){
                         livingEntity.setFrozenTicks(600);
                     }else livingEntity.setFrozenTicks(140);
+                }
+            }
+            case"minecraft:sculk_sensor":{
+                Box box = this.getBoundingBox().expand(4);
+                List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
+                if(Objects.requireNonNull(this.getOwner()).isLiving()){
+                    LivingEntity livingOwner = (LivingEntity) this.getOwner();
+                    livingOwner.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY,100,0));
+                }
+
+                for (LivingEntity livingEntity : list) {
+                    livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.DARKNESS,200,0),this.getOwner());
+                    livingEntity.playSoundIfNotSilent(SoundEvents.BLOCK_SCULK_SHRIEKER_SHRIEK);
+                    livingEntity.getWorld().addParticle(ParticleTypes.SCULK_CHARGE_POP,true,livingEntity.getX(),livingEntity.getY(),livingEntity.getZ(),0,0,0);
+                    if(livingEntity.isMobOrPlayer()&&!livingEntity.isPlayer()){
+                        MobEntity mob = (MobEntity) livingEntity;
+                        mob.setTarget(null);
+                    }
+
+
+
                 }
             }
 

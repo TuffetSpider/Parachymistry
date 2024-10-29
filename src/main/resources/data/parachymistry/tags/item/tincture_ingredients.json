@@ -15,7 +15,8 @@
     "parachymistry:quicklime",
     "parachymistry:mercury",
     "parachymistry:salt",
-    "minecraft:powder_snow_bucket"
+    "minecraft:powder_snow_bucket",
+    "minecraft:sculk_sensor"
 
   ]
 }

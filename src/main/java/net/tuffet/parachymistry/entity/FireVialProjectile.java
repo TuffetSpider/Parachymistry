@@ -68,7 +68,7 @@ public class FireVialProjectile extends ThrownItemEntity {
             ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.FLAME, x, y, z, 0, 0, 0, 0, 1.0);
         }
         super.onCollision(hitResult);
-        if (!this.getWorld().isClient && this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
+        if (!this.getWorld().isClient) {
             this.playSound(SoundEvents.BLOCK_GLASS_BREAK,1f,1f);
             this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 0, false, World.ExplosionSourceType.MOB);
 
