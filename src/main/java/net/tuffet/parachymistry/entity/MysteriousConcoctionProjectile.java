@@ -12,6 +12,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.PufferfishEntity;
+import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.entity.projectile.thrown.SnowballEntity;
@@ -42,6 +43,8 @@ import net.tuffet.parachymistry.item.ModItems;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
+import java.util.random.RandomGenerator;
 
 public class MysteriousConcoctionProjectile extends ThrownItemEntity {
     public MysteriousConcoctionProjectile(EntityType<? extends SnowballEntity> entityType, World world) {
@@ -157,6 +160,15 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                         livingEntity.getWorld().createExplosion(livingEntity,livingEntity.getX(),livingEntity.getY(),livingEntity.getZ(),0f, World.ExplosionSourceType.MOB);
                         if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.damage(livingEntity.getWorld().getDamageSources().explosion(livingEntity,livingEntity),2);
                 }}}
+            case"minecraft:rabbit_foot":{
+                if(!entityHitResult.getEntity().isPlayer()&&entityHitResult.getEntity().isLiving()){
+                    RabbitEntity rabbit = new RabbitEntity(EntityType.RABBIT,entityHitResult.getEntity().getWorld());
+                    rabbit.setPos(entityHitResult.getEntity().getX(),entityHitResult.getEntity().getY()+1,entityHitResult.getEntity().getZ());
+                    rabbit.setVariant(RabbitEntity.RabbitType.byId(random.nextBetween(0,7)));
+                    entityHitResult.getEntity().getWorld().spawnEntity(rabbit);
+                    entityHitResult.getEntity().remove(RemovalReason.DISCARDED);
+                }
+            }
 
 
             default:{
@@ -257,7 +269,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                     if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)){
                         livingEntity.setFrozenTicks(600);
                     }else livingEntity.setFrozenTicks(140);
-                }
+                }this.discard(); break;
             }
             case"minecraft:sculk_sensor":{
                 Box box = this.getBoundingBox().expand(4);
@@ -275,10 +287,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                         MobEntity mob = (MobEntity) livingEntity;
                         mob.setTarget(null);
                     }
-
-
-
-                }
+                }this.discard(); break;
             }
 
             default:{

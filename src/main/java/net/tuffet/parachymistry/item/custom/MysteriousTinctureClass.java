@@ -140,14 +140,19 @@ public class MysteriousTinctureClass extends Item{
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION,300,1));
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,300,1));
                 user.setFrozenTicks(140);
+                break;
             }
             case"minecraft:sculk_sensor":{
                 user.addVelocity(user.getRotationVecClient().negate().multiply(2));
                 user.getWorld().addParticle(ParticleTypes.SONIC_BOOM,true,user.getX(),user.getY(),user.getZ(),0,0,0);
                 user.getWorld().playSound(user,user.getBlockPos(), SoundEvents.ENTITY_WARDEN_SONIC_BOOM, SoundCategory.PLAYERS,1f,1f);
+                break;
 
             }
-
+            case"minecraft:rabbit_foot":{
+            user.addStatusEffect(new StatusEffectInstance(StatusEffects.LUCK,600,1));
+            break;
+            }
 
             default:{
                 break;
