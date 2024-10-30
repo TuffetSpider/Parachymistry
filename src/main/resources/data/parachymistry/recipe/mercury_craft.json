@@ -1,0 +1,15 @@
+{
+  "type": "parachymistry:alchymy_serializer",
+  "base": {
+    "item": "parachymistry:vial_of_earth"
+  },
+  "reagent": {
+    "item": "parachymistry:vial_of_water"
+  },
+  "catalyst": {
+    "item": "minecraft:iron_ingot"
+  },
+  "result": {
+    "id": "parachymistry:mercury"
+  }
+}
