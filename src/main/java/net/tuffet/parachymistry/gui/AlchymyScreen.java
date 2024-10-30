@@ -28,6 +28,11 @@ public class AlchymyScreen extends ForgingScreen<AlchymyScreenHandler> {
         this.titleY = 5;
     }
 
+    @Override
+    public AlchymyScreenHandler getScreenHandler() {
+        this.playerInventoryTitleY = this.backgroundHeight - 98;
+        return super.getScreenHandler();
+    }
 
     protected void setup() {
         assert this.client != null;
@@ -52,6 +57,11 @@ public class AlchymyScreen extends ForgingScreen<AlchymyScreenHandler> {
 
     }
 
+    @Override
+    protected void drawForeground(DrawContext context, int mouseX, int mouseY) {
+
+        super.drawForeground(context, mouseX, mouseY);
+    }
 
     protected void drawInvalidRecipeArrow(DrawContext context, int x, int y) {
         if (this.hasInvalidRecipe()) {

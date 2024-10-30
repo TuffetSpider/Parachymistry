@@ -23,6 +23,7 @@ import net.minecraft.particle.ParticleTypes;
 
 import net.minecraft.server.world.ServerWorld;
 
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 
 import net.minecraft.util.hit.EntityHitResult;
@@ -65,6 +66,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
 
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
+        if(this.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) entityHitResult.getEntity().damage(this.getDamageSources().indirectMagic(this, this.getOwner()), (float)2.0);
         switch(testConcoctionComponent(this.getStack())){
             case"minecraft:ender_pearl":{
                 World world = this.getWorld();
@@ -180,6 +182,8 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
 
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
+        this.getWorld().playSound(this,this.getBlockPos(),SoundEvents.ENTITY_SPLASH_POTION_BREAK, SoundCategory.PLAYERS,1f,1f);
+        ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), 0, 0, 0, 0, 1.0);
         switch(testConcoctionComponent(this.getStack())){
             case"minecraft:glowstone":{
 
@@ -297,7 +301,10 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
         }
     }
     public String testConcoctionComponent(ItemStack stack){
-        return Objects.requireNonNull(stack.get(ModComponents.TINCTUREITEM)).toString().replace("TinctureIngredientComponent[ingredient=","").replace("]","");
+        if(stack.get(ModComponents.TINCTUREITEM)==null){
+            return "null";
+        }
+        else return Objects.requireNonNull(stack.get(ModComponents.TINCTUREITEM)).toString().replace("TinctureIngredientComponent[ingredient=","").replace("]","");
     }
 
 }

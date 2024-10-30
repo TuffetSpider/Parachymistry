@@ -1,0 +1,11 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "down": "minecraft:block/vault_bottom",
+    "east": "parachymistry:block/side1alchymy",
+    "north": "parachymistry:block/side2alchymy",
+    "particle": "minecraft:block/loom",
+    "south": "parachymistry:block/side3alchymy",
+    "up": "parachymistry:block/alchymytop",
+    "west": "parachymistry:block/side4alchymy"
+  }}

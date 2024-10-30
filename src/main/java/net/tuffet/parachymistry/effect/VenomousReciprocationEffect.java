@@ -27,10 +27,13 @@ public class VenomousReciprocationEffect extends StatusEffect {
 
     @Override
     public void onEntityDamage(LivingEntity entity, int amplifier, DamageSource source, float amount) {
-        if(Objects.requireNonNull(source.getAttacker()).isLiving()){
+        if(source.getAttacker()!=null){
+            if(source.getAttacker().isLiving()){
+
+
             LivingEntity attacker = (LivingEntity) source.getAttacker();
             attacker.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON,120,amplifier));
-        }
+        }}
         super.onEntityDamage(entity, amplifier, source, amount);
     }
 }

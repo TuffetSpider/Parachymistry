@@ -76,7 +76,7 @@ public class FireVialProjectile extends ThrownItemEntity {
             Box box = this.getBoundingBox().expand(3.5, 2.0, 3.5);
             List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
             for (LivingEntity livingEntity : list) {
-                livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.HADES_EFFECT, 400, 0));
+                livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.HADES_EFFECT, 400, 0),this.getOwner());
             }this.discard();
         }
 

@@ -70,7 +70,7 @@ public class AetherVialProjectile extends ThrownItemEntity {
             Box box = this.getBoundingBox().expand(3.5, 4.0, 3.5);
             List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
             for (LivingEntity livingEntity : list) {
-                livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.AETHERIAL_SACRIFICE_EFFECT, 100, 0));
+                livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.AETHERIAL_SACRIFICE_EFFECT, 100, 0),this.getOwner());
                 this.getWorld().spawnEntity(new ShulkerBulletEntity(this.getWorld(), (LivingEntity) this.getOwner(), livingEntity, Direction.Axis.pickRandomAxis(random)));
                 this.getWorld().spawnEntity(new ShulkerBulletEntity(this.getWorld(), (LivingEntity) this.getOwner(), livingEntity, Direction.Axis.pickRandomAxis(random)));
                 }
