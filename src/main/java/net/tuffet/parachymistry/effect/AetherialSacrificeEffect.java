@@ -12,16 +12,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.ShulkerBulletEntity;
 import net.minecraft.particle.ParticleTypes;
 
-import net.minecraft.sound.SoundEvents;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.World;
 import net.tuffet.parachymistry.ModGamerules.ModRules;
 
 import java.util.List;
 
 
-import static net.minecraft.entity.projectile.AbstractWindChargeEntity.EXPLOSION_BEHAVIOR;
 
 public class AetherialSacrificeEffect extends StatusEffect {
     protected AetherialSacrificeEffect(StatusEffectCategory category, int color) {
@@ -44,12 +42,20 @@ public class AetherialSacrificeEffect extends StatusEffect {
                 if (!player.isCreative() && !player.isSpectator()) if(entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) entity.damage(entity.getWorld().getDamageSources().outOfWorld(),10);
             }
             else if(entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) entity.damage(entity.getWorld().getDamageSources().outOfWorld(),10);
-            entity.getWorld().createExplosion(entity, null, EXPLOSION_BEHAVIOR, entity.getX(), entity.getY(), entity.getZ(), 5.0F, false, World.ExplosionSourceType.TRIGGER, ParticleTypes.GUST_EMITTER_SMALL, ParticleTypes.GUST_EMITTER_LARGE, SoundEvents.ENTITY_WIND_CHARGE_WIND_BURST);
             entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 400, 0));
+            if(!entity.isPlayer()) {
+                ((ServerWorld) entity.getWorld()).spawnParticles(ParticleTypes.GUST_EMITTER_LARGE, entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0, 0, 1.0);
+            }
+            if(entity.isPlayer()){
+                assert entity instanceof PlayerEntity;
+                entity.getEntityWorld().addParticle(ParticleTypes.GUST_EMITTER_LARGE, true, entity.getX(), entity.getY(), entity.getZ(), 0, 0, 0);
+            }
+
+
             Box box = entity.getBoundingBox().expand(5, -20, 5);
-            List<LivingEntity> list = entity.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
+            List<LivingEntity> list = entity.getWorld().getNonSpectatingEntities(LivingEntity.class,box);
+            list.remove(entity);
             for (LivingEntity livingEntity : list) {
-                entity.getWorld().spawnEntity(new ShulkerBulletEntity(entity.getWorld(), entity, livingEntity, Direction.Axis.Z));
                 entity.getWorld().spawnEntity(new ShulkerBulletEntity(entity.getWorld(), entity, livingEntity, Direction.Axis.Z));
                 entity.setGlowing(false);
             }

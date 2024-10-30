@@ -21,9 +21,9 @@ public class VialItemClass extends Item {
         super(settings);
 
     }
-    protected ItemStack fill(ItemStack stack, PlayerEntity player, ItemStack outputStack) {
+    protected void fill(ItemStack stack, PlayerEntity player, ItemStack outputStack) {
         player.incrementStat(Stats.USED.getOrCreateStat(this));
-        return ItemUsage.exchangeStack(stack, player, outputStack);
+        ItemUsage.exchangeStack(stack, player, outputStack);
     }
 
     @Override

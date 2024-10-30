@@ -1,9 +1,7 @@
 package net.tuffet.parachymistry.entity;
-
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.projectile.ShulkerBulletEntity;
 import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
@@ -13,9 +11,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.tuffet.parachymistry.effect.ModEffects;
 import net.tuffet.parachymistry.item.ModItems;
@@ -71,8 +67,6 @@ public class AetherVialProjectile extends ThrownItemEntity {
             List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
             for (LivingEntity livingEntity : list) {
                 livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.AETHERIAL_SACRIFICE_EFFECT, 100, 0),this.getOwner());
-                this.getWorld().spawnEntity(new ShulkerBulletEntity(this.getWorld(), (LivingEntity) this.getOwner(), livingEntity, Direction.Axis.pickRandomAxis(random)));
-                this.getWorld().spawnEntity(new ShulkerBulletEntity(this.getWorld(), (LivingEntity) this.getOwner(), livingEntity, Direction.Axis.pickRandomAxis(random)));
                 }
             this.discard();
 
