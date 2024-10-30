@@ -27,6 +27,8 @@ public class ModItemGroups {
                         entries.add(ModItems.SALT );
                         entries.add(ModItems.MERCURY );
                         entries.add(ModBlocks.ALCHYMY_STATION);
+                        entries.add(ModItems.MYSTERIOUS_CONCOCTION);
+                        entries.add(ModItems.MYSTERIOUS_TINCTURE);
 
 
 

@@ -48,6 +48,7 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
         if(result.getItem() == (ModItems.MYSTERIOUS_TINCTURE) || result.getItem() == (ModItems.MYSTERIOUS_CONCOCTION)){
             ItemStack tincture = this.result.copy();
             tincture.set(ModComponents.TINCTUREITEM,new TinctureIngredientComponent(alchymyRecipeInput.catalyst().getItem().toString()));
+
             return tincture.copy();
         }
         return this.result.copy();
