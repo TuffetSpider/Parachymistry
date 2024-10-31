@@ -1,11 +1,11 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "down": "minecraft:block/vault_bottom",
-    "east": "parachymistry:block/side1alchymy",
-    "north": "parachymistry:block/side2alchymy",
-    "particle": "minecraft:block/loom",
-    "south": "parachymistry:block/side3alchymy",
-    "up": "parachymistry:block/alchymytop",
-    "west": "parachymistry:block/side4alchymy"
+    "down": "parachymistry:block/stationbottom",
+    "east": "parachymistry:block/stationside1",
+    "north": "parachymistry:block/stationside2",
+    "particle": "minecraft:block/oak_planks",
+    "south": "parachymistry:block/stationside3",
+    "up": "parachymistry:block/stationtop",
+    "west": "parachymistry:block/stationside4"
   }}
