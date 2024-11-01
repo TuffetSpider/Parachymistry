@@ -21,8 +21,8 @@ import net.tuffet.parachymistry.effect.ModEffects;
 import java.util.List;
 import java.util.Objects;
 
-public class MysteriousTinctureClass extends Item{
-    public MysteriousTinctureClass(Settings settings) {
+public class MysteriousTincture extends Item{
+    public MysteriousTincture(Settings settings) {
         super(settings);
 
     }

@@ -13,15 +13,15 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.tuffet.parachymistry.gui.AlchymyScreenHandler;
 
-public class AlchymyBlockClass extends CraftingTableBlock {
-    public static final MapCodec<net.tuffet.parachymistry.block.custom.AlchymyBlockClass> CODEC = createCodec(net.tuffet.parachymistry.block.custom.AlchymyBlockClass::new);
+public class AlchymyBlock extends CraftingTableBlock {
+    public static final MapCodec<AlchymyBlock> CODEC = createCodec(AlchymyBlock::new);
     private static final Text SCREEN_TITLE = Text.translatable("Undergo Alchymy");
 
-    public MapCodec<net.tuffet.parachymistry.block.custom.AlchymyBlockClass> getCodec() {
+    public MapCodec<AlchymyBlock> getCodec() {
         return CODEC;
     }
 
-    public AlchymyBlockClass(AbstractBlock.Settings settings) {
+    public AlchymyBlock(AbstractBlock.Settings settings) {
         super(settings);
     }
 

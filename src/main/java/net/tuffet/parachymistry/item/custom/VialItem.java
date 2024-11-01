@@ -16,8 +16,8 @@ import net.tuffet.parachymistry.item.ModItems;
 
 
 
-public class VialItemClass extends Item {
-    public VialItemClass(Settings settings) {
+public class VialItem extends Item {
+    public VialItem(Settings settings) {
         super(settings);
 
     }

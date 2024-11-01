@@ -15,8 +15,8 @@ import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
 import net.tuffet.parachymistry.entity.FireVialProjectile;
 
-public class FireVialClass extends Item implements ProjectileItem {
-    public FireVialClass(Item.Settings settings) {
+public class FireVial extends Item implements ProjectileItem {
+    public FireVial(Item.Settings settings) {
         super(settings);
     }
 

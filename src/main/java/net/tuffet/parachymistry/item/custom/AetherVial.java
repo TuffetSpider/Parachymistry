@@ -13,10 +13,10 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
-import net.tuffet.parachymistry.entity.AirVialProjectile;
+import net.tuffet.parachymistry.entity.AetherVialProjectile;
 
-public class AirVialClass extends Item implements ProjectileItem {
-    public AirVialClass(Item.Settings settings) {
+public class AetherVial extends Item implements ProjectileItem {
+    public AetherVial(Item.Settings settings) {
         super(settings);
     }
 
@@ -25,10 +25,11 @@ public class AirVialClass extends Item implements ProjectileItem {
         ItemStack itemStack = user.getStackInHand(hand);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!world.isClient) {
-            AirVialProjectile airVialProjectile = new AirVialProjectile(world, user);
-            airVialProjectile.setItem(itemStack);
-            airVialProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
-            world.spawnEntity(airVialProjectile);
+            AetherVialProjectile aetherVialProjectile = new AetherVialProjectile(world, user);
+            aetherVialProjectile.setItem(itemStack);
+            aetherVialProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
+            aetherVialProjectile.setNoGravity(true);
+            world.spawnEntity(aetherVialProjectile);
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));
@@ -37,8 +38,8 @@ public class AirVialClass extends Item implements ProjectileItem {
     }
 
     public ProjectileEntity createEntity(World world, Position pos, ItemStack stack, Direction direction) {
-        AirVialProjectile airVialProjectile = new AirVialProjectile(world, pos.getX(), pos.getY(), pos.getZ());
-        airVialProjectile.setItem(stack);
-        return airVialProjectile;
+        AetherVialProjectile aetherVialProjectile = new AetherVialProjectile(world, pos.getX(), pos.getY(), pos.getZ());
+        aetherVialProjectile.setItem(stack);
+        return aetherVialProjectile;
     }
 }

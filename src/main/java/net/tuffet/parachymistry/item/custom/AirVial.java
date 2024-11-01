@@ -13,10 +13,10 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
-import net.tuffet.parachymistry.entity.WaterVialProjectile;
+import net.tuffet.parachymistry.entity.AirVialProjectile;
 
-public class WaterVialClass extends Item implements ProjectileItem {
-    public WaterVialClass(Item.Settings settings) {
+public class AirVial extends Item implements ProjectileItem {
+    public AirVial(Item.Settings settings) {
         super(settings);
     }
 
@@ -25,10 +25,10 @@ public class WaterVialClass extends Item implements ProjectileItem {
         ItemStack itemStack = user.getStackInHand(hand);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!world.isClient) {
-            WaterVialProjectile waterVialProjectile = new WaterVialProjectile(world, user);
-            waterVialProjectile.setItem(itemStack);
-            waterVialProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
-            world.spawnEntity(waterVialProjectile);
+            AirVialProjectile airVialProjectile = new AirVialProjectile(world, user);
+            airVialProjectile.setItem(itemStack);
+            airVialProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
+            world.spawnEntity(airVialProjectile);
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));
@@ -37,8 +37,8 @@ public class WaterVialClass extends Item implements ProjectileItem {
     }
 
     public ProjectileEntity createEntity(World world, Position pos, ItemStack stack, Direction direction) {
-        WaterVialProjectile waterVialProjectile = new WaterVialProjectile(world, pos.getX(), pos.getY(), pos.getZ());
-        waterVialProjectile.setItem(stack);
-        return waterVialProjectile;
+        AirVialProjectile airVialProjectile = new AirVialProjectile(world, pos.getX(), pos.getY(), pos.getZ());
+        airVialProjectile.setItem(stack);
+        return airVialProjectile;
     }
 }

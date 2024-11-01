@@ -13,10 +13,10 @@ import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Position;
 import net.minecraft.world.World;
-import net.tuffet.parachymistry.entity.AetherVialProjectile;
+import net.tuffet.parachymistry.entity.WaterVialProjectile;
 
-public class AetherVialClass extends Item implements ProjectileItem {
-    public AetherVialClass(Item.Settings settings) {
+public class WaterVial extends Item implements ProjectileItem {
+    public WaterVial(Item.Settings settings) {
         super(settings);
     }
 
@@ -25,11 +25,10 @@ public class AetherVialClass extends Item implements ProjectileItem {
         ItemStack itemStack = user.getStackInHand(hand);
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         if (!world.isClient) {
-            AetherVialProjectile aetherVialProjectile = new AetherVialProjectile(world, user);
-            aetherVialProjectile.setItem(itemStack);
-            aetherVialProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
-            aetherVialProjectile.setNoGravity(true);
-            world.spawnEntity(aetherVialProjectile);
+            WaterVialProjectile waterVialProjectile = new WaterVialProjectile(world, user);
+            waterVialProjectile.setItem(itemStack);
+            waterVialProjectile.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
+            world.spawnEntity(waterVialProjectile);
         }
 
         user.incrementStat(Stats.USED.getOrCreateStat(this));
@@ -38,8 +37,8 @@ public class AetherVialClass extends Item implements ProjectileItem {
     }
 
     public ProjectileEntity createEntity(World world, Position pos, ItemStack stack, Direction direction) {
-        AetherVialProjectile aetherVialProjectile = new AetherVialProjectile(world, pos.getX(), pos.getY(), pos.getZ());
-        aetherVialProjectile.setItem(stack);
-        return aetherVialProjectile;
+        WaterVialProjectile waterVialProjectile = new WaterVialProjectile(world, pos.getX(), pos.getY(), pos.getZ());
+        waterVialProjectile.setItem(stack);
+        return waterVialProjectile;
     }
 }
