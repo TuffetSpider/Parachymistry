@@ -21,7 +21,7 @@ import net.tuffet.parachymistry.item.ModItems;
 import java.util.List;
 
 public class WaterVialProjectile extends ThrownItemEntity {
-    public WaterVialProjectile(EntityType<? extends SnowballEntity> entityType, World world) {
+    public WaterVialProjectile(EntityType<? extends WaterVialProjectile> entityType, World world) {
         super(entityType, world);
     }
 

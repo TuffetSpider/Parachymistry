@@ -24,7 +24,7 @@ import java.util.List;
 
 
 public class FireVialProjectile extends ThrownItemEntity {
-    public FireVialProjectile(EntityType<? extends SnowballEntity> entityType, World world) {
+    public FireVialProjectile(EntityType<? extends FireVialProjectile> entityType, World world) {
         super(entityType, world);
     }
 

@@ -48,7 +48,7 @@ import java.util.Random;
 import java.util.random.RandomGenerator;
 
 public class MysteriousConcoctionProjectile extends ThrownItemEntity {
-    public MysteriousConcoctionProjectile(EntityType<? extends SnowballEntity> entityType, World world) {
+    public MysteriousConcoctionProjectile(EntityType<? extends MysteriousConcoctionProjectile> entityType, World world) {
         super(entityType, world);
     }
 

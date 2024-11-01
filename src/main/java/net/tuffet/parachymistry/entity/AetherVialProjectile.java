@@ -20,7 +20,7 @@ import java.util.List;
 
 
 public class AetherVialProjectile extends ThrownItemEntity {
-    public AetherVialProjectile(EntityType<? extends SnowballEntity> entityType, World world) {
+    public AetherVialProjectile(EntityType<? extends AetherVialProjectile> entityType, World world) {
         super(entityType, world);
     }
 

@@ -22,7 +22,7 @@ import net.tuffet.parachymistry.item.ModItems;
 import java.util.List;
 
 public class EarthVialProjectile extends ThrownItemEntity {
-    public EarthVialProjectile(EntityType<? extends SnowballEntity> entityType, World world) {
+    public EarthVialProjectile(EntityType<? extends EarthVialProjectile> entityType, World world) {
         super(entityType, world);
     }
 
