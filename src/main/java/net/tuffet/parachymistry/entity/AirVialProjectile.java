@@ -34,6 +34,12 @@ public class AirVialProjectile extends ThrownItemEntity {
     }
 
     @Override
+    public void tick() {
+        if (this.getVelocity().lengthSquared() < 0.001) this.discard();
+        super.tick();
+    }
+
+    @Override
     protected Item getDefaultItem() {
         return ModItems.AIR_VIAL;
     }

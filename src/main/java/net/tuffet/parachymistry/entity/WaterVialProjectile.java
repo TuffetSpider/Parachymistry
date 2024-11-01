@@ -3,7 +3,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleTypes;
@@ -30,6 +29,12 @@ public class WaterVialProjectile extends ThrownItemEntity {
 
     public WaterVialProjectile(World world, double x, double y, double z) {
         super(EntityType.SNOWBALL, x, y, z, world);
+    }
+
+    @Override
+    public void tick() {
+        if (this.getVelocity().lengthSquared() < 0.001) this.discard();
+        super.tick();
     }
 
     @Override

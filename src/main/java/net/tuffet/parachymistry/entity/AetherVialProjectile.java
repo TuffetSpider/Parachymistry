@@ -1,12 +1,9 @@
 package net.tuffet.parachymistry.entity;
-import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
@@ -37,12 +34,11 @@ public class AetherVialProjectile extends ThrownItemEntity {
     protected Item getDefaultItem() {
         return ModItems.AETHER_VIAL;
     }
-    public void tick() {
-        super.tick();
-        if(this.age>300){
-            this.discard();
-        }
 
+    @Override
+    public void tick() {
+        if (this.getVelocity().lengthSquared() < 0.001) this.discard();
+        super.tick();
     }
 
     @Override
