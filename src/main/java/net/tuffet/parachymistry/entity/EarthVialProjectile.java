@@ -34,19 +34,28 @@ public class EarthVialProjectile extends ThrownItemEntity {
         super(EntityType.SNOWBALL, x, y, z, world);
     }
 
+    @Override
+    public void tick() {
+        if (this.getVelocity().lengthSquared() < 0.001) this.discard();
+        super.tick();
+    }
+
+    @Override
     protected Item getDefaultItem() {
         return ModItems.EARTH_VIAL;
     }
 
-
+    @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         if (!this.getWorld().isClient) {
             Entity entity = entityHitResult.getEntity();
-            if(entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) entity.damage(this.getDamageSources().inWall(), (float)5.0);
+            if (entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) entity.damage(this.getDamageSources().inWall(), (float)5.0);
             this.discard();
-        }}
+        }
+    }
 
+    @Override
     protected void onCollision(HitResult hitResult) {
         int particleCount = 200;
         double radius = 4.0;
@@ -67,15 +76,13 @@ public class EarthVialProjectile extends ThrownItemEntity {
         }
         super.onCollision(hitResult);
         if (!this.getWorld().isClient) {
-
             this.playSound(SoundEvents.BLOCK_GLASS_BREAK,1f,1f);
             Box box = this.getBoundingBox().expand(3.5, 2.0, 3.5);
             List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
             for (LivingEntity livingEntity : list) {
                 livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.GAIA_EFFECT, 400, 0),this.getOwner());
-            }this.discard();
-
-
-        }this.discard();
-    }}
-
+            }
+        }
+        this.discard();
+    }
+}

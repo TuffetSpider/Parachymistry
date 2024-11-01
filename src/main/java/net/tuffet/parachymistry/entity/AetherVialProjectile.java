@@ -1,13 +1,9 @@
 package net.tuffet.parachymistry.entity;
-import net.minecraft.component.type.PotionContentsComponent;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
@@ -21,12 +17,10 @@ import net.tuffet.parachymistry.item.ModItems;
 
 import java.util.List;
 
-
 public class AetherVialProjectile extends ThrownItemEntity {
     public AetherVialProjectile(EntityType<? extends AetherVialProjectile> entityType, World world) {
         super(entityType, world);
     }
-
 
     public AetherVialProjectile(World world, LivingEntity owner) {
         super(EntityType.SNOWBALL, owner, world);
@@ -36,22 +30,23 @@ public class AetherVialProjectile extends ThrownItemEntity {
         super(EntityType.SNOWBALL, x, y, z, world);
     }
 
+    @Override
     protected Item getDefaultItem() {
         return ModItems.AETHER_VIAL;
     }
-    public void tick() {
-        super.tick();
-        if(this.age>300){
-            this.discard();
-        }
 
+    @Override
+    public void tick() {
+        if (this.getVelocity().lengthSquared() < 0.001) this.discard();
+        super.tick();
     }
 
-
+    @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
-        }
+    }
 
+    @Override
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
         int particleCount = 200;
@@ -77,11 +72,8 @@ public class AetherVialProjectile extends ThrownItemEntity {
             List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
             for (LivingEntity livingEntity : list) {
                 livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.AETHERIAL_SACRIFICE_EFFECT, 100, 0),this.getOwner());
-                }
-            this.discard();
-
-
-
-
-        }this.discard();
-    }}
+            }
+        }
+        this.discard();
+    }
+}

@@ -4,7 +4,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.particle.ParticleTypes;
@@ -14,7 +13,6 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.tuffet.parachymistry.ModGamerules.ModRules;
 import net.tuffet.parachymistry.effect.ModEffects;
@@ -35,19 +33,28 @@ public class AirVialProjectile extends ThrownItemEntity {
         super(EntityType.SNOWBALL, x, y, z, world);
     }
 
+    @Override
+    public void tick() {
+        if (this.getVelocity().lengthSquared() < 0.001) this.discard();
+        super.tick();
+    }
+
+    @Override
     protected Item getDefaultItem() {
         return ModItems.AIR_VIAL;
     }
 
-
+    @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         if (!this.getWorld().isClient) {
             Entity entity = entityHitResult.getEntity();
             if(entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) entity.damage(this.getDamageSources().windCharge(this, (LivingEntity) this.getOwner()), (float)5.0);
             this.discard();
-        }}
+        }
+    }
 
+    @Override
     protected void onCollision(HitResult hitResult) {
         int particleCount = 200;
         double radius = 4.0;
@@ -75,13 +82,8 @@ public class AirVialProjectile extends ThrownItemEntity {
             ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.GUST_EMITTER_LARGE, this.getX(),this.getY(),this.getZ(), 0, 0, 0, 0, 1.0);
             for (LivingEntity livingEntity : list) {
                 livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.AEOLUS_EFFECT,400),this.getOwner());
-            }this.discard();
-
-
-        }this.discard();
-    }}
-
-
-
-
-
+            }
+        }
+        this.discard();
+    }
+}
