@@ -7,12 +7,13 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.tuffet.parachymistry.ModGamerules.ModRules;
 
 public class HadesHellfireEffect extends StatusEffect {
-    protected HadesHellfireEffect(StatusEffectCategory category, int color) {
+
+    protected HadesHellfireEffect() {
         super(StatusEffectCategory.HARMFUL,0xe9b8b3);
     }
+
     @Override
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
-
         return true;
     }
 

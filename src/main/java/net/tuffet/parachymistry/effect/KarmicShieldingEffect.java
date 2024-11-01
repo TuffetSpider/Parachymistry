@@ -5,25 +5,28 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class KarmicShieldingEffect extends StatusEffect {
-    protected KarmicShieldingEffect(StatusEffectCategory category, int color) {
-        super(category, color);
+
+    protected KarmicShieldingEffect() {
+        super(StatusEffectCategory.BENEFICIAL, 16445630);
     }
 
-    Float DamageStored = 0f;
+    private final Map<LivingEntity, Float> damageStored = new HashMap<>();
 
     @Override
     public void onEntityDamage(LivingEntity entity, int amplifier, DamageSource source, float amount) {
-        DamageStored = DamageStored + Math.max(amount/3,1);
-            entity.setAbsorptionAmount(DamageStored);
-            DamageStored=0f;
+        entity.setAbsorptionAmount(damageStored.getOrDefault(entity, 0F) + Math.max(amount / 3,1));
+        damageStored.remove(entity);
         super.onEntityDamage(entity, amplifier, source, amount);
     }
 
     @Override
     public void onApplied(LivingEntity entity, int amplifier) {
-        DamageStored=0f;
+        damageStored.remove(entity);
         super.onApplied(entity, amplifier);
     }
 }

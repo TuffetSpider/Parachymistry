@@ -5,7 +5,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 
 public class SwiftStrideEffect extends StatusEffect {
-    protected SwiftStrideEffect(StatusEffectCategory category, int color) {
+    protected SwiftStrideEffect() {
         super(StatusEffectCategory.BENEFICIAL, 102156172);
     }
     @Override

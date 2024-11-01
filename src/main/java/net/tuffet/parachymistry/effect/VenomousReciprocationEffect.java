@@ -10,30 +10,24 @@ import net.minecraft.entity.effect.StatusEffects;
 import java.util.Objects;
 
 public class VenomousReciprocationEffect extends StatusEffect {
-    protected VenomousReciprocationEffect(StatusEffectCategory category, int color) {
-        super(category, color);
+
+    protected VenomousReciprocationEffect() {
+        super(StatusEffectCategory.BENEFICIAL, 16933);
     }
+
     @Override
     public boolean canApplyUpdateEffect(int duration, int amplifier) {
-
         return true;
     }
 
     @Override
-    public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-
-        return super.applyUpdateEffect(entity, amplifier);
-    }
-
-    @Override
     public void onEntityDamage(LivingEntity entity, int amplifier, DamageSource source, float amount) {
-        if(source.getAttacker()!=null){
-            if(source.getAttacker().isLiving()){
-
-
-            LivingEntity attacker = (LivingEntity) source.getAttacker();
-            attacker.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON,120,amplifier));
-        }}
+        if (source.getAttacker() != null){
+            if (source.getAttacker().isLiving()) {
+                LivingEntity attacker = (LivingEntity) source.getAttacker();
+                attacker.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON,120,amplifier));
+            }
+        }
         super.onEntityDamage(entity, amplifier, source, amount);
     }
 }
