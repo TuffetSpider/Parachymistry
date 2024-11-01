@@ -13,7 +13,6 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.tuffet.parachymistry.ModGamerules.ModRules;
 import net.tuffet.parachymistry.effect.ModEffects;
@@ -33,11 +32,12 @@ public class WaterVialProjectile extends ThrownItemEntity {
         super(EntityType.SNOWBALL, x, y, z, world);
     }
 
+    @Override
     protected Item getDefaultItem() {
         return ModItems.WATER_VIAL;
     }
 
-
+    @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
         if (!this.getWorld().isClient) {
@@ -47,6 +47,7 @@ public class WaterVialProjectile extends ThrownItemEntity {
         }
     }
 
+    @Override
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
         int particleCount = 200;
@@ -74,8 +75,7 @@ public class WaterVialProjectile extends ThrownItemEntity {
             for (LivingEntity livingEntity : list) {
                 livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.POSEIDON_EFFECT, 400, 0),this.getOwner());
             }
-            this.discard();
-        }this.discard();
-
+        }
+        this.discard();
     }
 }

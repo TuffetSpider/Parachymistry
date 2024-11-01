@@ -17,26 +17,20 @@ public class ModItemGroups {
             FabricItemGroup.builder().icon(() -> new ItemStack(ModItems.MYSTERIOUS_TINCTURE))
                     .displayName(Text.translatable("itemgroup.parachymistry.parachymistry"))
                     .entries((displayContext, entries) -> {
-                        entries.add(ModItems.AETHER_VIAL);
-                        entries.add(ModItems.AIR_VIAL );
-                        entries.add(ModItems.ALCHYMICAL_VIAL);
-                        entries.add(ModItems.WATER_VIAL );
-                        entries.add(ModItems.FIRE_VIAL );
-                        entries.add(ModItems.QUICKLIME );
-                        entries.add(ModItems.EARTH_VIAL );
-                        entries.add(ModItems.SALT );
-                        entries.add(ModItems.MERCURY );
                         entries.add(ModBlocks.ALCHYMY_STATION);
+                        entries.add(ModItems.ALCHYMICAL_VIAL);
+                        entries.add(ModItems.SALT);
+                        entries.add(ModItems.MERCURY);
+                        entries.add(ModItems.QUICKLIME);
                         entries.add(ModItems.MYSTERIOUS_CONCOCTION);
                         entries.add(ModItems.MYSTERIOUS_TINCTURE);
-
-
+                        entries.add(ModItems.AIR_VIAL);
+                        entries.add(ModItems.FIRE_VIAL);
+                        entries.add(ModItems.WATER_VIAL);
+                        entries.add(ModItems.EARTH_VIAL);
+                        entries.add(ModItems.AETHER_VIAL);
 
                     }).build());
-
-
-
-
 
 
     public static void registerItemGroups() {
