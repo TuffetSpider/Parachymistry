@@ -163,10 +163,11 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                         if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.damage(livingEntity.getWorld().getDamageSources().explosion(livingEntity,livingEntity),2);
                 }}}
             case"minecraft:rabbit_foot":{
-                if(!entityHitResult.getEntity().isPlayer()&&entityHitResult.getEntity().isLiving()){
+                if(!entityHitResult.getEntity().isPlayer()&&entityHitResult.getEntity().isLiving()&&!entityHitResult.getEntity().isInvulnerable()){
                     RabbitEntity rabbit = new RabbitEntity(EntityType.RABBIT,entityHitResult.getEntity().getWorld());
                     rabbit.setPos(entityHitResult.getEntity().getX(),entityHitResult.getEntity().getY()+1,entityHitResult.getEntity().getZ());
                     rabbit.setVariant(RabbitEntity.RabbitType.byId(random.nextBetween(0,7)));
+                    rabbit.addCommandTag("parachymistryrabbit");
                     entityHitResult.getEntity().getWorld().spawnEntity(rabbit);
                     entityHitResult.getEntity().remove(RemovalReason.DISCARDED);
                 }
@@ -229,6 +230,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
             case"minecraft:pufferfish":{
                 PufferfishEntity pufferfish = new PufferfishEntity(EntityType.PUFFERFISH, this.getWorld());
                 pufferfish.setPos(this.getX(),this.getY(),this.getZ());
+                pufferfish.addCommandTag("parachymistrypuffer");
                 this.getWorld().spawnEntity(pufferfish);
 
 
