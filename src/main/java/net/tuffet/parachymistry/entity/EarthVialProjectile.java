@@ -36,7 +36,6 @@ public class EarthVialProjectile extends ThrownItemEntity {
 
     @Override
     public void tick() {
-        if (this.getVelocity().lengthSquared() < 0.001) this.discard();
         super.tick();
     }
 

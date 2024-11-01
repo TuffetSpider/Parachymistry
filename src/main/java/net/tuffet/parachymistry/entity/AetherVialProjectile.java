@@ -37,7 +37,7 @@ public class AetherVialProjectile extends ThrownItemEntity {
 
     @Override
     public void tick() {
-        if (this.getVelocity().lengthSquared() < 0.001) this.discard();
+        if (this.age>450) this.discard();
         super.tick();
     }
 
