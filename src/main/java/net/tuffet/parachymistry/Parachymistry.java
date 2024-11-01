@@ -10,6 +10,7 @@ import net.tuffet.parachymistry.ModGamerules.ModRules;
 import net.tuffet.parachymistry.block.ModBlocks;
 import net.tuffet.parachymistry.component.ModComponents;
 import net.tuffet.parachymistry.effect.ModEffects;
+import net.tuffet.parachymistry.gui.ModGuis;
 import net.tuffet.parachymistry.item.ModItemGroups;
 import net.tuffet.parachymistry.item.ModItems;
 import net.tuffet.parachymistry.recipe.AlchymyRecipe;
@@ -37,6 +38,7 @@ public class Parachymistry implements ModInitializer {
 		ModTags.initialize();
 		ModItemGroups.registerItemGroups();
 		ModRules.initialize();
+		ModGuis.initialize();
 
 
 

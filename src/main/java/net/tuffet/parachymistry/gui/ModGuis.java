@@ -14,7 +14,9 @@ public class ModGuis implements ModInitializer {
     public static final ScreenHandlerType<AlchymyScreenHandler> ALCHYMY =
             Registry.register(Registries.SCREEN_HANDLER, Identifier.of(Parachymistry.MOD_ID, "alchymy"),
                     new ScreenHandlerType<>(AlchymyScreenHandler::new,FeatureFlags.VANILLA_FEATURES));
+    public static void initialize(){
 
+    }
 
     @Override
     public void onInitialize() {
