@@ -48,9 +48,9 @@ public class MysteriousTincture extends Item{
         switch(testComponent(stack)){
             // For example, this case tests if the tincture has an ender pearl component, and if it does, teleports the player to the entity that last attacked them, supposing it exists
             case "minecraft:ender_pearl":{
-                {if (user.getLastAttacker() != null) {
+                if (user.getLastAttacker() != null) {
                     user.teleport(Objects.requireNonNull(user.getLastAttacker()).getX(),user.getLastAttacker().getY(),user.getLastAttacker().getZ(),true);
-                }}
+                }
                 break;
             }
             // These cases just use status effects, most of them being attributes, these are the simplest to add if you'd like to do something
