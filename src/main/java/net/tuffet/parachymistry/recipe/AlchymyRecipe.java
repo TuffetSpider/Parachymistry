@@ -1,5 +1,3 @@
-
-
 package net.tuffet.parachymistry.recipe;
 
 import com.mojang.serialization.MapCodec;
@@ -10,14 +8,12 @@ import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.recipe.*;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.world.World;
-import net.tuffet.parachymistry.component.ModComponents;
 import net.tuffet.parachymistry.component.TinctureIngredientComponent;
 import net.tuffet.parachymistry.item.ModItems;
 
-
 import java.util.stream.Stream;
 
-
+import static net.tuffet.parachymistry.Parachymistry.TINCTUREITEM;
 
 public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
 
@@ -26,34 +22,26 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
     final Ingredient catalyst;
     final ItemStack result;
 
-
     public AlchymyRecipe(Ingredient base, Ingredient reagent, Ingredient catalyst, ItemStack result) {
-
-
-
         this.base = base;
         this.reagent = reagent;
         this.catalyst = catalyst;
         this.result = result;
     }
 
-
-
     public boolean matches(AlchymyRecipeInput alchymyRecipeInput, World world) {
         return this.base.test(alchymyRecipeInput.base()) && this.reagent.test(alchymyRecipeInput.reagent()) && this.catalyst.test(alchymyRecipeInput.catalyst());
     }
 
-
     public ItemStack craft(AlchymyRecipeInput alchymyRecipeInput, RegistryWrapper.WrapperLookup wrapperLookup) {
         if(result.getItem() == (ModItems.MYSTERIOUS_TINCTURE) || result.getItem() == (ModItems.MYSTERIOUS_CONCOCTION)){
             ItemStack tincture = this.result.copy();
-            tincture.set(ModComponents.TINCTUREITEM,new TinctureIngredientComponent(alchymyRecipeInput.catalyst().getItem().toString()));
+            tincture.set(TINCTUREITEM,new TinctureIngredientComponent(alchymyRecipeInput.catalyst().getItem().toString()));
 
             return tincture.copy();
         }
         return this.result.copy();
     }
-
 
     public boolean fits(int width, int height) {
         return false;
@@ -76,7 +64,7 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
     }
 
     public RecipeSerializer<?> getSerializer() {
-        return ModRecipes.AlCHYMYSERIALIZER;
+        return ModRecipes.AlCHYMY_SERIALIZER;
     }
 
     public RecipeType<?> getType() {

@@ -1,6 +1,5 @@
 package net.tuffet.parachymistry.item;
 
-
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -29,9 +28,7 @@ public class ModItemGroups {
                         entries.add(ModItems.WATER_VIAL);
                         entries.add(ModItems.EARTH_VIAL);
                         entries.add(ModItems.AETHER_VIAL);
-
                     }).build());
-
 
     public static void registerItemGroups() {
         Parachymistry.LOGGER.info("Registering Item Groups for " + Parachymistry.MOD_ID);

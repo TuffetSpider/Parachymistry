@@ -53,7 +53,7 @@ public class MysteriousTinctureRecipe implements Recipe<AlchymyRecipeInput> {
     }
 
     public RecipeSerializer<?> getSerializer() {
-        return ModRecipes.TINCTURESERIALIZER;
+        return ModRecipes.TINCTURE_SERIALIZER;
     }
 
     public RecipeType<?> getType() {

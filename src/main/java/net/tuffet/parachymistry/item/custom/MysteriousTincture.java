@@ -21,6 +21,8 @@ import net.tuffet.parachymistry.effect.ModEffects;
 import java.util.List;
 import java.util.Objects;
 
+import static net.tuffet.parachymistry.Parachymistry.TINCTUREITEM;
+
 public class MysteriousTincture extends Item{
     public MysteriousTincture(Settings settings) {
         super(settings);
@@ -43,7 +45,7 @@ public class MysteriousTincture extends Item{
         }
 
         // This tests the components added during crafting, to add your own effects do  case "<ITEM>":{EFFECT}, added some examples that function here
-        if(stack.get(ModComponents.TINCTUREITEM)!=null){
+        if(stack.get(TINCTUREITEM)!=null){
         switch(testComponent(stack)){
             // For example, this case tests if the tincture has an ender pearl component, and if it does, teleports the player to the entity that last attacked them, supposing it exists
             case "minecraft:ender_pearl":{
@@ -161,7 +163,7 @@ public class MysteriousTincture extends Item{
     }
     // This is the function being used to test what component an item has
     public String testComponent(ItemStack stack){
-        return Objects.requireNonNull(stack.get(ModComponents.TINCTUREITEM)).toString().replace("TinctureIngredientComponent[ingredient=","").replace("]","");
+        return Objects.requireNonNull(stack.get(TINCTUREITEM)).toString().replace("TinctureIngredientComponent[ingredient=","").replace("]","");
     }
 
 }

@@ -15,11 +15,12 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.tuffet.parachymistry.ModGamerules.ModRules;
 import net.tuffet.parachymistry.effect.ModEffects;
 import net.tuffet.parachymistry.item.ModItems;
 
 import java.util.List;
+
+import static net.tuffet.parachymistry.Parachymistry.SHOULD_HAVE_DAMAGING_VIALS;
 
 public class EarthVialProjectile extends ThrownItemEntity {
     public EarthVialProjectile(EntityType<? extends EarthVialProjectile> entityType, World world) {
@@ -49,7 +50,7 @@ public class EarthVialProjectile extends ThrownItemEntity {
         super.onEntityHit(entityHitResult);
         if (!this.getWorld().isClient) {
             Entity entity = entityHitResult.getEntity();
-            if (entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) entity.damage(this.getDamageSources().inWall(), (float)5.0);
+            if (entity.getWorld().getGameRules().getBoolean(SHOULD_HAVE_DAMAGING_VIALS)) entity.damage(this.getDamageSources().inWall(), (float)5.0);
             this.discard();
         }
     }

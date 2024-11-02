@@ -13,9 +13,10 @@ import net.minecraft.particle.ParticleTypes;
 
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
-import net.tuffet.parachymistry.ModGamerules.ModRules;
 
 import java.util.List;
+
+import static net.tuffet.parachymistry.Parachymistry.SHOULD_HAVE_DAMAGING_VIALS;
 
 public class AetherialSacrificeEffect extends StatusEffect {
 
@@ -35,7 +36,7 @@ public class AetherialSacrificeEffect extends StatusEffect {
         assert effect != null;
         int timeRemaining = effect.getDuration();
         if (timeRemaining == 1) {
-            if (entity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS) && !entity.isSpectator())
+            if (entity.getWorld().getGameRules().getBoolean(SHOULD_HAVE_DAMAGING_VIALS) && !entity.isSpectator())
                 if (entity instanceof PlayerEntity player) if (!player.isCreative()) entity.damage(entity.getWorld().getDamageSources().outOfWorld(), 8);
                 else entity.damage(entity.getWorld().getDamageSources().generic(), 8);
 

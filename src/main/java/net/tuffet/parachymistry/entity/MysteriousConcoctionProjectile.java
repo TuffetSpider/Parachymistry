@@ -12,7 +12,6 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.PufferfishEntity;
 import net.minecraft.entity.passive.RabbitEntity;
 import net.minecraft.entity.projectile.ProjectileEntity;
-import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -32,13 +31,14 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import net.minecraft.world.event.GameEvent;
-import net.tuffet.parachymistry.ModGamerules.ModRules;
-import net.tuffet.parachymistry.component.ModComponents;
 
 import net.tuffet.parachymistry.item.ModItems;
 
 import java.util.List;
 import java.util.Objects;
+
+import static net.tuffet.parachymistry.Parachymistry.SHOULD_HAVE_DAMAGING_VIALS;
+import static net.tuffet.parachymistry.Parachymistry.TINCTUREITEM;
 
 public class MysteriousConcoctionProjectile extends ThrownItemEntity {
     public MysteriousConcoctionProjectile(EntityType<? extends MysteriousConcoctionProjectile> entityType, World world) {
@@ -66,7 +66,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
-        if (this.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) entityHitResult.getEntity().damage(this.getDamageSources().indirectMagic(this, this.getOwner()), (float)2.0);
+        if (this.getWorld().getGameRules().getBoolean(SHOULD_HAVE_DAMAGING_VIALS)) entityHitResult.getEntity().damage(this.getDamageSources().indirectMagic(this, this.getOwner()), (float)2.0);
         switch (testConcoctionComponent(this.getStack())) {
             case "minecraft:ender_pearl": {
                 World world = this.getWorld();
@@ -129,7 +129,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
             case "minecraft:soul_soil": {
                 if (entityHitResult.getEntity().isLiving()) {
                     LivingEntity livingEntity = (LivingEntity) entityHitResult.getEntity();
-                    if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS,200,0));
+                    if(livingEntity.getWorld().getGameRules().getBoolean(SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS,200,0));
                     livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS,200,0));
                     this.discard();
                 }
@@ -144,7 +144,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                     livingEntity.removeStatusEffect(StatusEffects.HUNGER);
                     livingEntity.removeStatusEffect(StatusEffects.WEAKNESS);
                     livingEntity.removeStatusEffect(StatusEffects.DARKNESS);
-                    if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON,200,0));
+                    if(livingEntity.getWorld().getGameRules().getBoolean(SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON,200,0));
                 }
             }
 
@@ -152,11 +152,11 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                 if (entityHitResult.getEntity().isLiving()) {
                     LivingEntity livingEntity = (LivingEntity) entityHitResult.getEntity();
                     livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.BLINDNESS,50,0));
-                    if (livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.setOnFireForTicks(50);
+                    if (livingEntity.getWorld().getGameRules().getBoolean(SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.setOnFireForTicks(50);
                     if (livingEntity.isTouchingWater()) {
                         livingEntity.setVelocity(0,5,0);
                         livingEntity.getWorld().createExplosion(livingEntity,livingEntity.getX(),livingEntity.getY(),livingEntity.getZ(),0f, World.ExplosionSourceType.MOB);
-                        if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.damage(livingEntity.getWorld().getDamageSources().explosion(livingEntity,livingEntity),2);
+                        if(livingEntity.getWorld().getGameRules().getBoolean(SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.damage(livingEntity.getWorld().getDamageSources().explosion(livingEntity,livingEntity),2);
                     }
                 }
             }
@@ -215,7 +215,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                 Box box = this.getBoundingBox().expand(7);
                 List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class,box);
                 for (LivingEntity livingEntity : list) {
-                    if(livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.setOnFireForTicks(20);
+                    if(livingEntity.getWorld().getGameRules().getBoolean(SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.setOnFireForTicks(20);
                     livingEntity.getWorld().createExplosion(livingEntity, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 0f , World.ExplosionSourceType.MOB);
                     double magnitude = (Math.pow(livingEntity.getY() - this.getY(), 2)) + ((Math.pow(livingEntity.getX() - this.getX(), 2)) + (Math.pow(livingEntity.getZ() - this.getZ(), 2)));
                     livingEntity.setVelocity((new Vec3d((livingEntity.getX() - this.getX()), (livingEntity.getY() - this.getY()) + 0.4, (livingEntity.getZ() - this.getZ())).multiply(Math.min((3 / magnitude), 3))));
@@ -236,7 +236,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
 
                 for (LivingEntity livingEntity : list) {
                     FallingBlockEntity anvil = FallingBlockEntity.spawnFromBlock(livingEntity.getWorld(),livingEntity.getBlockPos().add(0,2,0), Blocks.ANVIL.getDefaultState());anvil.setDestroyedOnLanding();
-                    if (livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) anvil.setHurtEntities(5,5);
+                    if (livingEntity.getWorld().getGameRules().getBoolean(SHOULD_HAVE_DAMAGING_VIALS)) anvil.setHurtEntities(5,5);
                 }
                 this.discard();
                 break;
@@ -266,7 +266,7 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                 Box box = this.getBoundingBox().expand(3);
                 List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
                 for (LivingEntity livingEntity : list) {
-                    if (livingEntity.getWorld().getGameRules().getBoolean(ModRules.SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.setFrozenTicks(600);
+                    if (livingEntity.getWorld().getGameRules().getBoolean(SHOULD_HAVE_DAMAGING_VIALS)) livingEntity.setFrozenTicks(600);
                     else livingEntity.setFrozenTicks(140);
                 }
                 this.discard();
@@ -300,10 +300,10 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
     }
 
     public String testConcoctionComponent(ItemStack stack){
-        if (stack.get(ModComponents.TINCTUREITEM) == null) {
+        if (stack.get(TINCTUREITEM) == null) {
             return "null";
         }
-        else return Objects.requireNonNull(stack.get(ModComponents.TINCTUREITEM)).toString().replace("TinctureIngredientComponent[ingredient=","").replace("]","");
+        else return Objects.requireNonNull(stack.get(TINCTUREITEM)).toString().replace("TinctureIngredientComponent[ingredient=","").replace("]","");
     }
 
 }
