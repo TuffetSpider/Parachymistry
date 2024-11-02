@@ -16,7 +16,6 @@ import net.minecraft.util.UseAction;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.tuffet.parachymistry.component.ModComponents;
 import net.tuffet.parachymistry.effect.ModEffects;
 import java.util.List;
 import java.util.Objects;
@@ -45,11 +44,11 @@ public class MysteriousTincture extends Item{
         }
 
         // This tests the components added during crafting, to add your own effects do  case "<ITEM>":{EFFECT}, added some examples that function here
-        if(stack.get(TINCTUREITEM)!=null){
+        if (stack.get(TINCTUREITEM) !=null) {
         switch(testComponent(stack)){
             // For example, this case tests if the tincture has an ender pearl component, and if it does, teleports the player to the entity that last attacked them, supposing it exists
             case "minecraft:ender_pearl":{
-                {if(user.getLastAttacker()!=null){
+                {if (user.getLastAttacker() != null) {
                     user.teleport(Objects.requireNonNull(user.getLastAttacker()).getX(),user.getLastAttacker().getY(),user.getLastAttacker().getZ(),true);
                 }}
                 break;
