@@ -19,10 +19,6 @@ public class GaiasGraspEffect extends StatusEffect {
 
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-        if (!entity.hasStatusEffect(ModEffects.AETHERIAL_SACRIFICE_EFFECT)) {
-            entity.removeStatusEffect(ModEffects.AETHERIAL_SACRIFICE_EFFECT);
-            entity.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOW_FALLING, 400, 0));
-        }
         entity.setOnGround(false);
         entity.setSprinting(false);
         return super.applyUpdateEffect(entity, amplifier);

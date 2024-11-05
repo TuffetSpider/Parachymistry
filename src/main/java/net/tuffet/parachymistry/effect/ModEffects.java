@@ -30,8 +30,8 @@ public final class ModEffects {
         GAIA_EFFECT = register("gaiasgrasp", new GaiasGraspEffect()
                 .addAttributeModifier(EntityAttributes.GENERIC_GRAVITY,
                         Identifier.of(Parachymistry.MOD_ID,"effect.gaiasgrasp"),
-                        10,
-                        EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                        0.8f,
+                        EntityAttributeModifier.Operation.ADD_VALUE));
         POSEIDON_EFFECT = register("poseidonswrath", new PoseidonsWrathEffect());
         AEOLUS_EFFECT = register("aeolusbreath", new AeolusBreathEffect()
                 .addAttributeModifier(EntityAttributes.GENERIC_GRAVITY,
@@ -41,8 +41,8 @@ public final class ModEffects {
         AETHERIAL_SACRIFICE_EFFECT = register("aetherialsacrifice", new AetherialSacrificeEffect()
                 .addAttributeModifier(EntityAttributes.GENERIC_GRAVITY,
                         Identifier.of(Parachymistry.MOD_ID, "effect.aetherialsacrifice"),
-                        -1.05f,
-                        EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+                        -0.085f,
+                        EntityAttributeModifier.Operation.ADD_VALUE));
         SWIFTSTRIDE_EFFECT = register("swiftstride", new SwiftStrideEffect()
                 .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_EFFICIENCY,
                         Identifier.of(Parachymistry.MOD_ID, "effect.swiftstride"),

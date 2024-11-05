@@ -1,11 +1,24 @@
 package net.tuffet.parachymistry.item;
 
+import net.minecraft.block.DispenserBlock;
+import net.minecraft.block.dispenser.FallibleItemDispenserBehavior;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.Saddleable;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPointer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Box;
+import net.minecraft.util.math.Direction;
 import net.tuffet.parachymistry.Parachymistry;
 import net.tuffet.parachymistry.item.custom.*;
+
+import java.util.List;
 
 public class ModItems {
 
@@ -38,5 +51,13 @@ public class ModItems {
             SALT = registerItem("salt", new Item(new Item.Settings().food(ModFoodComponents.SALT)));
             MYSTERIOUS_TINCTURE = registerItem("mysterious_tincture", new MysteriousTincture(new Item.Settings().food(ModFoodComponents.TINCTURE).maxCount(16)));
             MYSTERIOUS_CONCOCTION = registerItem("mysterious_concoction", new MysteriousConcoction(new Item.Settings().maxCount(16)));
-        }
-}
+            DispenserBlock.registerProjectileBehavior(ModItems.MYSTERIOUS_CONCOCTION);
+            DispenserBlock.registerProjectileBehavior(ModItems.FIRE_VIAL);
+            DispenserBlock.registerProjectileBehavior(ModItems.WATER_VIAL);
+            DispenserBlock.registerProjectileBehavior(ModItems.EARTH_VIAL);
+            DispenserBlock.registerProjectileBehavior(ModItems.AIR_VIAL);
+            DispenserBlock.registerProjectileBehavior(ModItems.AETHER_VIAL);
+        }}
+
+
+
