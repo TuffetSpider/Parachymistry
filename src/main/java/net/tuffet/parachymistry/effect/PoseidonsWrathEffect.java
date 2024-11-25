@@ -18,7 +18,7 @@ public class PoseidonsWrathEffect extends StatusEffect {
 
     @Override
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
-        entity.setOnFire(false);
+        entity.extinguishWithSound();
         entity.setAir(-19);
         if (entity.isTouchingWater()){
             entity.setSwimming(true);

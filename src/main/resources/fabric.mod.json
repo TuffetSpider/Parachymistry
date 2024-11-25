@@ -1,14 +1,14 @@
 {
 	"schemaVersion": 1,
 	"id": "parachymistry",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"name": "Parachymistry",
 	"description": "Mod made for Modfest 1.21 Neoforge. Vaguely inspired by medieval alchemy, with a focus on interesting consumeables to help players in a variety of situations",
 	"authors": [
 		"TuffetSpider_, Auzdin, Sneakedy, DevMC and Bytime."
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
+		"homepage": "https://modrinth.com/mod/parachymistry",
 		"sources": "https://github.com/TuffetSpider/Paracyhmistry"
 	},
 	"license": "CC0-1.0",

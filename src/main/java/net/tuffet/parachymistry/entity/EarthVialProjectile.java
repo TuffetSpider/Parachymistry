@@ -28,11 +28,11 @@ public class EarthVialProjectile extends ThrownItemEntity {
     }
 
     public EarthVialProjectile(World world, LivingEntity owner) {
-        super(EntityType.SNOWBALL, owner, world);
+        super(ModEntities.EARTH_VIAL, owner, world);
     }
 
     public EarthVialProjectile(World world, double x, double y, double z) {
-        super(EntityType.SNOWBALL, x, y, z, world);
+        super(ModEntities.EARTH_VIAL, x, y, z, world);
     }
 
     @Override
@@ -60,25 +60,25 @@ public class EarthVialProjectile extends ThrownItemEntity {
         int particleCount = 200;
         double radius = 4.0;
         Vec3d center = hitResult.getPos();
-        for (int i = 0; i < particleCount; i++) {
-            // Calculate the angle in radians
-            double angle = 2 * Math.PI * i / particleCount;
-
-            // Calculate x and z coordinates for the particle
-            double x = center.x + radius * Math.cos(angle);
-            double z = center.z + radius * Math.sin(angle);
-
-            // y can be the height above ground where you want the particles to appear
-            double y = center.y;
-
-            // Spawn the fire particle at the calculated position
-            ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.DUST_PLUME, x, y, z, 0, 0, 0, 0, 1.0);
-        }
         super.onCollision(hitResult);
         if (!this.getWorld().isClient) {
             this.playSound(SoundEvents.BLOCK_GLASS_BREAK,1f,1f);
             Box box = this.getBoundingBox().expand(3.5, 2.0, 3.5);
             List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
+            for (int i = 0; i < particleCount; i++) {
+                // Calculate the angle in radians
+                double angle = 2 * Math.PI * i / particleCount;
+
+                // Calculate x and z coordinates for the particle
+                double x = center.x + radius * Math.cos(angle);
+                double z = center.z + radius * Math.sin(angle);
+
+                // y can be the height above ground where you want the particles to appear
+                double y = center.y;
+
+                // Spawn the fire particle at the calculated position
+                ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.DUST_PLUME, x, y, z, 0, 0, 0, 0, 1.0);
+            }
             for (LivingEntity livingEntity : list) {
                 livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.GAIA_EFFECT, 400, 0),this.getOwner());
             }

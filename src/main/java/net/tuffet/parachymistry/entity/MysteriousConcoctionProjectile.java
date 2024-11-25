@@ -46,11 +46,11 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
     }
 
     public MysteriousConcoctionProjectile(World world, LivingEntity owner) {
-        super(EntityType.POTION, owner, world);
+        super(ModEntities.CONCOCTION_PROJECTILE, owner, world);
     }
 
     public MysteriousConcoctionProjectile(World world, double x, double y, double z) {
-        super(EntityType.POTION, x, y, z, world);
+        super(ModEntities.CONCOCTION_PROJECTILE, x, y, z, world);
     }
 
     @Override
@@ -181,14 +181,18 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
         this.getWorld().playSound(this,this.getBlockPos(),SoundEvents.ENTITY_SPLASH_POTION_BREAK, SoundCategory.PLAYERS,1f,1f);
-        ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), 0, 0, 0, 0, 1.0);
+        if(this.getWorld() instanceof ServerWorld serverWorld) {
+            serverWorld.spawnParticles(ParticleTypes.LARGE_SMOKE, this.getX(), this.getY(), this.getZ(), 0, 0, 0, 0, 1.0);
+        }
         switch(testConcoctionComponent(this.getStack())){
             case "minecraft:glowstone": {
                 if (!this.getWorld().isClient) {
                     this.playSound(SoundEvents.BLOCK_GLASS_BREAK,1f,1f);
                     Box box = this.getBoundingBox().expand(3.5, 2.0, 3.5);
                     List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
-                    ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.ELECTRIC_SPARK, this.getX(),this.getY(),this.getZ(), 0, 0, 0, 0, 1.0);
+                    if(this.getWorld() instanceof ServerWorld serverworld) {
+                    serverworld.spawnParticles(ParticleTypes.ELECTRIC_SPARK, this.getX(),this.getY(),this.getZ(), 0, 0, 0, 0, 1.0);
+                    }
                     for (LivingEntity livingEntity : list) {
                         livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING,600,0));
                         livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.INVISIBILITY,600,0));
@@ -202,7 +206,9 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
                     this.playSound(SoundEvents.BLOCK_GLASS_BREAK,1f,1f);
                     Box box = this.getBoundingBox().expand(10, 10, 10);
                     List<ProjectileEntity> list = this.getWorld().getNonSpectatingEntities(ProjectileEntity.class, box);
-                    ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.POOF, this.getX(),this.getY(),this.getZ(), 0, 0, 0, 0, 1.0);
+                    if(this.getWorld() instanceof ServerWorld serverworld) {
+                     serverworld.spawnParticles(ParticleTypes.POOF, this.getX(),this.getY(),this.getZ(), 0, 0, 0, 0, 1.0);
+                    }
                     for (ProjectileEntity projectileEntity : list) {
                       projectileEntity.setVelocity(0,0,0);
                       ;

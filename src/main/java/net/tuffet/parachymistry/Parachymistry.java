@@ -13,6 +13,7 @@ import net.minecraft.world.GameRules;
 import net.tuffet.parachymistry.block.ModBlocks;
 import net.tuffet.parachymistry.component.TinctureIngredientComponent;
 import net.tuffet.parachymistry.effect.ModEffects;
+import net.tuffet.parachymistry.entity.ModEntities;
 import net.tuffet.parachymistry.gui.ModGuis;
 import net.tuffet.parachymistry.item.ModItemGroups;
 import net.tuffet.parachymistry.item.ModItems;
@@ -48,5 +49,6 @@ public class Parachymistry implements ModInitializer {
 		ModRecipes.AlCHYMY_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, Identifier.of(Parachymistry.MOD_ID, "alchymy_serializer"), new AlchymyRecipe.Serializer());
 		ModRecipes.TINCTURE = Registry.register(Registries.RECIPE_TYPE, Identifier.of(Parachymistry.MOD_ID, "tincture"), new RecipeType<MysteriousTinctureRecipe>(){});
 		ModRecipes.TINCTURE_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, Identifier.of(Parachymistry.MOD_ID, "tincture_serializer"), new MysteriousTinctureRecipe.Serializer());
+		ModEntities.Initialize();
 	}
 }
