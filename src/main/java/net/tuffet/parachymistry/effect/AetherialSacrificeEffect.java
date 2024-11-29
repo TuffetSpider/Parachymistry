@@ -36,6 +36,7 @@ public class AetherialSacrificeEffect extends StatusEffect {
         assert effect != null;
         int timeRemaining = effect.getDuration();
         if (timeRemaining == 1) {
+            entity.setGlowing(false);
             if (entity.getWorld().getGameRules().getBoolean(SHOULD_HAVE_DAMAGING_VIALS) && !entity.isSpectator())
                 if (entity instanceof PlayerEntity player) if (!player.isCreative()) entity.damage(entity.getWorld().getDamageSources().outOfWorld(), 8);
                 else entity.damage(entity.getWorld().getDamageSources().generic(), 8);
@@ -49,7 +50,6 @@ public class AetherialSacrificeEffect extends StatusEffect {
             list.remove(entity);
             for (LivingEntity livingEntity : list) {
                 entity.getWorld().spawnEntity(new ShulkerBulletEntity(entity.getWorld(), entity, livingEntity, Direction.Axis.Z));
-                entity.setGlowing(false);
             }
         }
         return super.applyUpdateEffect(entity, amplifier);

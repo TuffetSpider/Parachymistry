@@ -75,6 +75,7 @@ public class AirVialProjectile extends ThrownItemEntity {
         super.onCollision(hitResult);
 
         if (!this.getWorld().isClient) {
+            ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.GUST_EMITTER_LARGE, this.getX(),this.getY(),this.getZ(), 0, 0, 0, 0, 1.0);
             this.playSound(SoundEvents.BLOCK_GLASS_BREAK,1f,1f);
             Box box = this.getBoundingBox().expand(3.5, 2.0, 3.5);
             List<LivingEntity> list = this.getWorld().getNonSpectatingEntities(LivingEntity.class, box);
@@ -91,7 +92,6 @@ public class AirVialProjectile extends ThrownItemEntity {
 
                 // Spawn the fire particle at the calculated position
                 ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.POOF, x, y, z, 0, 0, 0, 0, 1.0);
-                ((ServerWorld) this.getWorld()).spawnParticles(ParticleTypes.GUST_EMITTER_LARGE, this.getX(),this.getY(),this.getZ(), 0, 0, 0, 0, 1.0);
             }
             for (LivingEntity livingEntity : list) {
                 livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.AEOLUS_EFFECT,400),this.getOwner());
