@@ -75,8 +75,10 @@ public class MysteriousTincture extends Item{
                 break;
             }
 
-            case"minecraft:red_mushroom":{
-                Objects.requireNonNull(user.getAttributeInstance(EntityAttributes.GENERIC_SCALE)).setBaseValue(user.getAttributeValue(EntityAttributes.GENERIC_SCALE)+0.1);
+            case"minecraft:red_mushroom": {
+                if (user.getAttributeInstance(EntityAttributes.GENERIC_SCALE).getValue() < 1.8){
+                    Objects.requireNonNull(user.getAttributeInstance(EntityAttributes.GENERIC_SCALE)).setBaseValue(user.getAttributeValue(EntityAttributes.GENERIC_SCALE) + 0.1);
+            }
                 break;
             }
 

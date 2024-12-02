@@ -113,7 +113,9 @@ public class MysteriousConcoctionProjectile extends ThrownItemEntity {
             case "minecraft:red_mushroom": {
                 if (entityHitResult.getEntity().isLiving()) {
                     LivingEntity livingEntity = (LivingEntity) entityHitResult.getEntity();
-                    Objects.requireNonNull(livingEntity.getAttributeInstance(EntityAttributes.GENERIC_SCALE)).setBaseValue(livingEntity.getAttributeValue(EntityAttributes.GENERIC_SCALE)+0.1);
+                    if(livingEntity.getAttributeInstance(EntityAttributes.GENERIC_SCALE).getValue()<1.8) {
+                        Objects.requireNonNull(livingEntity.getAttributeInstance(EntityAttributes.GENERIC_SCALE)).setBaseValue(livingEntity.getAttributeValue(EntityAttributes.GENERIC_SCALE) + 0.1);
+                    }
                     this.discard();
                 }
                 break;
