@@ -13,14 +13,14 @@ import net.tuffet.parachymistry.item.ModItems;
 
 import java.util.stream.Stream;
 
-import static net.tuffet.parachymistry.Parachymistry.TINCTUREITEM;
+import static net.tuffet.parachymistry.Parachymistry.TINCTURE_ITEM;
 
 public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
 
-    final Ingredient base;
-    final Ingredient reagent;
-    final Ingredient catalyst;
-    final ItemStack result;
+    private final Ingredient base;
+    private final Ingredient reagent;
+    private final Ingredient catalyst;
+    private final ItemStack result;
 
     public AlchymyRecipe(Ingredient base, Ingredient reagent, Ingredient catalyst, ItemStack result) {
         this.base = base;
@@ -36,7 +36,7 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
     public ItemStack craft(AlchymyRecipeInput alchymyRecipeInput, RegistryWrapper.WrapperLookup wrapperLookup) {
         if(result.getItem() == (ModItems.MYSTERIOUS_TINCTURE) || result.getItem() == (ModItems.MYSTERIOUS_CONCOCTION)){
             ItemStack tincture = this.result.copy();
-            tincture.set(TINCTUREITEM,new TinctureIngredientComponent(alchymyRecipeInput.catalyst().getItem().toString()));
+            tincture.set(TINCTURE_ITEM,new TinctureIngredientComponent(alchymyRecipeInput.catalyst().getItem().toString()));
 
             return tincture.copy();
         }
@@ -107,4 +107,3 @@ public class AlchymyRecipe implements Recipe<AlchymyRecipeInput> {
         }
     }
 }
-

@@ -23,26 +23,19 @@ public class MysteriousTinctureRecipe implements Recipe<AlchymyRecipeInput> {
 
 
     public MysteriousTinctureRecipe(Ingredient base, Ingredient reagent, Ingredient catalyst, ItemStack result) {
-
-
-
         this.base = base;
         this.reagent = reagent;
         this.catalyst = catalyst;
         this.result = result;
     }
 
-
-
     public boolean matches(AlchymyRecipeInput alchymyRecipeInput, World world) {
         return this.base.test(alchymyRecipeInput.base()) && this.reagent.test(alchymyRecipeInput.reagent()) && this.catalyst.test(alchymyRecipeInput.catalyst());
     }
 
-
     public ItemStack craft(AlchymyRecipeInput alchymyRecipeInput, RegistryWrapper.WrapperLookup wrapperLookup) {
         return this.result;
     }
-
 
     public boolean fits(int width, int height) {
         return false;
@@ -59,7 +52,6 @@ public class MysteriousTinctureRecipe implements Recipe<AlchymyRecipeInput> {
     public RecipeType<?> getType() {
         return ModRecipes.TINCTURE;
     }
-
 
     public boolean isEmpty() {
         return Stream.of(this.base, this.reagent, this.catalyst).anyMatch(Ingredient::isEmpty);

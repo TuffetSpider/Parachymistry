@@ -1,5 +1,5 @@
 {
-  "type": "parachymistry:alchymy_serializer",
+  "type": "parachymistry:alchymy",
   "base": {
     "item": "parachymistry:vial_of_fire"
   },

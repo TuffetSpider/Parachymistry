@@ -6,7 +6,6 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.util.Identifier;
 import net.tuffet.parachymistry.Parachymistry;
 
 public final class ModEffects {
@@ -23,53 +22,53 @@ public final class ModEffects {
     public static RegistryEntry<StatusEffect> STEADFAST_EFFECT;
 
     private static RegistryEntry<StatusEffect> register(String id, StatusEffect statusEffect) {
-        return Registry.registerReference(Registries.STATUS_EFFECT, Identifier.of(Parachymistry.MOD_ID, id), statusEffect);
+        return Registry.registerReference(Registries.STATUS_EFFECT, Parachymistry.id(id), statusEffect);
     }
 
-    public static void registerModEffects() {
+    public static void init() {
         GAIA_EFFECT = register("gaiasgrasp", new GaiasGraspEffect()
                 .addAttributeModifier(EntityAttributes.GENERIC_GRAVITY,
-                        Identifier.of(Parachymistry.MOD_ID,"effect.gaiasgrasp"),
+                        Parachymistry.id("gaiasgrasp"),
                         0.8f,
                         EntityAttributeModifier.Operation.ADD_VALUE));
         POSEIDON_EFFECT = register("poseidonswrath", new PoseidonsWrathEffect());
         AEOLUS_EFFECT = register("aeolusbreath", new AeolusBreathEffect()
                 .addAttributeModifier(EntityAttributes.GENERIC_GRAVITY,
-                        Identifier.of(Parachymistry.MOD_ID, "effect.aeolusbreath"),
+                        Parachymistry.id("aeolusbreath"),
                         -0.95f, EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
         HADES_EFFECT = register("hadeshellfire", new HadesHellfireEffect());
         AETHERIAL_SACRIFICE_EFFECT = register("aetherialsacrifice", new AetherialSacrificeEffect()
                 .addAttributeModifier(EntityAttributes.GENERIC_GRAVITY,
-                        Identifier.of(Parachymistry.MOD_ID, "effect.aetherialsacrifice"),
+                        Parachymistry.id("aetherialsacrifice"),
                         -0.085f,
                         EntityAttributeModifier.Operation.ADD_VALUE));
         SWIFTSTRIDE_EFFECT = register("swiftstride", new SwiftStrideEffect()
                 .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_EFFICIENCY,
-                        Identifier.of(Parachymistry.MOD_ID, "effect.swiftstride"),
+                        Parachymistry.id("swiftstride"),
                         1f,
                         EntityAttributeModifier.Operation.ADD_VALUE)
                 .addAttributeModifier(EntityAttributes.GENERIC_STEP_HEIGHT,
-                        Identifier.of(Parachymistry.MOD_ID, "effect.swiftstridestep"),
+                        Parachymistry.id("swiftstridestep"),
                         1f,
                         EntityAttributeModifier.Operation.ADD_VALUE));
         IRONWARD_EFFECT = register("ironward", new IronWardEffect()
                 .addAttributeModifier(EntityAttributes.GENERIC_ARMOR,
-                        Identifier.of(Parachymistry.MOD_ID,"effect.ironward"),
+                        Parachymistry.id("ironward"),
                         4f,
                         EntityAttributeModifier.Operation.ADD_VALUE));
         VENOMOUS_RECIPROCATION_EFFECT = register("venomous_reciprocation", new VenomousReciprocationEffect());
         KARMIC_SHIELDING_EFFECT = register("karmic_shielding", new KarmicShieldingEffect()
                 .addAttributeModifier(EntityAttributes.GENERIC_MAX_ABSORPTION,
-                        Identifier.of(Parachymistry.MOD_ID, "effect.karmic_shielding"),
+                        Parachymistry.id("karmic_shielding"),
                         10f,
                         EntityAttributeModifier.Operation.ADD_VALUE));
         STEADFAST_EFFECT = register("steadfast", new IronWardEffect()
                 .addAttributeModifier(EntityAttributes.GENERIC_EXPLOSION_KNOCKBACK_RESISTANCE,
-                        Identifier.of(Parachymistry.MOD_ID, "effect.steadfast"),
+                        Parachymistry.id("steadfast"),
                         1f,
                         EntityAttributeModifier.Operation.ADD_VALUE)
                 .addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,
-                        Identifier.of(Parachymistry.MOD_ID, "effect.steadfastresistance"),
+                        Parachymistry.id("steadfastresistance"),
                         1f,
                         EntityAttributeModifier.Operation.ADD_VALUE));
     }

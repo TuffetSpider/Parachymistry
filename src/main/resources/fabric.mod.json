@@ -18,9 +18,6 @@
 		"main": [
 			"net.tuffet.parachymistry.Parachymistry"
 		],
-		"fabric-datagen": [
-			"net.tuffet.parachymistry.ParachymistryDataGenerator"
-		],
 		"client": [
 			"net.tuffet.parachymistry.ParachymistryClient"
 		]
@@ -30,8 +27,5 @@
 		"minecraft": "~1.21.1",
 		"java": ">=21",
 		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }

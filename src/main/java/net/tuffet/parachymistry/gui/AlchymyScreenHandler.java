@@ -1,5 +1,3 @@
-
-
 package net.tuffet.parachymistry.gui;
 
 import java.util.List;
@@ -38,11 +36,8 @@ public class AlchymyScreenHandler extends ForgingScreenHandler {
     }
 
     protected boolean canUse(BlockState state) {
-        {
-            return state.isOf(ModBlocks.ALCHYMY_STATION);
-        }
+        return state.isOf(ModBlocks.ALCHYMY_STATION);
     }
-
 
     @Override
     public void updateResult() {
@@ -61,8 +56,6 @@ public class AlchymyScreenHandler extends ForgingScreenHandler {
         }
 
     }
-
-
 
     @Override
     protected boolean canTakeOutput(PlayerEntity player, boolean present) {
@@ -94,17 +87,4 @@ public class AlchymyScreenHandler extends ForgingScreenHandler {
 
     }
 
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
+}
